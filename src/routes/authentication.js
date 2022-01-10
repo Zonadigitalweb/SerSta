@@ -4,7 +4,7 @@ const passport = require("passport")
 const {isLoggedIn} = require("../lib/auth")
 
 router.get("/registro",  (req,res) =>{
-    res.render("auth/registro")
+    res.render("auth/registro",{layout:"mainpdf"})
 })
 
 router.post("/registro",  passport.authenticate("local.signup",{
@@ -14,16 +14,9 @@ router.post("/registro",  passport.authenticate("local.signup",{
 }))
 
 router.get("/iniciar_sesion", (req,res) =>{
-    res.render("auth/inicio")
+    res.render("auth/inicio",{layout:"mainpdf"})
 })
 
-/*router.post("/iniciar_sesion", (req,res,next) =>{
-    passport.authenticate("local.signin",{
-        successRedirect: "/servicios_pendientes",
-        failureRedirect: "/iniciar_sesion"
-    })(req,res,next)
-})
-*/
 
 router.post("/iniciar_sesion", passport.authenticate("local.signin",{
     successRedirect: "/servicios_pendientes",
