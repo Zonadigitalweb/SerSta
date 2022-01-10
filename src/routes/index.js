@@ -233,7 +233,7 @@ router.get("/servicios_pendientes", isLoggedIn, async (req, res) => {
             Hora:garantia[index].Hora
         })
     }
-    const pendientes = await pool.query("SELECT * FROM `tblordenservicio` WHERE realizado =0 AND`FechaVisita`<>'00000-00-00 00:00:00' ORDER BY `FechaVisita` DESC")
+    const pendientes = await pool.query("SELECT * FROM `tblordenservicio` WHERE realizado =0 AND `FechaVisita`<>'00000-00-00 00:00:00' ORDER BY `FechaVisita` DESC")
     for (let index = 0; index < pendientes.length; index++) {
         let Ncliente = await pool.query("SELECT * FROM tblclientes WHERE `IdCliente`= ?",[pendientes[index].IdCliente])
         cliente.push({

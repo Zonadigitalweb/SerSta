@@ -16,7 +16,7 @@ const database = {
 
     host:"localhost",
     user: "root",
-    password: "Meekoneko2214$",
+    password: "",
     database: "movedb",
   
   
