@@ -9,27 +9,22 @@ const {isLoggedIn} = require("../lib/auth")
 const log = console.log
 
 //Principal
-router.get("/", isLoggedIn,  (req, res) => {   
-    res.render("layouts/inicio")
+router.get("/", isLoggedIn,  (req, res) => { 
+    res.redirect("/serviflash/servicios_pendientes")  
 })
-
-router.get("/start",  (req, res) => {   
-    res.render("layouts/start")
-})
-
 
 
 
 //Agregar get
 
-router.get("/agregar_registro", isLoggedIn, async (req, res)=>{
+router.get("/serviflash/agregar_registro", isLoggedIn, async (req, res)=>{
     let cliente= await pool.query("SELECT IdCliente, Nombre, DirColonia, DirCalle, DirNum from tblclientes WHERE Nombre <>' ' ORDER BY Nombre ASC")
     let num=await pool.query("SELECT max(IdCliente) as num FROM tblclientes;")
     num=num[0].num+1
     res.render("layouts/agregar_registro",{cliente, num})
 })
 
-router.get("/agregar_registro/:id", isLoggedIn, async (req, res) => {
+router.get("/serviflash/agregar_registro:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
     const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ?", [id])
     let cliente= await pool.query("SELECT * from tblclientes WHERE IdCliente = ?",[id])
@@ -41,10 +36,11 @@ router.get("/agregar_registro/:id", isLoggedIn, async (req, res) => {
     res.render("layouts/agregar_registro_completo", { equipo, cliente, clientes, nombre, num, idcliente })
 })
 
-router.get("/notas:id/", isLoggedIn, async (req, res) =>{
+router.get("/serviflash/notas:id/", isLoggedIn, async (req, res) =>{
 
     const { id } = req.params
     let notass = await pool.query("SELECT * FROM tblnotas WHERE IdOrdenServicio = ?",[id])
+    let IdCliente=notass[0].IdCliente
     const orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[id])
     if (notass[0] == undefined) {
 
@@ -67,7 +63,7 @@ router.get("/notas:id/", isLoggedIn, async (req, res) =>{
         } else{
             let notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ?",[notass[0].IdNotas])
             let IdN= notas[0].IdNotas
-            res.render("layouts/ver_notas",{notas, id, orden, IdN})
+            res.render("layouts/ver_notas",{notas, id, orden, IdN, IdCliente})
             return
         }
     }
@@ -91,13 +87,13 @@ router.post("/agregar_nota_n", isLoggedIn, async (req, res) =>{
     await pool.query("INSERT INTO tblnotas SET ?", [nota])
     const concepto={IdNotas, Cantidad,Descripcion,PrecioUnitario,Importe}
     await pool.query("INSERT INTO tbldetallenota SET ?", [concepto])
-    res.redirect("/notas"+IdOrdenServicio)
+    res.redirect("/serviflash/notas"+IdOrdenServicio)
 })
 
 router.post("/cerrar_nota", isLoggedIn, async (req, res) =>{
     let {Id} = req.body
     await pool.query("UPDATE tblnotas SET NotaCerrada = 1 WHERE IdOrdenServicio=?", [Id])
-    res.redirect("/notas"+Id)
+    res.redirect("/serviflash/notas"+Id)
 })
 
 
@@ -109,14 +105,14 @@ router.post("/agregar_nota", isLoggedIn, async (req, res) =>{
     const not = await pool.query("SELECT Total FROM tblnotas WHERE IdOrdenServicio = ?", [Id])
     let total=parseInt(not[0].Total,10)+parseInt(Importe,10)
     await pool.query("UPDATE tblnotas SET Total = ? WHERE IdOrdenServicio=?", [total,Id])
-    res.redirect("/notas"+Id)
+    res.redirect("/serviflash/notas"+Id)
 })
 
 router.post("/agregar_registro", isLoggedIn, async (req, res) => {
     let { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud,FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion } = req.body
     const newarticulo = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
-    res.redirect("/ver_cliente/"+IdCliente)
+    res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
 
 })
 
@@ -124,7 +120,7 @@ router.post("/agregar_equipo", isLoggedIn, async (req, res) => {
     let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo } = req.body
     const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo }
     await pool.query("INSERT INTO tblequipos SET ?", [newequipo])
-    res.redirect("/agregar_registro/"+IdCliente)
+    res.redirect("/serviflash/agregar_registro"+IdCliente+"/")
 
 })
 
@@ -132,14 +128,14 @@ router.post("/ver_cliente/agregare", isLoggedIn, async (req, res) => {
     let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo } = req.body
     const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo }
     await pool.query("INSERT INTO tblequipos SET ?", [newequipo])
-    res.redirect("/ver_cliente/"+IdCliente)
+    res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
 
 })
 router.post("/editar_cliente", isLoggedIn, async (req, res) => {
     let { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP} = req.body
     const newcliente = { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP}
     await pool.query("UPDATE tblclientes SET ? WHERE IdCliente=?", [newcliente, IdCliente])
-    res.redirect("/ver_cliente/"+IdCliente)
+    res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
 
 })
 
@@ -170,7 +166,7 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
     }
     const neworden = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
     await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
-    res.redirect("/ver_cliente/"+IdCliente)
+    res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
 
 })
 
@@ -178,7 +174,7 @@ router.post("/editar_equipo", isLoggedIn, async (req, res) => {
     let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo} = req.body
     const newequipo = { IdCliente,IdEquipo, Categoria, Tipo, Marca, Color, Modelo}
     await pool.query("UPDATE tblequipos SET ? WHERE IdCliente=? AND IdEquipo=?", [newequipo, IdCliente, IdEquipo])
-    res.redirect("/ver_cliente/"+IdCliente)
+    res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
 
 })
 
@@ -187,7 +183,7 @@ router.post("/agregar_cliente", isLoggedIn, async (req, res) => {
     const newcliente = { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP}
     await pool.query("INSERT INTO tblclientes SET ?", [newcliente])
     
-    res.redirect("/agregar_registro")
+    res.redirect("/serviflash/agregar_registro")
 
 })
 
@@ -195,7 +191,7 @@ router.post("/cliente_agregar", isLoggedIn, async (req, res) => {
     let { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP} = req.body
     const newcliente = { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP}
     await pool.query("INSERT INTO tblclientes SET ?", [newcliente])
-    res.redirect("/clientes")
+    res.redirect("/serviflash/clientes")
 
 })
 
@@ -203,13 +199,13 @@ router.post("/cliente_agregar", isLoggedIn, async (req, res) => {
 router.post("/agregar_garantia", isLoggedIn, async (req, res) => {
     let { IdOrdenServicio, FechaGarantia, IdCliente} = req.body
     await pool.query("UPDATE tblordenservicio SET FechaGarantia = ? WHERE IdOrdenServicio = ?", [FechaGarantia,IdOrdenServicio])
-    res.redirect("/ver_cliente/"+IdCliente)
+    res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
 
 })
 
 
 //Ver contenido
-router.get("/clientes", isLoggedIn, async (req, res) => {
+router.get("/serviflash/clientes", isLoggedIn, async (req, res) => {
     const clientes = await pool.query("SELECT * FROM tblclientes")
     let num=await pool.query("SELECT max(IdCliente) as num FROM tblclientes;")
     num=num[0].num+1
@@ -217,7 +213,8 @@ router.get("/clientes", isLoggedIn, async (req, res) => {
 })
 
 
-router.get("/servicios_pendientes", isLoggedIn, async (req, res) => {
+router.get("/serviflash/servicios_pendientes", isLoggedIn, async (req, res) => {
+
     let cliente = []
     let clienteg = []
     const garantia = await pool.query("SELECT * FROM `tblordenservicio` WHERE `FechaGarantia`<>'null' ORDER BY `FechaVisita` DESC")
@@ -336,7 +333,7 @@ if (time.isBetween(ATime, DTime)) {
 })
 
 
-router.get("/ver_cliente/:id", isLoggedIn, async (req, res) => {
+router.get("/serviflash/ver_cliente:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
     const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ?", [id])
     let cliente= await pool.query("SELECT * from tblclientes WHERE IdCliente = ?",[id])
@@ -380,13 +377,18 @@ router.get("/ver_cliente/:id", isLoggedIn, async (req, res) => {
 
 
 
-router.get("/reportes", isLoggedIn, async (req, res) => {
-    
-    res.render("layouts/reporte")
+router.get("/serviflash/reportes", isLoggedIn, async (req, res) => {
+    const id = req.user.IdUsuario
+    console.log (id)
+    if (id==15){
+        res.render("layouts/reporte")
+    }else{
+        res.redirect("/serviflash/servicios_pendientes")
+    }
 })
 
 
-router.post("/ver_reporte", isLoggedIn, async (req, res) => {
+router.post("/serviflash/ver_reporte", isLoggedIn, async (req, res) => {
      let {desde, hasta} =req.body
      let ordenes = await pool.query("SELECT substring(FechaRealizacion,1,10)AS fecha, CostoServicio, IdTecnico FROM tblordenservicio WHERE Realizado = 255")
      let tec4=0,
@@ -426,7 +428,6 @@ router.post("/ver_reporte", isLoggedIn, async (req, res) => {
         tec8 = Intl.NumberFormat('en-EU', {style: 'currency',currency: 'MXN', minimumFractionDigits: 2}).format(tec8);
         tec11 = Intl.NumberFormat('en-EU', {style: 'currency',currency: 'MXN', minimumFractionDigits: 2}).format(tec11);
     res.render("layouts/reporte_tecnico",{total,tec4,tec8,tec11,tec4n,tec8n,tec11n})
-    log(total,a)
 })
 
 
@@ -452,7 +453,7 @@ await pool.query("UPDATE tblidnotas SET IdOrden = ? WHERE IdNota = 1",[id])
 res.redirect("/descargar")
 })
 
-router.get("/ver_pdf/:id", isLoggedIn, async (req,res) =>{
+router.get("/ver_pdf:id/", isLoggedIn, async (req,res) =>{
 const {id}=req.params
 await pool.query("UPDATE tblidnotas SET IdOrden = ? WHERE IdNota = 1",[id])
 await pool.query("UPDATE tblnotas SET PdfListo = 1 WHERE IdOrdenServicio = ?",[id])

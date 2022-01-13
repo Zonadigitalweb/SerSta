@@ -20,11 +20,6 @@
                                             placeholder="{{Nombre}}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label>Colonia</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{DirColonia}}" disabled>
-                                    </div>
-                                    <div class="form-group">
                                         <label>Calle</label>
                                         <input type="text"  class="form-control text-dark m-1"
                                             placeholder="{{DirCalle}}" disabled>
@@ -35,12 +30,12 @@
                                             placeholder="{{DirNum}}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label>Telefono</label>
+                                        <label>Colonia</label>
                                         <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{Telefono}}" disabled>
+                                            placeholder="{{DirColonia}}" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label>RFC</label>
+                                        <label>Datos de ubicacion</label>
                                         <input type="text"  class="form-control text-dark m-1"
                                             placeholder="{{RFC}}" disabled>
                                     </div>
@@ -49,6 +44,16 @@
                                         <input type="text"  class="form-control text-dark m-1"
                                             placeholder="{{Municipio}}" disabled>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Telefono</label>
+                                        <input type="text"  class="form-control text-dark m-1"
+                                            placeholder="{{Telefono}}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>RFC</label>
+                                        <input type="text"  class="form-control text-dark m-1"
+                                            placeholder="{{RFC}}" disabled>
+                                    </div> 
                                     <div class="form-group">
                                         <label>CP</label>
                                         <input type="text"  class="form-control text-dark m-1"
@@ -115,6 +120,10 @@
                                         <input type="number" value="999" class="form-control text-dark m-1" disabled>
                                     </div>
                                     <div class="form-group">
+                                        <label>Folio Por Sucursal</label>
+                                        <input type="number" value="" class="form-control text-dark m-1" disabled>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Fecha de Solicitud</label>
                                         <input type="date"  class="form-control text-dark m-1"
                                              required>
@@ -127,10 +136,11 @@
                                     <div class="form-group">
                                         <label>Medio de contacto</label>
                                         <select  id="" class="form-select text-dark m-1 " required>
-                                            <option >Contacto 1</option>
-                                            <option >Contacto 2</option>
-                                            <option >Contacto 3</option>
-                                             <option >Contacto 4</option>
+                                            <option >Publicidad</option>
+                                            <option >Seccion Amarilla</option>
+                                            <option >Red social</option>
+                                             <option >Recomendacion</option>
+                                             <option >Cliente</option>
                                           </select>
                                     </div>  
                                     <div class="form-group">
@@ -156,6 +166,7 @@
                                         <select  class="form-select text-dark m-1 " >
                                             <option >Si</option>
                                             <option selected>No</option>
+                                            <option >Pendiente</option>
                                         </select>
                                     </div> 
                                      <div class="form-group">
@@ -165,33 +176,46 @@
                                     <div class="form-group">
                                         <label>Tipo de Trabajo</label>
                                         <select  class="form-select text-dark m-1 " >
+                                            <option >Cotizacion</option>
                                             <option >Preventivo</option>
                                             <option selected>Correctivo</option>
                                             <option >Garantia</option>
+                                            <option >Nueva Instalacion</option>
+                                            <option >Conexion Demostracion</option>
                                         </select>
                                     </div>  
                                     <div class="form-group" style="">
-                                        <label>Reparaciones </label><br>
-                                        <div style="border: black 1px solid; padding-left: 20px;">
-                                            <br>
-                                        <input type="checkbox">MANTENIMIENTO PREVENTIVO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox">INSTALACION <br>
-                                        <input type="checkbox">CAMBIO ENGRANES DE AGITADOR &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox">CAMBIO JUNTA HOMOSINETICA <br>
-                                        <input type="checkbox">CAMBIO SWITCH CENTRIFUGADO &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox">CAMBIO CONTROL NIVELES <br>
-                                        <input type="checkbox">CAMBIO AGITADOR &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox">CAMBIO BANDA DE TRANSMISION <br>
-                                        <input type="checkbox">CAMBIO CLUTCH DE VELOCIDAD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox">CAMBIO VARILLAS DE SUSPENSION <br>
-                                        <input type="checkbox">CAMBIO ARO DE SUSPENSION &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox">CAMBIO DE TINA RECUPERADORA<br>
-                                        <input type="checkbox">CAMBIO DE TRANSMISION &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <input type="checkbox">REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA <br>
-                                        <input type="checkbox">CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO
-                                       <br> <br>
-                                       </div>
+                                        <label>Reparaciones </label>
+                                        <select class="form-select text-dark m-1 ">
+                                            <option >MANTENIMIENTO PREVENTIVO</option>
+                                            <option >INSTALACION</option>
+                                            <option >CAMBIO ENGRANES DE AGITADOR</option>
+                                            <option >CAMBIO JUNTA HOMOSINETICA</option>
+                                            <option >CAMBIO SWITCH CENTRIFUGADO</option>
+                                            <option >CAMBIO CONTROL NIVELES</option>
+                                            <option >CAMBIO AGITADOR</option>
+                                            <option >CAMBIO BANDA DE TRANSMISION</option>
+                                            <option >CAMBIO CLUTCH DE VELOCIDAD</option>
+                                            <option >CAMBIO VARILLAS DE SUSPENSION</option>
+                                            <option >CAMBIO ARO DE SUSPENSION</option>
+                                            <option >CAMBIO DE TINA RECUPERADORA</option>
+                                            <option >CAMBIO DE TRANSMISION</option>
+                                            <option >REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA</option>
+                                            <option >CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO</option>
+                                        </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label>REFACCIONES</label>
+                                        <select class="form-select text-dark m-1 ">
+                                            <option  >Accesorios para refrigeración Alco</option>
+                                            <option value="4">Válvulas de expansión</option>
+                                            <option value="8">Válvulas solenoides</option>
+                                            <option value="11">Válvulas de paso</option>
+                                            <option value="11">Separadores de aceite Acumuladores de succión</option>
+                                            <option value="11">Filtros deshidratadores Indicadores de liquidos</option>
+                                            <option value="11">Aceites Control de temperatura</option>
+                                        </select>
+                                    </div>  
                                      <div class="form-group">
                                         <label>Tecnico</label>
                                         <select class="form-select text-dark m-1 ">
@@ -202,9 +226,8 @@
                                         </select>
                                     </div>  
                                     <div class="form-group">
-                                        <label>Diagnostico ????????</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                             >
+                                        <label>Diagnostico</label><br>
+                                        <textarea name="textarea"  class="form-control text-dark m-1" rows="7" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae impedit autem, ipsum illum accusamus recusandae illo aut, quisquam repudiandae exercitationem nostrum sequi quaerat tempore. Saepe minus placeat voluptatem corrupti. Et?</textarea>
                                     </div>
                                      <div class="form-group">
                                         <label>Presupuesto</label>
@@ -214,7 +237,7 @@
                                     <div class="form-group">
                                         <label>Costo Real del Servicio</label>
                                         <input type="text" value="$" class="form-control text-dark m-1"
-                                             >
+                                        disabled >
                                     </div>
                                     <div class="form-group">
                                         <label>Garantia</label>
