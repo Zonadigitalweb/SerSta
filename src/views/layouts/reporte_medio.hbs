@@ -35,23 +35,27 @@
                     <div class=" mx-auto">
                         <div class="card">
                             <div class="card-body" style="background-color:#e6e6e6;">
-                                <h1 class="text-dark mb-3 h4">Total {{total}}</h1>
+                                <h1 class="text-dark mb-3 h4">Total de servicios  {{total}}</h1>
                             <form action="/ver_reporte" method="post">
                             <div class="form-group">
-                                <label><strong>ALEJO FAJARDO</strong><br> numero de servicios {{tec4n}}</label>
-                                <input style="font-weight: bold;" type="text" value="{{tec4}}" class="form-control text-dark" disabled>
+                                <label><strong>Revistas y Anuncios</strong></label>
+                                <input style="font-weight: bold;" type="text" value="{{medios.Revista}}" class="form-control text-dark" disabled>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label><strong>RICARDO ANTONIO</strong><br>  numero de servicios {{tec8n}}</label>
-                                <input style="font-weight: bold;" type="text" value="{{tec8}}"  class="form-control text-dark" disabled>
+                                <label><strong>Clientes</strong></label>
+                                <input style="font-weight: bold;" type="text" value="{{medios.Cliente}}"  class="form-control text-dark" disabled>
                             </div>
                             <br>
                             <div class="form-group">
-                                <label><strong>ALBERTO CARLOS</strong><br> numero de servicios {{tec11n}}</label>
-                                <input style="font-weight: bold;" type="text"  value="{{tec11}}" class="form-control text-dark" disabled>
+                                <label><strong>Tarjeta</strong></label>
+                                <input style="font-weight: bold;" type="text"  value="{{medios.Tarjeta}}" class="form-control text-dark" disabled>
                             </div>
                             <br>
+                            <div class="form-group">
+                                <label><strong>Recomendacion</strong></label>
+                                <input style="font-weight: bold;" type="text"  value="{{medios.Recomendacion}}" class="form-control text-dark" disabled>
+                            </div>
                                 </div>
                             </form>  
                             </div>

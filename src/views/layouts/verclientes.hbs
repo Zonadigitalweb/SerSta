@@ -15,10 +15,12 @@
         <li class="nav-item">
           <a class="nav-link" href="/serviflash/agregar_registro"><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
         </li>
-        <li class="nav-item">
-          <a  class="nav-link "  href="/serviflash/reportes"><center><i class="fas fa-paste fa-2x"></i><br>Reportes</a></center>
+        <li class="nav-item" id="admin" style="display: block;">
+          <a  class="nav-link "  href="/serviflash/reportes"><center><i id="adminI" style="color: #f8f9fa;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #f8f9fa;">Administrador</p></a></center>
         </li>
-        
+        <li class="nav-item" style="margin-left: 50px;">
+          <a class="nav-link"><center><i class="fas fa-user fa-2x"></i></i><br>Hola {{user.Nombre}}</a></center>
+        </li>
       </ul>
     </div>
   </div>
@@ -63,7 +65,7 @@
                                         <tbody id="tblbody">
                                             {{#each clientes}}
                                             <tr id="{{IdCliente}}" style="display:none">
-                                                <td><a href="/ver_cliente{{IdCliente}}/"
+                                                <td><a href="/serviflash/ver_cliente{{IdCliente}}/"
                                                         class="link-primary">{{Nombre}}</a> </td>
                                                 <td>{{DirColonia}}</td>
                                                 <td>{{DirCalle}}</td>

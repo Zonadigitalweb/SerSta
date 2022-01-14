@@ -4,7 +4,14 @@ module.exports = {
         if (req.isAuthenticated()) {
             return next()
         }
-        return res.redirect("/iniciar_sesion")
+        return res.redirect("/serviflash/iniciar_sesion")
+    },
+
+    isAdmin(req,res,next){
+        if (req.user.IdUsuario==15) {
+            return next()
+        }
+        return res.redirect("/serviflash/servicios_pendientes")
     }
 
 }

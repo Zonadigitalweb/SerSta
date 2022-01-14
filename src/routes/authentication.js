@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const passport = require("passport")
+const pool = require("../database")
 const {isLoggedIn} = require("../lib/auth")
 
 router.get("/serviflash/registro",  (req,res) =>{
@@ -25,7 +26,9 @@ router.post("/iniciar_sesion", passport.authenticate("local.signin",{
 }))
 
 
-router.get("/serviflash/salir", (req,res) =>{
+router.get("/serviflash/salir", async (req,res) =>{
+    let id = req.user.IdUsuario
+    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '1', '', '', '', '', current_timestamp())",[id])
     req.logOut()
     res.redirect("/serviflash/iniciar_sesion")
 })
