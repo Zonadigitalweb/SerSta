@@ -8,7 +8,7 @@ module.exports = {
     },
 
     isAdmin(req,res,next){
-        if (req.user.IdUsuario==15) {
+        if (req.user.IdUsuario==15 || req.user.IdUsuario==18) {
             return next()
         }
         return res.redirect("/serviflash/servicios_pendientes")

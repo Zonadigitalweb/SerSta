@@ -395,7 +395,7 @@ router.get("/serviflash/ver_cliente:id/", isLoggedIn, async (req, res) => {
 
 
 router.get("/serviflash/reportes", isLoggedIn, isAdmin, async (req, res) => {
-    let cuenta = await pool.query("SELECT Email, Nombre, IdUsuario, Activa FROM tblusuarios WHERE IdUsuario = 13")
+    let cuenta = await pool.query("SELECT Email, Nombre, IdUsuario, Activa FROM tblusuarios WHERE IdUsuario = 16 OR IdUsuario = 17")
         res.render("layouts/reporte",{cuenta})
     
 })
@@ -511,7 +511,6 @@ const {id}=req.params
 let idu = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '8', ?, '', '', '', current_timestamp())",[idu,id])
 await pool.query("UPDATE tblidnotas SET IdOrden = ? WHERE IdNota = 1",[id])
-await pool.query("UPDATE tblnotas SET PdfListo = 1 WHERE IdOrdenServicio = ?",[id])
 res.redirect("/pdf")
 })
 
@@ -529,15 +528,11 @@ res.redirect("/pdf")
 
 
 
-
-
-
-
-
+/*
 
 
 router.get("/aa", isLoggedIn, async (req,res) =>{
-    const fecha=await pool.query("SELECT FechaRealizacion FROM tblordenservicio")
+    const fecha=await pool.query("SELECT * FROM tblordenservicio")
     for (let index = 0; index < fecha.length ; index++) {
         await pool.query("UPDATE tblordenservicio SET FechaVisita = ? WHERE IdOrdenServicio = ?",[fecha[index].FechaRealizacion,fecha[index].IdOrdenServicio])
 
@@ -545,6 +540,15 @@ router.get("/aa", isLoggedIn, async (req,res) =>{
    
     res.send("Listoooo")
     })
+
+
+    
+router.get("/bb", isLoggedIn, async (req,res) =>{
+        await pool.query("UPDATE tblordenservicio SET FechaGarantia = 'null' WHERE FechaGarantia <> 'null'")
+    res.send("Listoooo")
+    })
+
+
 
 
     router.get("/mayus", isLoggedIn, async (req,res) =>{
@@ -685,5 +689,9 @@ router.get("/aa", isLoggedIn, async (req,res) =>{
        await pool.query("UPDATE tbldetallenota SET Cantidad = 1 WHERE Cantidad = 0")
         res.send("Listoooo")
     })
+
+
+
+    */
 //Exportar
 module.exports = router

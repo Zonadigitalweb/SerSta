@@ -33,9 +33,16 @@
 
 <script>
 let id = {{user.IdUsuario}}
-if(id == 15){
-    document.getElementById("adminS").style.color="#707071"
-  document.getElementById("adminI").style.color="#707071"
+if(id == 15 || id == 18){
+  if(document.getElementById("h1").style.color =="" && document.getElementById("h2").style.color == "" && document.getElementById("h3").style.color == ""){
+      document.getElementById("adminS").style.color="blue"
+      document.getElementById("adminI").style.color="blue"
+  } else {
+      document.getElementById("adminS").style.color="#707071"
+      document.getElementById("adminI").style.color="#707071"
+
+  }
+  
 }else{
   document.getElementById("admin").style.display="none"
 }
