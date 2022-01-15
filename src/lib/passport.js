@@ -12,7 +12,7 @@ passport.use("local.signin", new LocalStrategy({
     if (user.length > 0) {
         const pass = await helpers.login(password, user[0].Contrasena)
         if (pass) {
-            await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '0', '', '', '', '', current_timestamp())",[user[0].IdUsuario])
+            await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ( '?', '0', '', '', '', '', current_timestamp())",[user[0].IdUsuario])
             done(null, user[0])
         }else{
             done(null, false)
