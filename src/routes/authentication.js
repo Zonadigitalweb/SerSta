@@ -3,7 +3,7 @@ const router = express.Router()
 const passport = require("passport")
 const pool = require("../database")
 const {isLoggedIn} = require("../lib/auth")
-
+/*
 router.get("/serviflash/registro",  (req,res) =>{
     res.render("auth/registro",{layout:"mainpdf"})
 })
@@ -13,6 +13,8 @@ router.post("/registro",  passport.authenticate("local.signup",{
         failureRedirect: "/serviflash/registro"
     
 }))
+*/
+
 
 router.get("/serviflash/iniciar_sesion", (req,res) =>{
     res.render("auth/inicio",{layout:"mainpdf"})
