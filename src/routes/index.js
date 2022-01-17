@@ -407,8 +407,67 @@ router.post("/serviflash/activar_desactivar", isLoggedIn, isAdmin, async (req, r
     
 })
 
+router.post("/serviflash/ver_movimientos", isLoggedIn, isAdmin, async (req, res) => {
+    let {desde, hasta} =req.body
+        let movimiento = await pool.query("SELECT * FROM `tblmovimientos` WHERE `Fecha`> ? AND `Fecha`<? AND IdUsuario <> '15'", [desde,hasta])
+        for (let index = 0; index < movimiento.length; index++) {
+            
+
+
+            if (movimiento[index].IdUsuario==16) {
+                movimiento[index].IdUsuario="CLAUDIA NATALY RODRIGUEZ GRACIANO"
+
+            } else if (movimiento[index].IdUsuario==17) {
+                movimiento[index].IdUsuario="LAURA KARINA ACUÑA MEJÍA"
+
+            }else if (movimiento[index].IdUsuario==18) {
+                movimiento[index].IdUsuario="ALEJO FAJARDO GÓMEZ"
+            }
+
+            if (movimiento[index].TipoMovimiento==0) {
+                movimiento[index].TipoMovimiento="Inicio de sesion"
+            } else if (movimiento[index].TipoMovimiento==1) {
+                movimiento[index].TipoMovimiento="Cerro sesion"
+            } else if (movimiento[index].TipoMovimiento==2) {
+                movimiento[index].TipoMovimiento="Agrego usuario"
+            } else if (movimiento[index].TipoMovimiento==3) {
+                movimiento[index].TipoMovimiento="Edito usuario"
+            } else if (movimiento[index].TipoMovimiento==4) {
+                movimiento[index].TipoMovimiento="Agrego equipo"
+            } else if (movimiento[index].TipoMovimiento==5) {
+                movimiento[index].TipoMovimiento="Edito usuario"
+            } else if (movimiento[index].TipoMovimiento==6) {
+                movimiento[index].TipoMovimiento="Agrego orden"
+            } else if (movimiento[index].TipoMovimiento==7) {
+                movimiento[index].TipoMovimiento="Edito orden"
+            } else if (movimiento[index].TipoMovimiento==8) {
+                movimiento[index].TipoMovimiento="Creo PDF"
+            } else if (movimiento[index].TipoMovimiento==9) {
+                movimiento[index].TipoMovimiento="Creo IMG"
+            } else if (movimiento[index].TipoMovimiento==10) {
+                movimiento[index].TipoMovimiento="Agrego nota"
+            } else if (movimiento[index].TipoMovimiento==11) {
+                movimiento[index].TipoMovimiento="Cerro nota"
+            }
+        
+            if (movimiento[index].IdOrdenServicio==0) {
+                movimiento[index].IdOrdenServicio=""
+            }
+            if (movimiento[index].IdCliente==0) {
+                movimiento[index].IdCliente=""
+            }
+            if (movimiento[index].IdEquipo==0) {
+                movimiento[index].IdEquipo=""
+            }
+
+            
+        }
+        res.render("layouts/reporte_movimiento",{movimiento})
+    
+})
+
 router.post("/serviflash/ver_reporte", isLoggedIn, isAdmin, async (req, res) => {
-     let {desde, hasta} =req.body
+    let {desde, hasta} =req.body
      let ordenes = await pool.query("SELECT substring(FechaRealizacion,1,10)AS fecha, CostoServicio, IdTecnico FROM tblordenservicio WHERE Realizado = 255")
      let tec4=0,
      tec8=0,
