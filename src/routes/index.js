@@ -77,7 +77,7 @@ router.get("/serviflash/notas:id/", isLoggedIn, async (req, res) =>{
 router.post("/agregar_nota_n", isLoggedIn, async (req, res) =>{
     let {IdOrdenServicio, FechaNota, Garantia, IdCliente,NotaCerrada,Cantidad,Descripcion,PrecioUnitario,Importe} = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '10', ?, '', '', '', current_timestamp())",[id,IdOrdenServicio])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '10', ?,current_timestamp())",[id,IdOrdenServicio])
     const aa = await pool.query("SELECT MAX(`IdNotas`) AS id FROM tblnotas")
     let IdNotas = aa[0].id + 1
     let Total = Importe
@@ -92,7 +92,7 @@ router.post("/agregar_nota_n", isLoggedIn, async (req, res) =>{
 router.post("/cerrar_nota", isLoggedIn, async (req, res) =>{
     let {Id} = req.body
     let idu = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '11', ?, '', '', '', current_timestamp())",[idu,Id])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '11', ?,current_timestamp())",[idu,Id])
     await pool.query("UPDATE tblnotas SET NotaCerrada = 1 WHERE IdOrdenServicio=?", [Id])
     res.redirect("/serviflash/notas"+Id)
 })
@@ -112,7 +112,7 @@ router.post("/agregar_nota", isLoggedIn, async (req, res) =>{
 router.post("/agregar_registro", isLoggedIn, async (req, res) => {
     let { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud,FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion } = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '6', ?, '', '', '', current_timestamp())",[id,IdOrdenServicio])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '6', ?,current_timestamp())",[id,IdOrdenServicio])
     const newarticulo = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
@@ -122,7 +122,7 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
 router.post("/agregar_equipo", isLoggedIn, async (req, res) => {
     let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo } = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '4', '', ?, ?, '', current_timestamp())",[id,IdCliente,IdEquipo])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdCliente`, `IdEquipo`,`Fecha`) VALUES (?, '4', ?, ?, current_timestamp())",[id,IdCliente,IdEquipo])
     const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo }
     await pool.query("INSERT INTO tblequipos SET ?", [newequipo])
     res.redirect("/serviflash/agregar_registro"+IdCliente+"/")
@@ -132,7 +132,7 @@ router.post("/agregar_equipo", isLoggedIn, async (req, res) => {
 router.post("/ver_cliente/agregare", isLoggedIn, async (req, res) => {
     let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo } = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '4', '', ?, ?, '', current_timestamp())",[id,IdCliente,IdEquipo])
+    await pool.query("INSERT INTO `tblmovimientos` ( `IdUsuario`, `TipoMovimiento`, `IdCliente`, `IdEquipo`, `Fecha`) VALUES (?, '4', ?, ?, current_timestamp())",[id,IdCliente,IdEquipo])
     const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo }
     await pool.query("INSERT INTO tblequipos SET ?", [newequipo])
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
@@ -141,7 +141,7 @@ router.post("/ver_cliente/agregare", isLoggedIn, async (req, res) => {
 router.post("/editar_cliente", isLoggedIn, async (req, res) => {
     let { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP} = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '3', '', ?, '', '', current_timestamp())",[id,IdCliente])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdCliente`, `Fecha`) VALUES (?, '3', ?, current_timestamp())",[id,IdCliente])
     const newcliente = { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP}
     await pool.query("UPDATE tblclientes SET ? WHERE IdCliente=?", [newcliente, IdCliente])
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
@@ -151,7 +151,7 @@ router.post("/editar_cliente", isLoggedIn, async (req, res) => {
 router.post("/editar_registro", isLoggedIn, async (req, res) => {
     let { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion } = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '7', ?, '', '', '', current_timestamp())",[id,IdOrdenServicio])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '7', ?, current_timestamp())",[id,IdOrdenServicio])
     if (IdTecnico=="JOSE MARIA CARDENAS ANZAR") {
         IdTecnico=1
     }else if (IdTecnico=="JOSE LUIS ZAMORA") {
@@ -184,7 +184,7 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
 router.post("/editar_equipo", isLoggedIn, async (req, res) => {
     let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo} = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '5', '', ?, ?, '', current_timestamp())",[id,IdCliente,IdEquipo])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdCliente`, `IdEquipo`, `Fecha`) VALUES (?, '5', ?, ?, current_timestamp())",[id,IdCliente,IdEquipo])
     const newequipo = { IdCliente,IdEquipo, Categoria, Tipo, Marca, Color, Modelo}
     await pool.query("UPDATE tblequipos SET ? WHERE IdCliente=? AND IdEquipo=?", [newequipo, IdCliente, IdEquipo])
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
@@ -194,7 +194,7 @@ router.post("/editar_equipo", isLoggedIn, async (req, res) => {
 router.post("/agregar_cliente", isLoggedIn, async (req, res) => {
     let { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP} = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '2', '', ?, '', '', current_timestamp())",[id,IdCliente])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdCliente`,`Fecha`) VALUES (?, '2', ?, current_timestamp())",[id,IdCliente])
     const newcliente = { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP}
     await pool.query("INSERT INTO tblclientes SET ?", [newcliente])
     
@@ -205,7 +205,7 @@ router.post("/agregar_cliente", isLoggedIn, async (req, res) => {
 router.post("/cliente_agregar", isLoggedIn, async (req, res) => {
     let { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP} = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '2', '', ?, '', '', current_timestamp())",[id,IdCliente])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdCliente`, `Fecha`) VALUES (?, '2', ?, current_timestamp())",[id,IdCliente])
     const newcliente = { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP}
     await pool.query("INSERT INTO tblclientes SET ?", [newcliente])
     res.redirect("/serviflash/clientes")
@@ -501,7 +501,7 @@ router.get("/verpdf",  pdfc.pdf)
 router.get("/ver_nota/:id", isLoggedIn, async (req,res) =>{
 const {id}=req.params
 let idu = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '9', ?, '', '', '', current_timestamp())",[idu,id])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '9', ?, current_timestamp())",[idu,id])
 await pool.query("UPDATE tblidnotas SET IdOrden = ? WHERE IdNota = 1",[id])
 res.redirect("/descargar")
 })
@@ -509,7 +509,7 @@ res.redirect("/descargar")
 router.get("/ver_pdf:id/", isLoggedIn, async (req,res) =>{
 const {id}=req.params
 let idu = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '8', ?, '', '', '', current_timestamp())",[idu,id])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `Fecha`) VALUES (?, '8', ?, current_timestamp())",[idu,id])
 await pool.query("UPDATE tblidnotas SET IdOrden = ? WHERE IdNota = 1",[id])
 res.redirect("/pdf")
 })

@@ -30,7 +30,7 @@ router.post("/iniciar_sesion", passport.authenticate("local.signin",{
 
 router.get("/serviflash/salir", async (req,res) =>{
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdMovimiento`, `IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `IdCliente`, `IdEquipo`, `IdNota`, `Fecha`) VALUES ('', '?', '1', '', '', '', '', current_timestamp())",[id])
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `Fecha`) VALUES (?, '1',current_timestamp())",[id])
     req.logOut()
     res.redirect("/serviflash/iniciar_sesion")
 })
