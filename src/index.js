@@ -4,6 +4,7 @@ const hbs= require("express-handlebars")
 const exphbs = require("express-handlebars")
 const path= require("path")
 const passport = require("passport")
+const favicon = require('serve-favicon')
 const flash = require("connect-flash")
 const session = require("express-session")
 const MySQLStore = require("express-mysql-session")
@@ -45,6 +46,7 @@ app.use(express.json())
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(favicon(path.join(__dirname, 'public', 'favi.png')))
 
 
 app.use((req,res,next)=>{
