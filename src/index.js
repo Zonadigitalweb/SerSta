@@ -46,7 +46,8 @@ app.use(express.json())
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(favicon(path.join(__dirname, 'public', 'favi.png')))
+app.use(favicon(path.join(__dirname, 'public', 'bc.ico')))
+
 
 
 app.use((req,res,next)=>{

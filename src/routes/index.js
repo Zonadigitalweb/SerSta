@@ -175,6 +175,9 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
     }else if (IdTecnico=="ALBERTO CARLOS SERRANO") {
         IdTecnico=11
     }
+    if (CostoServicio=="") {
+        CostoServicio=0
+    }
     const neworden = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
     await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
