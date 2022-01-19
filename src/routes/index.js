@@ -410,6 +410,7 @@ router.post("/serviflash/activar_desactivar", isLoggedIn, isAdmin, async (req, r
 router.post("/serviflash/ver_movimientos", isLoggedIn, isAdmin, async (req, res) => {
     let {desde, hasta} =req.body
         let movimiento = await pool.query("SELECT * FROM `tblmovimientos` WHERE `Fecha`> ? AND `Fecha`<? AND IdUsuario <> '15'", [desde,hasta])
+        log(movimiento)
         for (let index = 0; index < movimiento.length; index++) {
             
 
@@ -462,6 +463,7 @@ router.post("/serviflash/ver_movimientos", isLoggedIn, isAdmin, async (req, res)
 
             
         }
+        log(movimiento)
         res.render("layouts/reporte_movimiento",{movimiento})
     
 })

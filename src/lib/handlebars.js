@@ -12,7 +12,7 @@ helpers.momentD= (timestamp)=>{
  }
 helpers.momentH= (timestamp)=>{ 
   
-    let fecha= moment(timestamp).format("YYYY-MM-DD HH:MM:SS");
+    let fecha= moment(timestamp).format("YYYY-MM-DD hh:mm");
      return fecha
  }
 helpers.moment= (timestamp)=>{ 
