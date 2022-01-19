@@ -113,6 +113,12 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
     let { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud,FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion } = req.body
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '6', ?,current_timestamp())",[id,IdOrdenServicio])
+    if (FechaRealizacion=="") {
+        FechaRealizacion=null
+    }
+    if (CostoServicio=="") {
+        FechaRealizacion=null
+    }
     const newarticulo = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
@@ -218,6 +224,9 @@ router.post("/cliente_agregar", isLoggedIn, async (req, res) => {
 
 router.post("/agregar_garantia", isLoggedIn, async (req, res) => {
     let { IdOrdenServicio, FechaGarantia, IdCliente} = req.body
+    if (FechaGarantia=="") {
+        FechaGarantia=null
+    }
     await pool.query("UPDATE tblordenservicio SET FechaGarantia = ? WHERE IdOrdenServicio = ?", [FechaGarantia,IdOrdenServicio])
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
 
@@ -412,7 +421,9 @@ router.post("/serviflash/activar_desactivar", isLoggedIn, isAdmin, async (req, r
 
 router.post("/serviflash/ver_movimientos", isLoggedIn, isAdmin, async (req, res) => {
     let {desde, hasta} =req.body
-        let movimiento = await pool.query("SELECT * FROM `tblmovimientos` WHERE `Fecha`> ? AND `Fecha`<? AND IdUsuario <> '15'", [desde,hasta])
+    desde=desde+"00:00:00"
+    hasta=hasta+"23:59:59"
+        let movimiento = await pool.query("SELECT * FROM `tblmovimientos` WHERE DATE(`Fecha`)>= '? 00:00:00'  AND DATE(`Fecha`)<= '? 23:59:59'  AND IdUsuario <> '15';", [desde,hasta])
         log(movimiento)
         for (let index = 0; index < movimiento.length; index++) {
             
@@ -591,8 +602,8 @@ res.redirect("/pdf")
 
 
 
-
 /*
+
 
 
 router.get("/aa", isLoggedIn, async (req,res) =>{
