@@ -421,9 +421,9 @@ router.post("/serviflash/activar_desactivar", isLoggedIn, isAdmin, async (req, r
 
 router.post("/serviflash/ver_movimientos", isLoggedIn, isAdmin, async (req, res) => {
     let {desde, hasta} =req.body
-    desde=desde+"00:00:00"
-    hasta=hasta+"23:59:59"
-        let movimiento = await pool.query("SELECT * FROM `tblmovimientos` WHERE DATE(`Fecha`)>= '? 00:00:00'  AND DATE(`Fecha`)<= '? 23:59:59'  AND IdUsuario <> '15';", [desde,hasta])
+    desde=desde+" 00:00:00"
+    hasta=hasta+" 23:59:59"
+        let movimiento = await pool.query("SELECT * FROM `tblmovimientos` WHERE DATE(`Fecha`)>= ?  AND DATE(`Fecha`)<= ?  AND IdUsuario <> '15';", [desde,hasta])
         log(movimiento)
         for (let index = 0; index < movimiento.length; index++) {
             
