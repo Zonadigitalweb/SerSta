@@ -81,8 +81,7 @@ router.post("/agregar_nota_n", isLoggedIn, async (req, res) =>{
     const aa = await pool.query("SELECT MAX(`IdNotas`) AS id FROM tblnotas")
     let IdNotas = aa[0].id + 1
     let Total = Importe
-    let PdfListo = 0
-    const nota={IdNotas, IdOrdenServicio, FechaNota, Garantia, IdCliente,NotaCerrada, Total, PdfListo}
+    const nota={IdNotas, IdOrdenServicio, FechaNota, Garantia, IdCliente,NotaCerrada, Total}
     await pool.query("INSERT INTO tblnotas SET ?", [nota])
     const concepto={IdNotas, Cantidad,Descripcion,PrecioUnitario,Importe}
     await pool.query("INSERT INTO tbldetallenota SET ?", [concepto])
@@ -180,6 +179,9 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
         IdTecnico=10
     }else if (IdTecnico=="ALBERTO CARLOS SERRANO") {
         IdTecnico=11
+    }
+    if (FechaRealizacion=="") {
+        FechaRealizacion=null
     }
     if (CostoServicio=="") {
         CostoServicio=0
