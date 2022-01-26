@@ -284,7 +284,7 @@ module.exports={
         const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ? AND IdEquipo = ?", [datos[0].IdCliente, datos[0].IdEquipo])
         let notas = await pool.query("SELECT * FROM tblnotas WHERE IdOrdenServicio = ?",[idOrden])
         let garantia=notas[0].Garantia
-        notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ? order by `Descripcion` asc",[notas[0].IdNotas])
+        notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ?",[notas[0].IdNotas])
         let total=0
         for (let index = 0; index < notas.length; index++) {
             total+=notas[index].Importe

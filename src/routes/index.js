@@ -40,7 +40,6 @@ router.get("/serviflash/notas:id/", isLoggedIn, async (req, res) =>{
 
     const { id } = req.params
     let notass = await pool.query("SELECT * FROM tblnotas WHERE IdOrdenServicio = ?",[id])
-
     const orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[id])
     if (notass[0] == undefined) {
 
@@ -59,8 +58,14 @@ router.get("/serviflash/notas:id/", isLoggedIn, async (req, res) =>{
         } else{
             let IdCliente=notass[0].IdCliente
             let notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ? order by `Descripcion` asc",[notass[0].IdNotas])
-            let IdN= notas[0].IdNotas
-            res.render("layouts/ver_notas",{notas, id, orden, IdN, IdCliente})
+            if (notas[0] == undefined) {
+                let IdN= notass[0].IdNotas
+                res.render("layouts/ver_notas",{notas, id, orden, IdN, IdCliente})
+            } else{
+                let IdN= notas[0].IdNotas
+                res.render("layouts/ver_notas",{notas, id, orden, IdN, IdCliente})
+
+            }
             return
         }
     }
@@ -451,6 +456,18 @@ router.get("/serviflash/reportes", isLoggedIn, isAdmin, async (req, res) => {
         res.render("layouts/reporte",{cuenta})
     
 })
+router.get("/serviflash/eliminar_nota:id/", isLoggedIn, isAdmin, async (req, res) => {
+    let {id} = req.params
+    console.log(id)
+    let Orden = await pool.query("SELECT * FROM `tbldetallenota` WHERE `ID` = ?",[id])
+    log(Orden[0])
+    await pool.query("DELETE FROM `tbldetallenota` WHERE `ID` = ?",[id])
+    let IdOrden = await pool.query("SELECT * FROM `tblnotas` WHERE IdNotas = ?",[Orden[0].IdNotas])
+
+    res.redirect("/serviflash/notas"+IdOrden[0].IdOrdenServicio+"/")
+
+    
+})
 
 router.post("/serviflash/activar_desactivar", isLoggedIn, isAdmin, async (req, res) => {
         let {Activa}=req.body
@@ -461,8 +478,9 @@ router.post("/serviflash/activar_desactivar", isLoggedIn, isAdmin, async (req, r
 
 router.post("/editar_garantia", isLoggedIn, isAdmin, async (req, res) => {
         let {IdOrdenServicio, FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}=req.body
-        let garantia ={FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}
-        console.log(IdOrdenServicio, garantia)
+        let garantia = {FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}
+        let idu = req.user.IdUsuario
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `Fecha`) VALUES (?, '12', ?, current_timestamp())",[idu,IdOrdenServicio])
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?",[garantia,IdOrdenServicio])
         res.redirect("/ver_garantia"+IdOrdenServicio+"/")
     
@@ -512,6 +530,10 @@ router.post("/serviflash/ver_movimientos", isLoggedIn, isAdmin, async (req, res)
                 movimiento[index].TipoMovimiento="Agrego nota"
             } else if (movimiento[index].TipoMovimiento==11) {
                 movimiento[index].TipoMovimiento="Cerro nota"
+            } else if (movimiento[index].TipoMovimiento==12) {
+                movimiento[index].TipoMovimiento="Modifico Garantia"
+            } else if (movimiento[index].TipoMovimiento==13) {
+                movimiento[index].TipoMovimiento="Cerro Garantia"
             }
         
             if (movimiento[index].IdOrdenServicio==0) {
@@ -639,6 +661,8 @@ const orden = await pool.query("SELECT * , substring(FechaGarantia,1,10)AS fecha
 
 router.get("/cerrar_garantia:id/", isLoggedIn, async (req,res) =>{
 const {id}=req.params
+let idu = req.user.IdUsuario
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `Fecha`) VALUES (?, '13', ?, current_timestamp())",[idu,id])
 await pool.query("UPDATE `tblordenservicio` SET `FechaGarantia` = null WHERE IdOrdenServicio = ?",[id])
 const cliente = await pool.query("SELECT `IdCliente` FROM `tblordenservicio` WHERE `IdOrdenServicio` = ?",[id])
 res.redirect("/serviflash/ver_cliente"+cliente[0].IdCliente+"/")

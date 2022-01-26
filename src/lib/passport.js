@@ -13,10 +13,19 @@ passport.use("local.signin", new LocalStrategy({
         const pass = await helpers.login(password, user[0].Contrasena)
         if (pass) {
             await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `Fecha`) VALUES (?, '0', current_timestamp())",[user[0].IdUsuario])
-            /*let fecha=new Date()
-            fecha=fecha.getFullYear()+"-"+fecha.getMonth()+"-"+fecha.getDate()
+            let fecha=new Date()
+            let mes=fecha.getMonth()+1
+            let dia=fecha.getDate()
+            if (mes < 10) {
+                mes="0"+mes
+            }
+            if (dia < 10) {
+                dia="0"+dia
+            }
+            fecha=fecha.getFullYear()+"-"+mes+"-"+dia
+            fecha=fecha+" 00:00:00"
             console.log(fecha)
-            await pool.query("UPDATE tblordenservicio SET Realizado = 255 WHERE Realizado = 100 AND FechaRealizacion< NOW()")*/
+            await pool.query("UPDATE tblordenservicio SET Realizado = 255 WHERE Realizado = 100 AND FechaRealizacion < ?",[fecha])
 
             done(null, user[0])
         }else{
