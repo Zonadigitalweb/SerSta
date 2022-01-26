@@ -456,7 +456,7 @@ router.get("/serviflash/reportes", isLoggedIn, isAdmin, async (req, res) => {
         res.render("layouts/reporte",{cuenta})
     
 })
-router.get("/serviflash/eliminar_nota:id/", isLoggedIn, isAdmin, async (req, res) => {
+router.get("/serviflash/eliminar_nota:id/", isLoggedIn, async (req, res) => {
     let {id} = req.params
     console.log(id)
     let Orden = await pool.query("SELECT * FROM `tbldetallenota` WHERE `ID` = ?",[id])
