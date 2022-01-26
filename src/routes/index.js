@@ -51,14 +51,14 @@ router.get("/serviflash/notas:id/", isLoggedIn, async (req, res) =>{
 
         if (notass[0].NotaCerrada == 1) {
             
-                let notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ?",[notass[0].IdNotas])
+                let notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ? order by `Descripcion` asc",[notass[0].IdNotas])
                 let aa =5050
                 res.render("layouts/solo_notas",{notas, id, aa,orden})
                 return
             
         } else{
             let IdCliente=notass[0].IdCliente
-            let notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ?",[notass[0].IdNotas])
+            let notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ? order by `Descripcion` asc",[notass[0].IdNotas])
             let IdN= notas[0].IdNotas
             res.render("layouts/ver_notas",{notas, id, orden, IdN, IdCliente})
             return
@@ -277,7 +277,8 @@ router.get("/serviflash/servicios_pendientes", isLoggedIn, async (req, res) => {
             Calle:Nclienteg[0].DirCalle,
             Colonia:Nclienteg[0].DirColonia,
             FechaVisita:garantia[index].FechaVisita,
-            Hora:garantia[index].Hora
+            FechaGarantiaNew:garantia[index].FechaGarantiaNew,
+            Hora:garantia[index].HoraGarantia
         })
     }
 
@@ -291,6 +292,7 @@ router.get("/serviflash/servicios_pendientes", isLoggedIn, async (req, res) => {
             Calle:Nclienteg[0].DirCalle,
             Colonia:Nclienteg[0].DirColonia,
             FechaVisita:proceso[index].FechaVisita,
+            FechaRealizacion:proceso[index].FechaRealizacion,
             Hora:proceso[index].Hora
         })
     }
