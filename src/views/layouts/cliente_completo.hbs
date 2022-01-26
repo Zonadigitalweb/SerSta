@@ -280,6 +280,8 @@
                                    Ver orden de servicio =>
                                     <button class="btn btn-info" title="VER ORDEN" onclick=registro({{IdOrdenServicio}})><i style="color: white;"
                                             class="far fa-id-badge"></i></button>
+                                            <a href="/ver_garantia{{IdOrdenServicio}}/"  id="garra{{IdOrdenServicio}}" title="GARANTIA" class="btn btn-info"><i style="color: white;"
+                                            class="fas fa-exclamation-triangle"></i></a>
                                             <a href="/serviflash/notas{{IdOrdenServicio}}/" title="VER NOTAS" class="btn btn-info"><i style="color: white;"
                                              class="fas fa-file-invoice-dollar"></i></a>
                                             <a href="/ver_nota/{{IdOrdenServicio}}" title="IMAGEN ORDEN DE SERVICIO" class="btn btn-info"><i style="color: white;"
@@ -344,6 +346,7 @@
                                     <option value="255">Si</option>
                                     <option value="0">No</option>
                                     <option value="128">Cotizacion</option>
+                                    <option value="100">En Proceso</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -641,7 +644,7 @@
                     document.getElementById(id).style.display = "block"
                     document.getElementById("btn" + id).style.display = "block"
                     document.getElementById("registros").style.display = "none"
-                    garantia(id)
+                   //garantia(id)
                 }
             }
 
@@ -687,9 +690,14 @@
                     document.getElementById("Extra"+id).style.display = "none"
                     document.getElementById("Realizado"+id).selectedIndex=1
 
-                }else {
+                }else if(document.getElementById("Realizado"+id).value=="En Proceso"){
+                    document.getElementById("Extra"+id).style.display = "none"
+                    document.getElementById("Realizado"+id).selectedIndex=4
+
+                } else {
                     document.getElementById("Extra"+id).style.display = "none"
                     document.getElementById("Realizado"+id).selectedIndex=3
+
                 }
                 
 
@@ -793,9 +801,22 @@
                     } else if(array[index].Garantia=="2021-12-31"){
                         document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Garantia"
                         document.getElementById("p"+array[index].Id).style.color="red"
+                    }else if(array[index].Realizado=="En Proceso"){
+                        document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" En Proceso"
+                        document.getElementById("p"+array[index].Id).style.color="green"
                     }
                 }
             }
             marca()
 
+            function garra1(){
+                for(let index=0; index<array.length;index++){
+                    if(array[index].Realizado=="Si"){
+                    }else{
+                        document.getElementById("garra"+array[index].Id).style.display="none"
+
+                    }
+                }
+            }
+            garra1()
 </script>

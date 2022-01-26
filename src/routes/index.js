@@ -186,8 +186,15 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
     if (CostoServicio=="") {
         CostoServicio=0
     }
-    const neworden = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
-    await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
+    const cerrado = await pool.query("SELECT * FROM `tblnotas` WHERE IdOrdenServicio = ?",[IdOrdenServicio])
+    if (cerrado.length==0) {
+        const neworden = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
+        await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
+    }else if (cerrado[0].NotaCerrada==1) {
+        const neworden = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, Hora, IdTecnico, MedioDeInformacion }
+        await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
+    } 
+
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
 
 })
@@ -199,6 +206,12 @@ router.post("/editar_equipo", isLoggedIn, async (req, res) => {
     const newequipo = { IdCliente,IdEquipo, Categoria, Tipo, Marca, Color, Modelo}
     await pool.query("UPDATE tblequipos SET ? WHERE IdCliente=? AND IdEquipo=?", [newequipo, IdCliente, IdEquipo])
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
+
+})
+router.post("/abrir_nota", isLoggedIn, async (req, res) => {
+    let {folio} = req.body
+    await pool.query("UPDATE tblnotas SET NotaCerrada = 0 WHERE IdOrdenServicio = ?", [folio])
+    res.redirect("/serviflash/reportes")
 
 })
 
@@ -247,6 +260,7 @@ router.get("/serviflash/clientes", isLoggedIn, async (req, res) => {
 router.get("/serviflash/servicios_pendientes", isLoggedIn, async (req, res) => {
 
     let cliente = []
+    let clientep = []
     let clienteg = []
     const garantia = await pool.query("SELECT * FROM `tblordenservicio` WHERE `FechaGarantia`<>'null' ORDER BY `FechaVisita` DESC")
     for (let index = 0; index < garantia.length; index++) {
@@ -259,6 +273,20 @@ router.get("/serviflash/servicios_pendientes", isLoggedIn, async (req, res) => {
             Colonia:Nclienteg[0].DirColonia,
             FechaVisita:garantia[index].FechaVisita,
             Hora:garantia[index].Hora
+        })
+    }
+
+    const proceso = await pool.query("SELECT * FROM `tblordenservicio` WHERE `Realizado`='100' ORDER BY `FechaVisita` DESC")
+    for (let index = 0; index < proceso.length; index++) {
+        let Nclienteg = await pool.query("SELECT * FROM tblclientes WHERE `IdCliente`= ?",[proceso[index].IdCliente])
+        clientep.push({
+            IdOrden:proceso[index].IdOrdenServicio,
+            IdCliente:proceso[index].IdCliente,
+            Nombre:Nclienteg[0].Nombre,
+            Calle:Nclienteg[0].DirCalle,
+            Colonia:Nclienteg[0].DirColonia,
+            FechaVisita:proceso[index].FechaVisita,
+            Hora:proceso[index].Hora
         })
     }
     const pendientes = await pool.query("SELECT * FROM `tblordenservicio` WHERE realizado =0 AND `FechaVisita`<>'00000-00-00 00:00:00' ORDER BY `FechaVisita` DESC")
@@ -360,7 +388,7 @@ if (time.isBetween(ATime, DTime)) {
 
 
     }
-    res.render("layouts/servicios_pendientes", {pendientes, array, garantia, cliente, clienteg})
+    res.render("layouts/servicios_pendientes", {pendientes, array, garantia, cliente, clienteg, clientep})
 })
 
 
@@ -374,9 +402,12 @@ router.get("/serviflash/ver_cliente:id/", isLoggedIn, async (req, res) => {
             orden[index].Realizado="No"
         }else if (orden[index].Realizado==128) {
             orden[index].Realizado="Cotizacion"
+        }else if (orden[index].Realizado==100) {
+            orden[index].Realizado="En Proceso"
         }else{
             orden[index].Realizado="Si"
         }
+        
     }
     for (let index = 0; index < orden.length; index++) {
         if (orden[index].IdTecnico==1) {
@@ -418,6 +449,15 @@ router.post("/serviflash/activar_desactivar", isLoggedIn, isAdmin, async (req, r
         let {Activa}=req.body
         await pool.query("UPDATE tblusuarios SET Activa = ? WHERE IdUsuario = 13",[Activa])
         res.redirect("/serviflash/reportes")
+    
+})
+
+router.post("/editar_garantia", isLoggedIn, isAdmin, async (req, res) => {
+        let {IdOrdenServicio, FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}=req.body
+        let garantia ={FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}
+        console.log(IdOrdenServicio, garantia)
+        await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?",[garantia,IdOrdenServicio])
+        res.redirect("/ver_garantia"+IdOrdenServicio+"/")
     
 })
 
@@ -581,6 +621,20 @@ let idu = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '9', ?, current_timestamp())",[idu,id])
 await pool.query("UPDATE tblidnotas SET IdOrden = ? WHERE IdNota = 1",[id])
 res.redirect("/descargar")
+})
+
+
+router.get("/ver_garantia:id/", isLoggedIn, async (req,res) =>{
+const {id}=req.params
+const orden = await pool.query("SELECT * , substring(FechaGarantia,1,10)AS fecha FROM tblordenservicio WHERE IdOrdenServicio = ?",[id])
+    res.render("layouts/garantia",{orden})
+})
+
+router.get("/cerrar_garantia:id/", isLoggedIn, async (req,res) =>{
+const {id}=req.params
+await pool.query("UPDATE `tblordenservicio` SET `FechaGarantia` = null WHERE IdOrdenServicio = ?",[id])
+const cliente = await pool.query("SELECT `IdCliente` FROM `tblordenservicio` WHERE `IdOrdenServicio` = ?",[id])
+res.redirect("/serviflash/ver_cliente"+cliente[0].IdCliente+"/")
 })
 
 router.get("/ver_pdf:id/", isLoggedIn, async (req,res) =>{
