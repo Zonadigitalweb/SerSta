@@ -116,7 +116,7 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
         FechaRealizacion=null
     }
     if (CostoServicio=="") {
-        FechaRealizacion=null
+        CostoServicio=null
     }
     const newarticulo = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
@@ -190,9 +190,14 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
     if (cerrado.length==0) {
         const neworden = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
-    }else if (cerrado[0].NotaCerrada==1) {
+    }else {
+        if (cerrado[0].NotaCerrada==1){
         const neworden = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, Hora, IdTecnico, MedioDeInformacion }
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
+        }else if (cerrado[0].NotaCerrada==0) {
+            const neworden = { IdOrdenServicio, IdCliente, IdEquipo, Falla, FechaSolicitud, FechaVisita, Realizado, FechaRealizacion, Observaciones, Presupuesto, CostoServicio, Hora, IdTecnico, MedioDeInformacion }
+        await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
+        }
     } 
 
     res.redirect("/serviflash/ver_cliente"+IdCliente+"/")
