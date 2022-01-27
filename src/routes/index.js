@@ -476,7 +476,7 @@ router.post("/serviflash/activar_desactivar", isLoggedIn, isAdmin, async (req, r
     
 })
 
-router.post("/editar_garantia", isLoggedIn, isAdmin, async (req, res) => {
+router.post("/editar_garantia", isLoggedIn, async (req, res) => {
         let {IdOrdenServicio, FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}=req.body
         let garantia = {FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}
         let idu = req.user.IdUsuario
