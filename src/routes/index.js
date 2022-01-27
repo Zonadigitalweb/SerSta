@@ -480,7 +480,7 @@ router.post("/editar_garantia", isLoggedIn, isAdmin, async (req, res) => {
         let {IdOrdenServicio, FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}=req.body
         let garantia = {FechaGarantia, FechaGarantiaNew, HoraGarantia, NotasGarantia}
         let idu = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `Fecha`) VALUES (?, '12', ?, current_timestamp())",[idu,IdOrdenServicio])
+        await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`, `Fecha`) VALUES (?, '12', ?, current_timestamp())",[idu,IdOrdenServicio])
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?",[garantia,IdOrdenServicio])
         res.redirect("/ver_garantia"+IdOrdenServicio+"/")
     
