@@ -18,12 +18,12 @@ const database = {
     host:"localhost",
     user: "root",
     password: "",
-    database: "serviflash",
+    database: "servistar",
   
   
   }
 
-app.set ("port", process.env.PORT || 4000)
+app.set ("port", process.env.PORT || 3500)
 app.set("views",path.join(__dirname,"views"))
 app.engine(".hbs",exphbs({
     defaultLayout:"main",
