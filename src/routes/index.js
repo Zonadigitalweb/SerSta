@@ -287,7 +287,7 @@ router.get("/serviflash/servicios_pendientes", isLoggedIn, async (req, res) => {
         })
     }
 
-    const proceso = await pool.query("SELECT * FROM `tblordenservicio` WHERE `Realizado`='100' ORDER BY `FechaVisita` DESC")
+    const proceso = await pool.query("SELECT * FROM `tblordenservicio` WHERE `Realizado`='100' ORDER BY `FechaRealizacion` DESC")
     for (let index = 0; index < proceso.length; index++) {
         let Nclienteg = await pool.query("SELECT * FROM tblclientes WHERE `IdCliente`= ?",[proceso[index].IdCliente])
         clientep.push({

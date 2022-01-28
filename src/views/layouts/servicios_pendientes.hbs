@@ -48,7 +48,7 @@
         </thead>
         <tbody>
           {{#each clientep}}
-          <tr id="{{IdOrden}}" style="background-color: #c4c4c4; color:green;">
+          <tr id="p{{IdOrden}}" style="background-color: #c4c4c4; color:#ec7c26;">
             <td>{{IdOrden}}</td>
             <td>{{Nombre}}</td>
             <td>{{Calle}}</td>
@@ -113,6 +113,7 @@
 
   let array = []
   let arrayD = []
+  let clientep =[]
   {{#each pendientes}}
   array.push({
     IdOrdenServicio: "{{IdOrdenServicio}}",
@@ -122,6 +123,12 @@
     Falla: "{{Falla}}",
     Hora: "{{Hora}}",
   })
+  {{/each}}
+  {{#each clientep}}
+  clientep.push({
+            IdOrden:"{{IdOrden}}",
+            FechaRealizacion:"{{moment FechaRealizacion}}"
+        })
   {{/each}}
   {{#each array}}
   arrayD.push({
@@ -157,8 +164,10 @@
           }
         }
 
-        for(index = 0; index < array.length; index++){
-
+        for(index = 0; index < clientep.length; index++){
+             if (fecha == clientep[index].FechaRealizacion) {
+            document.getElementById("p"+clientep[index].IdOrden).style.color="green"
+             }
         }
 
       }

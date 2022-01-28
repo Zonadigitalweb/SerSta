@@ -28,7 +28,7 @@ router.post("/iniciar_sesion", passport.authenticate("local.signin",{
 }))
 
 
-router.get("/serviflash/salir", async (req,res) =>{
+router.get("/serviflash/salir", isLoggedIn, async (req,res) =>{
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `Fecha`) VALUES (?, '1',current_timestamp())",[id])
     req.logOut()
