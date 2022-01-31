@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #707071;" >
+  <div class="container-fluid" >
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -7,22 +7,30 @@
     <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
         <li class="nav-item">
-            <a  class=" nav-link" id="h1" href="/serviflash/servicios_pendientes"> <center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
+            <a  class=" nav-link" id="h1" href="/servistar/servicios_pendientes" style="color: white;"><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
         </li>
         <li class="nav-item">
-          <a style="color: blue;" id="h2" class="nav-link"  href="/serviflash/clientes"><center><i class="fas fa-address-book fa-2x"></i><br>Clientes</a></center>
+          <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: white;"><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" id="h3" href="/serviflash/agregar_registro"><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
-        </li>
+        <li class="nav-item dropdown" style="margin-top: 15px;">
+        <a class="nav-link dropdown-toggle " style="color: #b5b5b5;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <center><i class="fas fa-file-alt fa-2x"></i><br>Catalogo</center>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/servistar/clientes">Clientes</a>
+          <a class="dropdown-item" href="#">Tecnicos</a>
+          <a class="dropdown-item" href="#">Refacciones</a>
+          <a class="dropdown-item" href="#">Servicios</a>
+        </div>
+      </li>
         <li class="nav-item" id="admin" style="display: block;">
-          <a  class="nav-link "  href="/serviflash/reportes"><center><i id="adminI" style="color: #f8f9fa;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #f8f9fa;">Administrador</p></a></center>
+          <a  class="nav-link "  href="/servistar/reportes"><center><i id="adminI" style="color: #707071;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #707071;">Administrador</p></a></center>
         </li>
         <li class="nav-item">
-          <a  class="nav-link " ><center><i style="color: #f8f9fa;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #f8f9fa;">...</p></a></center>
+          <a  class="nav-link " ><center><i style="color: #707071;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #707071;">...</p></a></center>
         </li>
         <li class="nav-item" >
-          <a class="nav-link"><center><i class="fas fa-user fa-2x"></i></i><br>Hola {{user.Nombre}}</a></center>
+          <a class="nav-link" style="color: white;"><center><i class="fas fa-user fa-2x"></i></i><br>Hola {{user.Nombre}}</a></center>
         </li>
       </ul>
     </div>
@@ -68,7 +76,7 @@
                                         value="{{DirNum}}" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label>Entre</label>
+                                    <label>Ubicacion</label>
                                     <input type="text" id="entre" name="DirEntre" class="form-control text-dark m-1"
                                         value="{{DirEntre}}" disabled>
                                 </div>
@@ -280,12 +288,14 @@
                                    Ver orden de servicio =>
                                     <button class="btn btn-info" title="VER ORDEN" onclick=registro({{IdOrdenServicio}})><i style="color: white;"
                                             class="far fa-id-badge"></i></button>
+                                            <div style="display: none;">
                                             <a href="/ver_garantia{{IdOrdenServicio}}/"  id="garra{{IdOrdenServicio}}" title="GARANTIA" class="btn btn-info"><i style="color: white;"
                                             class="fas fa-exclamation-triangle"></i></a>
-                                            <a href="/serviflash/notas{{IdOrdenServicio}}/" title="VER NOTAS" class="btn btn-info"><i style="color: white;"
+                                            <a href="/servistar/notas{{IdOrdenServicio}}/" title="VER NOTAS" class="btn btn-info"><i style="color: white;"
                                              class="fas fa-file-invoice-dollar"></i></a>
                                             <a href="/ver_nota/{{IdOrdenServicio}}" title="IMAGEN ORDEN DE SERVICIO" class="btn btn-info"><i style="color: white;"
                                             class="far fa-file-image"></i></a>
+                                            </div>
                                 </div>
                             </li>
                             {{/each}}
@@ -295,7 +305,7 @@
                         <div style="display:none" id="btn{{IdOrdenServicio}}">
                             <button class="btn btn-info" title="ATRAS" onclick=registro({{IdOrdenServicio}})><i style="color: white;"
                                     class="fas fa-chevron-left"></i></button>
-                            <button class="btn btn-info" title="EDITAR" onclick=editarr({{IdOrdenServicio}})><i style="color: white;"
+                            <button class="btn btn-info" title="EDITAR" onclick=editar_registro({{IdOrdenServicio}})><i style="color: white;"
                                     class="far fa-edit"></i></button>
 
                         </div>
@@ -303,145 +313,215 @@
                         <form action="/editar_registro" method="POST" style="display:none" id="{{IdOrdenServicio}}">
 
                             <div class="form-group">
-                                <label>Numero de Solicitud</label>
+                                <label>Folio</label>
                                 <input type="number" name="IdOrdenServicio" id="Idre" value="{{IdOrdenServicio}}"
                                     style="display:none" class="form-control text-dark m-1">
                                 <input type="number" value="{{IdOrdenServicio}}" class="form-control text-dark m-1"
                                     disabled>
                             </div>
-                            <div class="form-group">
-                                <label>Cliente</label>
-                                <input type="number" style="display:none" name="IdCliente" value="{{IdCliente}}"
-                                    class="form-control text-dark m-1">
-                                <input type="text"  value="{{IdCliente}}"
-                                    class="form-control text-dark m-1" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label id="E{{IdOrdenServicio}}">Equipo</label>
-                                <input type="number" style="display:none" name="IdEquipo" value="{{IdEquipo}}"
-                                    class="form-control text-dark m-1">
-                                <input type="text" value="{{IdEquipo}}"
-                                    class="form-control text-dark m-1" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Falla</label>
-                                <input type="text" name="Falla" value="{{Falla}}" id="Falla{{IdOrdenServicio}}" class="form-control text-dark m-1"
-                                    required disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Fecha de Solicitud</label>
-                                <input type="date" name="FechaSolicitud" id="FechaSolicitud{{IdOrdenServicio}}" value="{{moment FechaSolicitud }}"
-                                    class="form-control text-dark m-1" required disabled>
-                            </div>
-                             <div class="form-group">
-                                <label>Fecha de Visita</label>
-                                <input type="date" name="FechaVisita" id="FechaVisita{{IdOrdenServicio}}" value="{{moment FechaVisita }}"
-                                    class="form-control text-dark m-1" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Realizado</label>
-                                <select name="Realizado" id="Realizado{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
-                                    <option  style="display:block" id="Extra{{IdOrdenServicio}}">{{Realizado}}</option>
+                                    <div class="form-group">
+                                        <label>Fecha de Solicitud</label>
+                                        <input type="date" name="FechaSolicitud" id="FechaSolicitud{{IdOrdenServicio}}" value="{{moment FechaSolicitud}}" class="form-control text-dark m-1" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hora de llamda</label>
+                                        <input type="time" name="HoraLLamda" id="HoraLLamda{{IdOrdenServicio}}" value="{{HoraLLamda}}" class="form-control text-dark m-1" disabled>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label>Medio de contacto</label>
+                                        <select  name="MedioDeInformacion" id="MedioDeInformacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
 
-                                    <option value="255">Si</option>
-                                    <option value="0">No</option>
-                                    <option value="128">Cotizacion</option>
-                                    <option value="100">En Proceso</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Fecha de Entrega</label>
-                                <input type="date" name="FechaRealizacion" id="FechaRealizacion{{IdOrdenServicio}}" value="{{moment FechaRealizacion}}"
-                                    class="form-control text-dark m-1" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Observaciones</label>
-                                <input type="text" name="Observaciones" id="Observaciones{{IdOrdenServicio}}" value="{{Observaciones}}"
-                                    class="form-control text-dark m-1" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Presupuesto</label>
-                                <input type="text" name="Presupuesto" id="Presupuesto{{IdOrdenServicio}}" value="{{Presupuesto}}"
-                                    class="form-control text-dark m-1" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Costo del Servicio</label>
-                                <input type="text" name="CostoServicio" id="CostoServicio{{IdOrdenServicio}}" value="{{CostoServicio}}"
-                                    class="form-control text-dark m-1" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Horario</label>
-                                <select name="Hora" id="Hora{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
-                                    <option value="{{Hora}}">{{Hora}}</option>
-
-                                    <option>Seleccione uno</option>
-                                            <option value="08:00 - 09:00">8:00-9:00</option>
-                                            <option value="08:00 - 09:30">8:00-9:30</option>
-                                            <option value="08:00 - 10:00">8:00-10:00</option>
-                                            <option value="09:00 - 10:00">9:00-10:00</option>
-                                            <option value="09:00 - 10:30">9:00-10:30</option>
-                                            <option value="09:00 - 11:00">9:00-11:00</option>
-                                            <option value="10:00 - 11:00">10:00-11:00</option>
-                                            <option value="10:00 - 11:30">10:00-11:30</option>
-                                            <option value="10:00 - 12:00">10:00-12:00</option>
-                                            <option value="11:00 - 12:00">11:00-12:00</option>
-                                            <option value="11:00 - 12:30">11:00-12:30</option>
-                                            <option value="11:00 - 01:00">11:00-1:00</option>
-                                            <option value="12:00 - 01:00">12:00-1:00</option>
-                                            <option value="12:00 - 01:30">12:00-1:30</option>
-                                            <option value="12:00 - 02:00">12:00-2:00</option>
-                                            <option value="01:00 - 02:00">1:00-2:00</option>
-                                            <option value="01:00 - 02:30">1:00-2:30</option>
-                                            <option value="01:00 - 03:00">1:00-3:00</option>
-                                            <option value="02:00 - 03:00">2:00-3:00</option>
-                                            <option value="02:00 - 03:30">2:00-3:30</option>
-                                            <option value="02:00 - 04:00">2:00-4:00</option>
-                                            <option value="03:00 - 04:00">3:00-4:00</option>
-                                            <option value="03:00 - 04:30">3:00-4:30</option>
-                                            <option value="03:00 - 05:00">3:00-5:00</option>
-                                            <option value="04:00 - 05:00">4:00-5:00</option>
-                                            <option value="04:00 - 05:30">4:00-5:30</option>
-                                            <option value="04:00 - 06:00">4:00-6:00</option>
-                                            <option value="05:00 - 06:00">5:00-6:00</option>
-                                            <option value="05:00 - 06:30">5:00-6:30</option>
-                                            <option value="05:00 - 07:00">5:00-7:00</option>
-                                            <option value="06:00 - 07:00">6:00-7:00</option>
-                                            <option value="06:00 - 07:30">6:00-7:30</option>
-                                            <option value="06:00 - 08:00">6:00-8:00</option>
-                                            <option value="07:00 - 08:00">7:00-8:00</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Tecnico</label>
-                                <select name="IdTecnico" id="IdTecnico{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled required>
-                                    <option  style="display:block" id="Extra1{{IdOrdenServicio}}" value="{{IdTecnico}}">{{IdTecnico}}</option>
+                                            <option value="{{MedioDeInformacion}}">{{MedioDeInformacion}}</option>
+                                           <option value="Seccion Amarilla">Seccion Amarilla</option>
+                                            <option value="Volante" >Volante</option>
+                                            <option value="Red social">Red social</option>
+                                             <option value="Recomendacion">Recomendacion</option>
+                                             <option value="Cliente">Cliente</option>
+                                          </select>
+                                    </div>  
+                                    <div class="form-group" style="display: none;">
+                                        <label>Cliente</label>
+                                              <input type="text" value="{{idcliente}}" id="IdCliente{{IdOrdenServicio}}" name="IdCliente" class="form-control text-dark m-1"> 
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Equipo</label>
+                                        <input type="text" name="IdEquipo"id="IdEquipo{{IdOrdenServicio}}" value="{{IdEquipo}}" class="form-control text-dark m-1" disabled>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Falla Reportada</label>
+                                        <input type="text" name="Falla" id="Falla{{IdOrdenServicio}}" value="{{Falla}}" class="form-control text-dark m-1"
+                                           disabled >
+                                    </div>
+                                     <div class="form-group">
+                                        <label>Horario de Visita</label>
+                                        <input type="time" name="HoraVisita" id="HoraVisita{{IdOrdenServicio}}" value="{{HoraVisita}}" class="form-control text-dark m-1" disabled>
+                                    </div>  
+                                    <div class="form-group">
+                                        <label>Se realizo la visita</label>
+                                        <select name="VisitaRealizada" id="VisitaRealizada{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
+                                            <option value="{{VisitaRealizada}}">{{VisitaRealizada}}</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                            <option  value="Pendiente">Pendiente</option>
+                                        </select>
+                                    </div> 
+                                     <div class="form-group">
+                                        <label>Horario Real de Visita</label>
+                                        <input type="time" name="HoraVisitaReal" id="HoraVisitaReal{{IdOrdenServicio}}" value="{{HoraVisitaReal}}" class="form-control text-dark m-1" disabled>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label>Tipo de Trabajo</label>
+                                        <select name="TipoTrabajo" id="TipoTrabajo{{IdOrdenServicio}}" class="form-select text-dark m-1 "  disabled>
+                                            <option value="{{TipoTrabajo}}">{{TipoTrabajo}}</option>
+                                            <option value="Cotizacion">Cotizacion</option>
+                                            <option value="Preventivo">Preventivo</option>
+                                            <option value="Correctivo">Correctivo</option>
+                                            <option value="Garantia">Garantia</option>
+                                            <option value="Nueva Instalacion">Nueva Instalacion</option>
+                                            <option value="Conexion Demostracion">Conexion Demostracion</option>
+                                        </select>
+                                    </div>  
+                                    <div class="form-group" style="">
+                                        <label>Reparaciones </label>
+                                        <select name="Reparaciones" id="Reparaciones{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
+                                            <option value="{{Reparaciones}}">{{Reparaciones}}</option>
+                                           <option value="MANTENIMIENTO PREVENTIVO">MANTENIMIENTO PREVENTIVO</option>
+                                            <option value="INSTALACION">INSTALACION</option>
+                                            <option value="CAMBIO ENGRANES DE AGITADOR">CAMBIO ENGRANES DE AGITADOR</option>
+                                            <option value="CAMBIO JUNTA HOMOSINETICA">CAMBIO JUNTA HOMOSINETICA</option>
+                                            <option value="CAMBIO SWITCH CENTRIFUGADO">CAMBIO SWITCH CENTRIFUGADO</option>
+                                            <option value="CAMBIO CONTROL NIVELES">CAMBIO CONTROL NIVELES</option>
+                                            <option value="CAMBIO AGITADOR">CAMBIO AGITADOR</option>
+                                            <option value="CAMBIO BANDA DE TRANSMISION">CAMBIO BANDA DE TRANSMISION</option>
+                                            <option value="CAMBIO CLUTCH DE VELOCIDAD">CAMBIO CLUTCH DE VELOCIDAD</option>
+                                            <option value="CAMBIO VARILLAS DE SUSPENSION">CAMBIO VARILLAS DE SUSPENSION</option>
+                                            <option value="CAMBIO ARO DE SUSPENSION">CAMBIO ARO DE SUSPENSION</option>
+                                            <option value="CAMBIO DE TINA RECUPERADORA">CAMBIO DE TINA RECUPERADORA</option>
+                                            <option value="CAMBIO DE TRANSMISION">CAMBIO DE TRANSMISION</option>
+                                            <option value="REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA">REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA</option>
+                                            <option value="CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO">CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>REFACCIONES</label>
+                                        <select name="Refacciones" id="Refacciones{{IdOrdenServicio}}" class="form-select text-dark m-1 "disabled>
+                                            <option  value="{{Refacciones}}">{{Refacciones}}</option>
+                                           <option value="Accesorios para refrigeración Alco" >Accesorios para refrigeración Alco</option>
+                                            <option value="Válvulas de expansión">Válvulas de expansión</option>
+                                            <option value="Válvulas solenoides">Válvulas solenoides</option>
+                                            <option value="Válvulas de paso">Válvulas de paso</option>
+                                            <option value="Separadores de aceite Acumuladores de succión">Separadores de aceite Acumuladores de succión</option>
+                                            <option value="Filtros deshidratadores Indicadores de liquidos">Filtros deshidratadores Indicadores de liquidos</option>
+                                            <option value="Aceites Control de temperatura">Aceites Control de temperatura</option>
+                                        </select>
+                                    </div>  
+                                     <div class="form-group">
+                                        <label>Tecnico</label>
+                                        <select name="IdTecnico" id="IdTecnico{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
+                                            <option value="{{IdTecnico}}" >{{IdTecnico}}</option>
+                                            <option value="0"  >Tecnico 1</option>
+                                            <option value="1">Tecnico 2</option>
+                                            <option value="2">Tecnico 3</option>
+                                            <option value="3">Tecnico 4</option>
+                                        </select>
+                                    </div>  
+                                    <div class="form-group">
+                                        <label>Diagnostico</label><br>
+                                        <textarea name="Diagnostico" disabled id="Diagnostico{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="7" >{{Diagnostico}}</textarea>
+                                    </div>
+                                     <div class="form-group">
+                                        <label>Presupuesto</label>
+                                        <input name="Presupuesto" type="number" id="Presupuesto{{IdOrdenServicio}}"  value="{{Presupuesto}}" class="form-control text-dark m-1"
+                                            disabled >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Costo Real del Servicio</label>
+                                        <input type="number" name="CostoServicio" id="CostoServicio{{IdOrdenServicio}}" value="{{CostoServicio}}" class="form-control text-dark m-1"
+                                        disabled >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Garantia</label>
+                                        <input name="Garantia" type="text" id="Garantia{{IdOrdenServicio}}" value="{{Garantia}}" class="form-control text-dark m-1" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Aceptacion de Presupuestos</label>
+                                        <select name="AceptarPresupuesto" id="AceptarPresupuesto{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
+                                            <option value="{{AceptarPresupuesto}}">{{AceptarPresupuesto}}</option>
+                                            <option value="No" >No</option>
+                                            <option value="Si" >Si</option>
+                                            <option value="En Espera" >En Espera</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha Estimada de terminado</label>
+                                        <input type="date" id="FechaTerminadoEstimado{{IdOrdenServicio}}" name="FechaTerminadoEstimado" value="{{moment FechaTerminadoEstimado}}" class="form-control text-dark m-1"
+                                             disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Lugar de Reparacion</label>
+                                        <select name="LugarReparacion" id="LugarReparacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
+                                            <option value="{{LugarReparacion}}">{{LugarReparacion}}</option>
+                                            <option value="Casa del cliente">Casa del cliente</option>
+                                            <option   value="Taller">Taller</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Estado del Servicio</label>
+                                        <select name="EstadoServicio" id="EstadoServicio{{IdOrdenServicio}}" class="form-select text-dark m-1 "disabled >
+                                            <option value="{{EstadoServicio}}">{{EstadoServicio}}</option>
+                                            <option value="En Ejecucion">En Ejecucion</option>
+                                            <option  value="Para Entregar">Para Entregar</option>
+                                            <option value="Esperando">Esperando</option>
+                                            <option  value="Esperando Refacciones">Esperando Refacciones</option>
+                                            <option  value="Sin Preparacion">Sin Preparacion</option>
+                                            <option  value="No Aceptado">No Aceptado</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha Real de terminado</label>
+                                        <input name="FechaTerminado" type="date" id="FechaTerminado{{IdOrdenServicio}}"  value="{{moment FechaTerminado}}" class="form-control text-dark m-1"
+                                            disabled >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha de Entrega</label>
+                                        <input type="date" name="FechaEntrega" id="FechaEntrega{{IdOrdenServicio}}" value="{{moment FechaEntrega}}" class="form-control text-dark m-1"
+                                            disabled >
+                                    </div>
+                                     <div class="form-group">
+                                        <label>Vigencia de Garantia</label>
+                                        <select name="VigenciaGarantia" id="VigenciaGarantia{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled >
+                                            <option value="{{VigenciaGarantia}}">{{VigenciaGarantia}}</option>
+                                            <option value="-">-</option>
+                                            <option  value="15">15</option>
+                                            <option value="30">30</option>
+                                            <option  value="60">60</option>
+                                            <option  value="90">90</option>
+                                            <option  value="180">180</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Articulo o Servicio en Garantia</label>
+                                         <input type="text" name="ArticuloGarantia" id="ArticuloGarantia{{IdOrdenServicio}}" value="{{ArticuloGarantia}}" class="form-control text-dark m-1" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Fecha de Vencimiento</label>
+                                        <input type="date" name="FechaVencimiento" id="FechaVencimiento{{IdOrdenServicio}}" value="{{moment FechaVencimiento}}" class="form-control text-dark m-1"
+                                            disabled >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Dias para Vencimiento</label>
+                                        <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}" value="{{DiasVencimiento}}" class="form-control text-dark m-1"
+                                            disabled >
+                                    </div>
                                     
-
-                                    <option value="0">Seleccione uno</option>
-                                    <option value="4">ALEJO FAJARDO</option>
-                                    <option value="8">RICARDO ANTONIO</option>
-                                    <option value="11">ALBERTO CARLOS</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Medio por el cual de entero del servicio</label>
-                                <select name="MedioDeInformacion" id="MedioDeInformacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " required
-                                    disabled>
-                                    <option  style="display:block" id="Extra2{{IdOrdenServicio}}">{{MedioDeInformacion}}</option>
-                                   
-
-                                    <option value="tarjeta">Tarjeta</option>
-                                    <option value="revista/anuncio">Revista/Anuncio</option>
-                                    <option value="cliente">Cliente</option>
-                                    <option value="recomendacion">Recomendacion</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-info btn-block mx-1 " id="btnenv{{IdOrdenServicio}}" title="GUARDAR" style="display:none;">
-                                    <i style="color: white;" class="fas fa-check"></i>
-                                </button>
-                            </div>
-                        </form>
+                                    
+                                    <div class="form-group" >
+                                        <button class="btn btn-info btn-block mx-1 " id="{{IdOrdenServicio}}BTN" style="display: none;" title="Enviar">
+                                            <i class="fas fa-check" style="color: white;"></i>
+                                        </button>
+                                    </div>
+                                </form>
                         {{/each}}
                         <br>
                         <br>
@@ -505,6 +585,39 @@
     })
     {{/each}}
 
+            function editar_registro(id){
+                console.log(arrayE[0].IdCliente)
+                document.getElementById("IdCliente"+id).value=arrayE[0].IdCliente
+                document.getElementById("FechaSolicitud"+id).disabled=false
+                document.getElementById("HoraLLamda"+id).disabled=false
+                document.getElementById("MedioDeInformacion"+id).disabled=false
+                document.getElementById("IdEquipo"+id).disabled=false
+                document.getElementById("Falla"+id).disabled=false
+                document.getElementById("HoraVisita"+id).disabled=false
+                document.getElementById("VisitaRealizada"+id).disabled=false
+                document.getElementById("HoraVisitaReal"+id).disabled=false
+                document.getElementById("TipoTrabajo"+id).disabled=false
+                document.getElementById("Reparaciones"+id).disabled=false
+                document.getElementById("Refacciones"+id).disabled=false
+                document.getElementById("IdTecnico"+id).disabled=false
+                document.getElementById("Diagnostico"+id).disabled=false
+                document.getElementById("Presupuesto"+id).disabled=false
+                document.getElementById("CostoServicio"+id).disabled=false
+                document.getElementById("Garantia"+id).disabled=false
+                document.getElementById("AceptarPresupuesto"+id).disabled=false
+                document.getElementById("FechaTerminadoEstimado"+id).disabled=false
+                document.getElementById("LugarReparacion"+id).disabled=false
+                document.getElementById("EstadoServicio"+id).disabled=false
+                document.getElementById("FechaTerminado"+id).disabled=false
+                document.getElementById("FechaEntrega"+id).disabled=false
+                document.getElementById("VigenciaGarantia"+id).disabled=false
+                document.getElementById("ArticuloGarantia"+id).disabled=false
+                document.getElementById("FechaVencimiento"+id).disabled=false
+                document.getElementById("DiasVencimiento"+id).disabled=false
+                document.getElementById(id+"BTN").style.display="block"
+                document.getElementById("btn"+id).style.display="none"
+
+            }
 
             function SelE(selecE) {
                     for (index = 0; index < arrayE.length; index++) {
