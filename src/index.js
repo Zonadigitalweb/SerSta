@@ -17,7 +17,7 @@ const database = {
 
     host:"localhost",
     user: "root",
-    password: "",
+    password: "Meekoneko2214$",
     database: "servistar",
   
   

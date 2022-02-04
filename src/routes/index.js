@@ -144,6 +144,20 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
     if (DiasVencimiento=="") {
         DiasVencimiento=null
     }
+    if (IdAyudante=="") {
+        IdAyudante=null
+    }
+    if (IdTecnicoSegui=="") {
+        IdTecnicoSegui=null
+    }
+    if (IdAyudanteSegui=="") {
+        IdAyudanteSegui=null
+    }
+    if (IdTecnico=="") {
+        IdTecnico=null
+    }
+
+
     const newarticulo = {IdSucursal,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,  FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento }
     log(newarticulo)
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
