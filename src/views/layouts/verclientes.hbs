@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #707071;" >
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #5b5378;" >
   <div class="container-fluid" >
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
           <a  class="nav-link "  href="/servistar/reportes"><center><i id="adminI" style="color: #707071;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #707071;">Administrador</p></a></center>
         </li>
         <li class="nav-item">
-          <a  class="nav-link " ><center><i style="color: #707071;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #707071;">...</p></a></center>
+          <a  class="nav-link " ><center><i style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #5b5378;">...</p></a></center>
         </li>
         <li class="nav-item" >
           <a class="nav-link" style="color: white;"><center><i class="fas fa-user fa-2x"></i></i><br>Hola {{user.Nombre}}</a></center>
@@ -100,57 +100,70 @@
                                     <i style="color: white;" class="fas fa-plus"></i>
                                 </button>
                                 <form action="/cliente_agregar" method="POST" style="display:none" id="form">
-                                    <div class="form-group">
-                                        <label>Id Cliente</label>
-                                        <input type="number" name="IdCliente" style="display:none"
-                                            class="form-control text-dark m-1" value="{{num}}">
-                                        <input type="number" class="form-control text-dark m-1" value="{{num}}"
-                                            disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text" name="Nombre" class="form-control text-dark m-1" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Colonia</label>
-                                        <input type="text" name="DirColonia" class="form-control text-dark m-1"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Calle</label>
-                                        <input type="text" name="DirCalle" class="form-control text-dark m-1" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Numero</label>
-                                        <input type="text" name="DirNum" class="form-control text-dark m-1" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ubicacion</label>
-                                        <input type="text" name="DirEntre" class="form-control text-dark m-1" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Telefono</label>
-                                        <input type="text" name="Telefono" class="form-control text-dark m-1"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>RFC</label>
-                                        <input type="text" name="RFC" class="form-control text-dark m-1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Municipio</label>
-                                        <input type="text" name="Municipio" class="form-control text-dark m-1" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>CP</label>
-                                        <input type="number" name="CP" class="form-control text-dark m-1" >
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-info btn-block mx-1" title="ENVIAR">
-                                            <i style="color: white;" class="fas fa-check"></i>
-                                        </button>
-                                    </div>
-                                </form>
+                                <div class="row">
+                                <div class="col-md-3">
+                                    <label>Id Cliente</label>
+                                    <input type="number" style="display: none;" name="IdCliente"
+                                        class="form-control text-dark m-1" value="{{num}}">
+                                    <input type="number" class="form-control text-dark m-1" value="{{num}}" disabled>
+                                </div>
+                                <div class="col-md-9">
+                                    <label>Nombre</label>
+                                    <input type="text"  id="nombre" name="Nombre" class="form-control text-dark m-1" 
+                                         required>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-5">
+                                    <label>Calle</label>
+                                    <input type="text" id="calle" name="DirCalle" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <label>Numero</label>
+                                    <input type="text" id="numero" name="DirNum" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                <div class="col-md-5">
+                                    <label>Colonia</label>
+                                    <input type="text" id="colonia" name="DirColonia" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-9">
+                                    <label>Datos de Ubicacion</label>
+                                    <input type="text" id="entre" name="DirEntre" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Municipio</label>
+                                    <input type="text" id="municipio" name="Municipio"
+                                        class="form-control text-dark m-1" required>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <label>Telefono</label>
+                                    <input type="text" id="telefono" name="Telefono" class="form-control text-dark m-1"
+                                     required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>RFC</label>
+                                    <input type="text" id="rfc" name="RFC" class="form-control text-dark m-1"
+                                         >
+                                </div>
+                                <div class="col-md-3">
+                                    <label>CP</label>
+                                    <input type="text" id="cp" name="CP" class="form-control text-dark m-1"
+                                         >
+                                </div>
+                                </div>
+                                <button class="btn btn-info size-2" title="GUARDAR"> <i style="color: white;" class="fas fa-check"></i></button>
+
+                                
+                            </form>
                             </div>
                         </div>
                     </div>

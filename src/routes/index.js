@@ -26,13 +26,16 @@ router.get("/servistar/agregar_registro", isLoggedIn, async (req, res)=>{
 
 router.get("/servistar/agregar_registro:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
+    const idU = req.user
     const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ?", [id])
     let cliente= await pool.query("SELECT * from tblclientes WHERE IdCliente = ?",[id])
     let num=await pool.query("SELECT max(IdOrdenServicio) as num FROM tblordenservicio;")
     num=num[0].num+1
     let idcliente=cliente[0].IdCliente
     let nombre=cliente[0].Nombre
-    res.render("layouts/agregar_registro_completo", { equipo, cliente, nombre, num, idcliente })
+    let sucu=await pool.query("SELECT Sucursal FROM tblusuarios WHERE IdUsuario = ?", [idU.IdUsuario])
+    sucu=sucu[0].Sucursal
+    res.render("layouts/agregar_registro_completo", { equipo, cliente, nombre, num, idcliente, sucu })
 })
 
 router.get("/servistar/notas:id/", isLoggedIn, async (req, res) =>{
@@ -113,11 +116,29 @@ router.post("/agregar_nota", isLoggedIn, async (req, res) =>{
 })
 
 router.post("/agregar_registro", isLoggedIn, async (req, res) => {
-    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
+    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita, FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui, VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
     let id = req.user.IdUsuario
     let IdSucursal = req.user.Sucursal
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '6', ?,current_timestamp())",[id,IdOrdenServicio])
-    const newarticulo = {IdSucursal,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento }
+    if (FechaSolicitud=="") {
+        FechaSolicitud=null
+    }
+    if (FechaVisita=="") {
+        FechaVisita=null
+    }
+    if (FechaTerminadoEstimado=="") {
+        FechaTerminadoEstimado=null
+    }
+    if (FechaTerminado=="") {
+        FechaTerminado=null
+    }
+    if (FechaEntrega=="") {
+        FechaEntrega=null
+    }
+    if (FechaVencimiento=="") {
+        FechaVencimiento=null
+    }
+    const newarticulo = {IdSucursal,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,  FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento }
     log(newarticulo)
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
     res.redirect("/servistar/ver_cliente"+IdCliente+"/")
@@ -125,20 +146,20 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
 })
 
 router.post("/agregar_equipo", isLoggedIn, async (req, res) => {
-    let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo } = req.body
+    let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo, Serie } = req.body
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdCliente`, `IdEquipo`,`Fecha`) VALUES (?, '4', ?, ?, current_timestamp())",[id,IdCliente,IdEquipo])
-    const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo }
+    const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo, Serie }
     await pool.query("INSERT INTO tblequipos SET ?", [newequipo])
     res.redirect("/servistar/agregar_registro"+IdCliente+"/")
 
 })
 
 router.post("/ver_cliente/agregare", isLoggedIn, async (req, res) => {
-    let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo } = req.body
+    let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Serie, Color, Modelo } = req.body
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` ( `IdUsuario`, `TipoMovimiento`, `IdCliente`, `IdEquipo`, `Fecha`) VALUES (?, '4', ?, ?, current_timestamp())",[id,IdCliente,IdEquipo])
-    const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo }
+    const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Serie, Color, Modelo }
     await pool.query("INSERT INTO tblequipos SET ?", [newequipo])
     res.redirect("/servistar/ver_cliente"+IdCliente+"/")
 
@@ -154,8 +175,8 @@ router.post("/editar_cliente", isLoggedIn, async (req, res) => {
 })
 
 router.post("/editar_registro", isLoggedIn, async (req, res) => {
-    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
-    let aaa={ IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada, IdAyudanteSegui, IdTecnicoSegui, IdAyudante, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
+    let aaa={ IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal, IdAyudanteSegui, IdTecnicoSegui, IdAyudante,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
     log(aaa)
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '7', ?, current_timestamp())",[id,IdOrdenServicio])
@@ -171,14 +192,14 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
    
     const cerrado = await pool.query("SELECT * FROM `tblnotas` WHERE IdOrdenServicio = ?",[IdOrdenServicio])
     if (cerrado.length==0) {
-        const neworden = { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+        const neworden = { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
     }else {
         if (cerrado[0].NotaCerrada==1){
-        const neworden =  { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+        const neworden =  {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
         }else if (cerrado[0].NotaCerrada==0) {
-            const neworden = { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+            const neworden = {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
         }
     } 
@@ -188,10 +209,10 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
 })
 
 router.post("/editar_equipo", isLoggedIn, async (req, res) => {
-    let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Color, Modelo} = req.body
+    let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Serie, Color, Modelo} = req.body
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdCliente`, `IdEquipo`, `Fecha`) VALUES (?, '5', ?, ?, current_timestamp())",[id,IdCliente,IdEquipo])
-    const newequipo = { IdCliente,IdEquipo, Categoria, Tipo, Marca, Color, Modelo}
+    const newequipo = { IdCliente,IdEquipo, Categoria, Tipo, Marca, Serie, Color, Modelo}
     await pool.query("UPDATE tblequipos SET ? WHERE IdCliente=? AND IdEquipo=?", [newequipo, IdCliente, IdEquipo])
     res.redirect("/servistar/ver_cliente"+IdCliente+"/")
 

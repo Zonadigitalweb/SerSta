@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #707071;" >
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #5b5378;" >
   <div class="container-fluid" >
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@
           <a  class="nav-link "  href="/servistar/reportes"><center><i id="adminI" style="color: #707071;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #707071;">Administrador</p></a></center>
         </li>
         <li class="nav-item">
-          <a  class="nav-link " ><center><i style="color: #707071;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #707071;">...</p></a></center>
+          <a  class="nav-link " ><center><i style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #5b5378;">...</p></a></center>
         </li>
         <li class="nav-item" >
           <a class="nav-link" style="color: white;"><center><i class="fas fa-user fa-2x"></i></i><br>Hola {{user.Nombre}}</a></center>
@@ -48,66 +48,79 @@
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
                                 <h1 class="text-dark mb-3 h4">Datos</h1>
+
+
                                 <form action="/agregar_registro" method="POST">
-                                    {{#each cliente}}
-                                    <div class="form-group">
-                                        <label>Id Cliente</label>
-                                        <input type="number"  class="form-control text-dark m-1"
-                                            placeholder="{{IdCliente}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{Nombre}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Colonia</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{DirColonia}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Calle</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{DirCalle}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Numero</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{DirNum}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Entre</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{DirEntre}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Telefono</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{Telefono}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>RFC</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{RFC}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Municipio</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{Municipio}}" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>CP</label>
-                                        <input type="text"  class="form-control text-dark m-1"
-                                            placeholder="{{CP}}" disabled>
-                                    </div>
-                                    {{/each}}
-                                </form>
+                                {{#each cliente}}
+                                <div class="row">
+                                <div class="col-md-3">
+                                    <label>Id Cliente</label>
+                                    <input type="number" style="display: none;" name="IdCliente"
+                                        class="form-control text-dark m-1" value="{{IdCliente}}">
+                                    <input type="number" class="form-control text-dark m-1" value="{{IdCliente}}" disabled>
+                                </div>
+                                <div class="col-md-9">
+                                    <label>Nombre</label>
+                                    <input type="text"  id="nombre" name="Nombre" class="form-control text-dark m-1" 
+                                        value="{{Nombre}}" disabled required>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-5">
+                                    <label>Calle</label>
+                                    <input type="text" id="calle" name="DirCalle" class="form-control text-dark m-1"
+                                        value="{{DirCalle}}" disabled required>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <label>Numero</label>
+                                    <input type="text" id="numero" name="DirNum" class="form-control text-dark m-1"
+                                        value="{{DirNum}}" disabled required>
+                                </div>
+                                <div class="col-md-5">
+                                    <label>Colonia</label>
+                                    <input type="text" id="colonia" name="DirColonia" class="form-control text-dark m-1"
+                                        value="{{DirColonia}}" disabled required>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-9">
+                                    <label>Datos de Ubicacion</label>
+                                    <input type="text" id="entre" name="DirEntre" class="form-control text-dark m-1"
+                                        value="{{DirEntre}}" disabled required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Municipio</label>
+                                    <input type="text" id="municipio" name="Municipio"
+                                        class="form-control text-dark m-1" value="{{Municipio}}" disabled required>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <label>Telefono</label>
+                                    <input type="text" id="telefono" name="Telefono" class="form-control text-dark m-1"
+                                        value="{{Telefono}}" disabled required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>RFC</label>
+                                    <input type="text" id="rfc" name="RFC" class="form-control text-dark m-1"
+                                        value="{{RFC}}" disabled>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>CP</label>
+                                    <input type="text" id="cp" name="CP" class="form-control text-dark m-1"
+                                        value="{{CP}}" disabled>
+                                </div>
+                                </div>
+                                {{/each}}
+                            </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <br>
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
@@ -134,31 +147,39 @@
                                 <button class="btn btn-info size-2" onclick=Agregar() id="btnadd" title="AGREGAR EQUIPO">
                                 <i style="color: white;" class="fas fa-plus"></i>
                                 </button>
-                                <form action="/agregar_equipo" method="POST" style="display:none" id="agregare">
-                                    <div class="form-group">
-                                        <label>Id cliente</label>
-                                        <input type="number" value="{{idcliente}}" class="form-control text-dark m-1" disabled>
-                                        <input type="number" name="IdCliente" id="IdCliente" value="{{idcliente}}" class="form-control text-dark m-1" style="display:none">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Id equipo</label>
-                                        <input type="number" id="IdEquipo" class="form-control text-dark m-1" disabled>
-                                        <input type="number" name="IdEquipo" id="IdEquiporr" class="form-control text-dark m-1" style="display:none">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Categoria</label>
-                                        <select name="Categoria" id="Categoria" class="form-select text-dark m-1 " onclick=tipo() disabled>
-                                            <option  value="">Elige una categoria</option>
-                                            <option value="LAVADO">LAVADO</option>
-                                            <option value="REFRIGERACION">REFRIGERACION</option>
-                                            <option value="MICROONDAS">MICROONDAS</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tipo</label> 
 
-                                       <select name="Tipo" id="Tipo" class="form-select text-dark m-1 " disabled>
-                                           <option value="">Elige un tipo</option>
+
+                                 <form action="/agregar_equipo" method="POST" style="display:none" id="agregare">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Id cliente</label>
+                                    <input type="number" class="form-control text-dark m-1" value="{{idcliente}}" disabled id="IdClienterr"
+                                        >
+                                    <input type="number"  name="IdCliente" id="IdCliente"
+                                        class="form-control text-dark m-1" style="display:none" value={{idcliente}}>
+                                </div>
+                                <div class="col-md-2">
+                                    <label>Id equipo</label>
+                                    <input type="number" id="IdEquipo" class="form-control text-dark m-1" disabled>
+                                    <input type="number" name="IdEquipo" id="IdEquiporr"
+                                        class="form-control text-dark m-1" style="display:none">
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-5">
+                                    <label>Categoria</label>
+                                    <select name="Categoria" id="Categoria" class="form-select text-dark m-1 "
+                                        onclick=tipo() disabled>
+                                        <option value="">Elige una categoria</option>
+                                        <option value="LAVADO">LAVADO</option>
+                                        <option value="REFRIGERACION">REFRIGERACION</option>
+                                        <option value="MICROONDAS">MICROONDAS</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-7">
+                                    <label>Tipo</label>
+                                    <select name="Tipo" id="Tipo" class="form-select text-dark m-1 " disabled>
+                                        <option value="">Elige un tipo</option>
                                         <option id="lav1" style="display:none" value="LAVADORA">LAVADORA</option>
                                         <option id="lav2" style="display:none" value="SECADORA">SECADORA</option>
                                         <option id="ref1" style="display:none" value="REFRIGERADOR">REFRIGERADOR
@@ -170,28 +191,37 @@
                                             DE BOTELLAS</option>
                                         <option id="ref5" style="display:none" value="SERVIBAR">SERVIBAR</option>
                                         <option id="mic1" style="display:none" value="MICROONDAS">MICROONDAS</option>
-                                        </select>
-                                    <div class="form-group">
-                                        <label>Marca</label>
-                                        <input type="text" name="Marca" id="Marca" class="form-control text-dark m-1"
-                                             disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Color</label>
-                                        <input type="text" name="Color" id="Color" class="form-control text-dark m-1"
-                                             disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Modelo</label>
-                                        <input type="text" name="Modelo" id="Modelo" class="form-control text-dark m-1"
-                                             disabled>
-                                    </div>
-                                    <div class="form-group" id="btnagr" style="display:none" title="ENVIAR">
-                                        <button class="btn btn-info btn-block mx-1 ">
-                                            <i style="color: white;" class="fas fa-check"></i>
-                                        </button>
-                                    </div>
-                                </form>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-3">
+                                    <label>Marca</label>
+                                    <input type="text" name="Marca" id="Marca" class="form-control text-dark m-1"
+                                        disabled>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Color</label>
+                                    <input type="text" name="Color" id="Color" class="form-control text-dark m-1"
+                                        disabled>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Modelo</label>
+                                    <input type="text" name="Modelo" id="Modelo" class="form-control text-dark m-1"
+                                        disabled>
+                                </div>
+                                 <div class="col-md-3">
+                                    <label>Serie</label>
+                                    <input type="text" name="Serie" id="Serie" class="form-control text-dark m-1"
+                                        disabled>
+                                </div>
+                                </div>
+                                <div class="form-group" id="btnagr" style="display:none" title="GUARDAR">
+                                    <button class="btn btn-info btn-block mx-1 ">
+                                        <i style="color: white;" class="fas fa-check"></i>
+                                    </button>
+                                </div>
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -199,65 +229,99 @@
             </div>
             </div>
             <br>
-            <div class=" mx-auto"  id="Agregar">
+            <div class=" mx-auto" style="display: none;"  id="Agregar">
             <div class="card">
                 <div class="card-body">
                     <h1 class="text-dark mb-3 h4">Registro</h1>
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
                                 <h1 class="text-dark mb-3 h4">Agregar Orden de Servicio</h1>
-                                <form action="/agregar_registro" method="POST">
-                                    <div class="form-group">
-                                        <label>Fecha de Solicitud</label>
-                                        <input type="date" name="FechaSolicitud" class="form-control text-dark m-1" >
+
+
+
+
+                                 <form action="/agregar_registro" method="POST">
+
+                             <div class="row">
+                                <div class="col-md-2">
+                                <label>Folio</label>
+                                <input type="number" value="{{num}}" name="IdOrdenServicio" 
+                                    style="display:none" class="form-control text-dark m-1">
+                                <input type="number" value="{{num}}" class="form-control text-dark m-1"
+                                    disabled>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-md-2">
+                                        <label>Folio sucursal</label>
+                                              <input type="text" value="{{sucu}}" id="IdSucursal{{IdOrdenServicio}}" name="IdSucursal" class="form-control text-dark m-1" disabled> 
+                                    </div>
+                                     <div class="col-md-4">
+                                        <label>Cliente</label>
+                                              <input type="text" value="{{nombre}}" id="IdCliente{{IdOrdenServicio}}" class="form-control text-dark m-1" disabled> 
+                                              <input type="text" style="display: none;" value="{{idcliente}}" id="IdCliente{{IdOrdenServicio}}" name="IdCliente" class="form-control text-dark m-1"> 
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Equipo</label>
+                                        <input type="text" id="IdEquipoReg" value="nom" class="form-control text-dark m-1" disabled>
+                                        <input type="text" style="display: none;" name="IdEquipo" id="IdEquipoId" value="id" class="form-control text-dark m-1" >
+                                        
+                                    </div>
+                            
+                            </div>
+                              <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Fecha de Solicitud</label>
+                                        <input type="date" name="FechaSolicitud" required id="FechaSolicitud{{IdOrdenServicio}}" class="form-control text-dark m-1" >
+                                    </div>
+                                    <div class="col-md-3">
                                         <label>Hora de llamda</label>
-                                        <input type="time" name="HoraLLamda"  class="form-control text-dark m-1" >
+                                        <input type="time" name="HoraLLamda" required id="HoraLLamda{{IdOrdenServicio}}" class="form-control text-dark m-1" >
                                     </div> 
-                                    <div class="form-group">
+                                    <div class="col-md-3">
                                         <label>Medio de contacto</label>
-                                        <select  name="MedioDeInformacion" class="form-select text-dark m-1 " >
-                                            <option value="Seccion Amarilla">Seccion Amarilla</option>
+                                        <select  name="MedioDeInformacion" required id="MedioDeInformacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+
+                                         
+                                           <option value="Seccion Amarilla">Seccion Amarilla</option>
                                             <option value="Volante" >Volante</option>
                                             <option value="Red social">Red social</option>
                                              <option value="Recomendacion">Recomendacion</option>
                                              <option value="Cliente">Cliente</option>
                                           </select>
                                     </div>  
-                                    <div class="form-group" style="display: none;">
-                                        <label>Cliente</label>
-                                              <input type="text" value="{{idcliente}}" name="IdCliente" class="form-control text-dark m-1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Equipo</label>
-                                        <input type="text" name="IdEquipo" class="form-control text-dark m-1" disabled>
-                                        
                                     </div>
                                     <div class="form-group">
                                         <label>Falla Reportada</label>
-                                        <input type="text" name="Falla"  class="form-control text-dark m-1"
+                                        <input type="text" name="Falla" required id="Falla{{IdOrdenServicio}}"  class="form-control text-dark m-1"
                                             >
                                     </div>
-                                     <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                        <label>Fecha de Visita</label>
+                                        <input type="date" name="FechaVisita" required id="FechaVisita{{IdOrdenServicio}}"  class="form-control text-dark m-1" >
+                                    </div>
+                                     <div class="col-md-3">
                                         <label>Horario de Visita</label>
-                                        <input type="time" name="HoraVisita" class="form-control text-dark m-1" >
+                                        <input type="time" name="HoraVisita" required id="HoraVisita{{IdOrdenServicio}}"  class="form-control text-dark m-1" >
                                     </div>  
-                                    <div class="form-group">
+                                    <div class="col-md-3">
                                         <label>Se realizo la visita</label>
-                                        <select name="VisitaRealizada" class="form-select text-dark m-1 " >
+                                        <select name="VisitaRealizada" id="VisitaRealizada{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                       
                                             <option value="Si">Si</option>
-                                            <option value="No" selected>No</option>
+                                            <option value="No">No</option>
                                             <option  value="Pendiente">Pendiente</option>
                                         </select>
                                     </div> 
-                                     <div class="form-group">
+                                     <div class="col-md-3">
                                         <label>Horario Real de Visita</label>
-                                        <input type="time" name="HoraVisitaReal"  class="form-control text-dark m-1" >
+                                        <input type="time" name="HoraVisitaReal" id="HoraVisitaReal{{IdOrdenServicio}}"  class="form-control text-dark m-1" >
                                     </div> 
-                                    <div class="form-group">
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-2">
                                         <label>Tipo de Trabajo</label>
-                                        <select name="TipoTrabajo" class="form-select text-dark m-1 " >
+                                        <select name="TipoTrabajo" id="TipoTrabajo{{IdOrdenServicio}}" class="form-select text-dark m-1 "  >
+                                            
                                             <option value="Cotizacion">Cotizacion</option>
                                             <option value="Preventivo">Preventivo</option>
                                             <option value="Correctivo">Correctivo</option>
@@ -266,10 +330,11 @@
                                             <option value="Conexion Demostracion">Conexion Demostracion</option>
                                         </select>
                                     </div>  
-                                    <div class="form-group" style="">
+                                    <div class="col-md-6" style="">
                                         <label>Reparaciones </label>
-                                        <select name="Reparaciones" class="form-select text-dark m-1 ">
-                                            <option value="MANTENIMIENTO PREVENTIVO">MANTENIMIENTO PREVENTIVO</option>
+                                        <select name="Reparaciones" id="Reparaciones{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                           
+                                           <option value="MANTENIMIENTO PREVENTIVO">MANTENIMIENTO PREVENTIVO</option>
                                             <option value="INSTALACION">INSTALACION</option>
                                             <option value="CAMBIO ENGRANES DE AGITADOR">CAMBIO ENGRANES DE AGITADOR</option>
                                             <option value="CAMBIO JUNTA HOMOSINETICA">CAMBIO JUNTA HOMOSINETICA</option>
@@ -286,89 +351,81 @@
                                             <option value="CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO">CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>REFACCIONES</label>
-                                        <select name="Refacciones" class="form-select text-dark m-1 ">
-                                            <option value="Accesorios para refrigeración Alco" >Accesorios para refrigeración Alco</option>
-                                            <option value="Válvulas de expansión">Válvulas de expansión</option>
-                                            <option value="Válvulas solenoides">Válvulas solenoides</option>
-                                            <option value="Válvulas de paso">Válvulas de paso</option>
-                                            <option value="Separadores de aceite Acumuladores de succión">Separadores de aceite Acumuladores de succión</option>
-                                            <option value="Filtros deshidratadores Indicadores de liquidos">Filtros deshidratadores Indicadores de liquidos</option>
-                                            <option value="Aceites Control de temperatura">Aceites Control de temperatura</option>
-                                        </select>
+                                    <div class="col-md-4">
+                                        <label>REFACCIONES</label> <br>
+                                        <button class="btn btn-info" style="background-color: #7e759b; color: white; border-color: #7e759b;">Agregar Refacciones al servicio</button>
+                                    </div>
                                     </div>  
-                                     <div class="form-group">
+                                    <div class="row">
+                                     <div class="col-md-3">
                                         <label>Tecnico</label>
-                                        <select name="IdTecnico" class="form-select text-dark m-1 ">
-                                            <option value="0" selected >Tecnico 1</option>
+                                        <select name="IdTecnico" id="IdTecnico{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                           
+                                            <option value="0"  >Tecnico 1</option>
                                             <option value="1">Tecnico 2</option>
                                             <option value="2">Tecnico 3</option>
                                             <option value="3">Tecnico 4</option>
                                         </select>
-                                    </div>  
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Ayudante</label>
+                                        <select name="IdAyudante" id="IdAyudante{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                           
+                                            <option value="0"  >Ayudante 1</option>
+                                            <option value="1">Ayudante 2</option>
+                                            <option value="2">Ayudante 3</option>
+                                            <option value="3">Ayudante 4</option>
+                                        </select>
+                                    </div> 
+                                    <div class="col-md-3">
+                                        <label>Tecnico Seguimiento</label>
+                                        <select name="IdTecnicoSegui" id="IdTecnicoSegui{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                           
+                                            <option value="0"  >Tecnico 1</option>
+                                            <option value="1">Tecnico 2</option>
+                                            <option value="2">Tecnico 3</option>
+                                            <option value="3">Tecnico 4</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Ayudante Seguimiento</label>
+                                        <select name="IdAyudanteSegui" id="IdAyudanteSegui{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                            
+                                            <option value="0"  >Ayudante 1</option>
+                                            <option value="1">Ayudante 2</option>
+                                            <option value="2">Ayudante 3</option>
+                                            <option value="3">Ayudante 4</option>
+                                        </select>
+                                    </div> 
+                                    </div>
                                     <div class="form-group">
                                         <label>Diagnostico</label><br>
-                                        <textarea name="Diagnostico"  class="form-control text-dark m-1" rows="7" ></textarea>
+                                        <textarea name="Diagnostico"  id="Diagnostico{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
-                                     <div class="form-group">
+                                    <div class="row">
+                                     <div class="col-md-3">
                                         <label>Presupuesto</label>
-                                        <input name="Presupuesto" type="number"  value="" class="form-control text-dark m-1"
+                                        <input name="Presupuesto" type="number" id="Presupuesto{{IdOrdenServicio}}" class="form-control text-dark m-1"
                                              >
                                     </div>
-                                    <div class="form-group">
+                                    <div class="col-md-3">
                                         <label>Costo Real del Servicio</label>
-                                        <input type="number" name="CostoServicio" value="" class="form-control text-dark m-1"
+                                        <input type="number" name="CostoServicio" id="CostoServicio{{IdOrdenServicio}}"  class="form-control text-dark m-1"
                                          >
                                     </div>
-                                    <div class="form-group">
-                                        <label>Garantia</label>
-                                        <input name="Garantia" type="text"  class="form-control text-dark m-1" >
-                                    </div>
-                                    <div class="form-group">
+                                    <div class="col-md-3">
                                         <label>Aceptacion de Presupuestos</label>
-                                        <select name="AceptarPresupuesto" class="form-select text-dark m-1 ">
+                                        <select name="AceptarPresupuesto" id="AceptarPresupuesto{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                            
                                             <option value="No" >No</option>
                                             <option value="Si" >Si</option>
                                             <option value="En Espera" >En Espera</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Fecha Estimada de terminado</label>
-                                        <input type="date" name="FechaTerminadoEstimado"  class="form-control text-dark m-1"
-                                             >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Lugar de Reparacion</label>
-                                        <select name="LugarReparacion" class="form-select text-dark m-1 " >
-                                            <option value="Casa del cliente">Casa del cliente</option>
-                                            <option  selected value="Taller">Taller</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Estado del Servicio</label>
-                                        <select name="EstadoServicio" class="form-select text-dark m-1 " >
-                                            <option value="En Ejecucion">En Ejecucion</option>
-                                            <option  value="Para Entregar">Para Entregar</option>
-                                            <option value="Esperando">Esperando</option>
-                                            <option  value="Esperando Refacciones">Esperando Refacciones</option>
-                                            <option  value="Sin Preparacion">Sin Preparacion</option>
-                                            <option  value="No Aceptado">No Aceptado</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fecha Real de terminado</label>
-                                        <input name="FechaTerminado" type="date"   class="form-control text-dark m-1"
-                                             >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Fecha de Entrega</label>
-                                        <input type="date" name="FechaEntrega" class="form-control text-dark m-1"
-                                             >
-                                    </div>
-                                     <div class="form-group">
+                                     <div class="col-md-3">
                                         <label>Vigencia de Garantia</label>
-                                        <select name="VigenciaGarantia" class="form-select text-dark m-1 " >
+                                        <select name="VigenciaGarantia" id="VigenciaGarantia{{IdOrdenServicio}}" class="form-select text-dark m-1 "  >
+                                            
                                             <option value="-">-</option>
                                             <option  value="15">15</option>
                                             <option value="30">30</option>
@@ -377,23 +434,66 @@
                                             <option  value="180">180</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Articulo o Servicio en Garantia</label>
-                                         <input type="text" name="ArticuloGarantia"  class="form-control text-dark m-1">
                                     </div>
-                                    <div class="form-group">
+                                    
+                                     <div class="row">
+                                     <div class="col-md-3">
+                                        <label>Fecha Estimada terminado</label>
+                                        <input type="date" id="FechaTerminadoEstimado{{IdOrdenServicio}}" name="FechaTerminadoEstimado"  class="form-control text-dark m-1"
+                                             >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Fecha Real de terminado</label>
+                                        <input name="FechaTerminado" type="date" id="FechaTerminado{{IdOrdenServicio}}"  class="form-control text-dark m-1"
+                                             >
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Fecha de Entrega</label>
+                                        <input type="date" name="FechaEntrega" id="FechaEntrega{{IdOrdenServicio}}"  class="form-control text-dark m-1"
+                                             >
+                                    </div>
+                                    <div class="col-md-3">
                                         <label>Fecha de Vencimiento</label>
-                                        <input type="date" name="FechaVencimiento"  class="form-control text-dark m-1"
+                                        <input type="date" name="FechaVencimiento" id="FechaVencimiento{{IdOrdenServicio}}"  class="form-control text-dark m-1"
                                              >
                                     </div>
-                                    <div class="form-group">
+                                    </div>
+                                    
+                                    <div class="row">
+                                     <div class="col-md-3">
+                                        <label>Lugar de Reparacion</label>
+                                        <select name="LugarReparacion" id="LugarReparacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                           
+                                            <option value="Casa del cliente">Casa del cliente</option>
+                                            <option   value="Taller">Taller</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Estado del Servicio</label>
+                                        <select name="EstadoServicio" id="EstadoServicio{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
+                                          
+                                            <option value="En Ejecucion">En Ejecucion</option>
+                                            <option  value="Para Entregar">Para Entregar</option>
+                                            <option value="Esperando">Esperando</option>
+                                            <option  value="Esperando Refacciones">Esperando Refacciones</option>
+                                            <option  value="Sin Preparacion">Sin Preparacion</option>
+                                            <option  value="No Aceptado">No Aceptado</option>
+                                        </select>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                    <div class="col-md-3">
                                         <label>Dias para Vencimiento</label>
-                                        <input type="number" name="DiasVencimiento"  class="form-control text-dark m-1"
+                                        <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}"  class="form-control text-dark m-1"
                                              >
                                     </div>
-                                    
-                                    
-                                    <div class="form-group">
+                                     <div class="col-md-4">
+                                        <label>Articulo o Servicio en Garantia</label>
+                                         <button class="btn btn-info" style="background-color: #7e759b; color: white; border-color: #7e759b;">Agregar Articulo o Servicio</button>
+                                    </div>
+                                    </div>
+                                    <br>
+                                    <div class="form-group" >
                                         <button class="btn btn-info btn-block mx-1 " title="Enviar">
                                             <i class="fas fa-check" style="color: white;"></i>
                                         </button>
@@ -424,6 +524,7 @@
                 Marca: "{{Marca}}",
                 Color: "{{Color}}",
                 Modelo: "{{Modelo}}",
+                Serie:"{{Serie}}",
                 LugarS: a
             })
             a++
@@ -431,21 +532,25 @@
 
                     function SelE(selecE) {
                             for(index = 0; index < arrayE.length; index++){
-                                if(selecE ==arrayE[index].LugarS){
-                                    document.getElementById("IdCliente").value=arrayE[index].IdCliente
-                                    document.getElementById("IdEquipo").value=arrayE[index].IdEquipo
-                                    document.getElementById("Categoria").value=arrayE[index].Categoria
-                                    document.getElementById("Tipo").value=arrayE[index].Tipo
-                                    document.getElementById("Marca").value=arrayE[index].Marca
-                                    document.getElementById("Color").value=arrayE[index].Color
-                                    document.getElementById("Modelo").value=arrayE[index].Modelo
-                                    document.getElementById("EquipoRr").value=arrayE[index].IdEquipo
-                                    document.getElementById("EquipoR").value=arrayE[index].IdEquipo
+                                if(selecE ==arrayE[index].IdEquipo){
                                     document.getElementById("Agregar").style.display = "block"
                                     document.getElementById("agregare").style.display = "block"
                                     document.getElementById("btnadd").style.display = "none"
                                     document.getElementById("titulo").innerText="EQUIPO SELECCIONADO"
-                                    document.getElementById("equipo").innerText="EQUIPO "+arrayE[index].Tipo+" "+arrayE[index].Marca
+                                    //document.getElementById("equipo").innerText="EQUIPO "+arrayE[index].Tipo+" "+arrayE[index].Marca
+                                    document.getElementById("IdCliente").value=arrayE[index].IdCliente
+                                    document.getElementById("IdClienterr").value=arrayE[index].IdCliente
+                                    document.getElementById("IdEquipo").value=arrayE[index].IdEquipo
+                                    document.getElementById("IdEquiporr").value=arrayE[index].IdEquipo
+                                    document.getElementById("Categoria").value=arrayE[index].Categoria
+                                    document.getElementById("Tipo").value=arrayE[index].Tipo
+                                    document.getElementById("Marca").value=arrayE[index].Marca
+                                    document.getElementById("Serie").value=arrayE[index].Serie
+                                    document.getElementById("Color").value=arrayE[index].Color
+                                    document.getElementById("Modelo").value=arrayE[index].Modelo
+                                    document.getElementById("IdEquipoReg").value=arrayE[index].Tipo+" "+arrayE[index].Marca
+                                    document.getElementById("IdEquipoId").value=arrayE[index].IdEquipo
+                                    
 
 
 
@@ -463,6 +568,7 @@
                         document.getElementById("Marca").disabled=false
                         document.getElementById("Color").disabled=false
                         document.getElementById("Modelo").disabled=false
+                        document.getElementById("Serie").disabled=false
                         document.getElementById("btnagr").style.display = "block"
                         document.getElementById("busE").style.display = "none"
                     }
