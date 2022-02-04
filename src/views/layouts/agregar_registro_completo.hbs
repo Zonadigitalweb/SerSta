@@ -44,7 +44,8 @@
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Cliente</h1>
+                    <h1 class="text-dark mb-3 h4">Cliente <button onclick=ocuC() class="btn btn-info" ><i style="color: white;" class="fas fa-arrows-alt-v"></i></button></h1>
+                         <section id="ocuC" style="display: block;">
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
                                 <h1 class="text-dark mb-3 h4">Datos</h1>
@@ -120,12 +121,14 @@
                 </div>
             </div>
         </div>
+         </section>
         <br>
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Equipo</h1>
+                    <h1 class="text-dark mb-3 h4">Equipo <button onclick=ocuE() class="btn btn-info" ><i style="color: white;" class="fas fa-arrows-alt-v"></i></button></h1>
                     <div class=" mx-auto">
+                        <section id="ocuE" style="display: block;">
                         <div class="card">
                             <div class="card-body" style="display:block; background-color:#d9d9d9;" id="busE">
                                 <h1 class="text-dark mb-3 h4">Buscar</h1>
@@ -173,7 +176,7 @@
                                         <option value="">Elige una categoria</option>
                                         <option value="LAVADO">LAVADO</option>
                                         <option value="REFRIGERACION">REFRIGERACION</option>
-                                        <option value="MICROONDAS">MICROONDAS</option>
+                                        <option value="COCINA">COCINA</option>
                                     </select>
                                 </div>
                                 <div class="col-md-7">
@@ -187,10 +190,27 @@
                                         <option id="ref2" style="display:none" value="ENFRIADOR DE AGUA">ENFRIADOR DE
                                             AGUA</option>
                                         <option id="ref3" style="display:none" value="CONGELADOR">CONGELADOR</option>
-                                        <option id="ref4" style="display:none" value="ENFRIADOR DE BOTELLAS">ENFRIADOR
-                                            DE BOTELLAS</option>
-                                        <option id="ref5" style="display:none" value="SERVIBAR">SERVIBAR</option>
-                                        <option id="mic1" style="display:none" value="MICROONDAS">MICROONDAS</option>
+                                        <option id="ref4" style="display:none" value="ENFRIADOR DE BOTELLAS">ENFRIADOR DE BOTELLAS</option>
+                                        <option id="ref5" style="display:none" value="REFRIGERADOR CON DESPACHADOR">REFRIGERADOR CON DESPACHADOR</option>
+                                        <option id="ref6" style="display:none" value="REFRIGERADOR SIN DESPACHADOR">REFRIGERADOR SIN DESPACHADOR</option>
+                                        <option id="ref7" style="display:none" value="REFRIGERADOR PANELABLE CAFETERA">REFRIGERADOR PANELABLE CAFETERA</option>
+                                        <option id="ref8" style="display:none" value="SERVIBAR">SERVIBAR</option>
+                                        <option id="mic1" style="display:none" value="ESTUFAS 120 -150 CM">ESTUFAS 120 -150 CM</option>
+                                        <option id="mic2" style="display:none" value="ESTUFA 90CM ">ESTUFA 90CM </option>
+                                        <option id="mic3" style="display:none" value="HORNO DOBLE">HORNO DOBLE</option>
+                                        <option id="mic4" style="display:none" value="HORNO 60 70 90 CM Y 30">HORNO 60 70 90 CM Y 30</option>
+                                        <option id="mic5" style="display:none" value="HORNO COMPACTO">HORNO COMPACTO</option>
+                                        <option id="mic6" style="display:none" value="PARRILLA ELÉCTRICA DE INDUCCIÓN 60 90 CM  Y 30 ">PARRILLA ELÉCTRICA DE INDUCCIÓN 60 90 CM  Y 30</option>
+                                        <option id="mic7" style="display:none" value="DOMINÓ ELÉCTRICO ,INDUCCIÓN Y GAS">DOMINÓ ELÉCTRICO ,INDUCCIÓN Y GAS </option>
+                                        <option id="mic8" style="display:none" value="CAVA DE VINOS 82CM CAVA DE VINO 60 Y 45 CM">CAVA DE VINOS 82CM CAVA DE VINO 60 Y 45 CM</option>
+                                        <option id="mic9" style="display:none" value="PARRILLA DE GAS">PARRILLA DE GAS</option>
+                                        <option id="mic10" style="display:none" value="LAVAVAJILLAS">LAVAVAJILLAS</option>
+                                        <option id="mic11" style="display:none" value="CAMPANA DE ISLA">CAMPANA DE ISLA</option>
+                                        <option id="mic12" style="display:none" value="CAMPANA DE INTEGRACIÓN CAMPANA DE PARED 120 -150 CM ">CAMPANA DE INTEGRACIÓN CAMPANA DE PARED 120 -150 CM </option>
+                                        <option id="mic13" style="display:none" value="CAMPANA DE PARED">CAMPANA DE PARED</option>
+                                        <option id="mic14" style="display:none" value="CAMPANA TELESCÓPICA Y BAJO ALACENA">CAMPANA TELESCÓPICA Y BAJO ALACENA</option>
+                                        <option id="mic15" style="display:none" value="CAJONES TÉRMICOS">CAJONES TÉRMICOS</option>
+                                        <option id="mic16" style="display:none" value="ASADORES  Y COCINAS EXTERIOR">ASADORES  Y COCINAS EXTERIOR</option>
                                     </select>
                                 </div>
                                 </div>
@@ -228,11 +248,13 @@
                 </div>
             </div>
             </div>
+            </section>
             <br>
             <div class=" mx-auto" style="display: none;"  id="Agregar">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Registro</h1>
+                    <h1 class="text-dark mb-3 h4">Registro <button onclick=ocuR() class="btn btn-info" ><i style="color: white;" class="fas fa-arrows-alt-v"></i></button></h1>
+                        <section id="ocuR" style="display: block;">
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
                                 <h1 class="text-dark mb-3 h4">Agregar Orden de Servicio</h1>
@@ -350,10 +372,6 @@
                                             <option value="REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA">REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA</option>
                                             <option value="CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO">CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO</option>
                                         </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>REFACCIONES</label> <br>
-                                        <button class="btn btn-info" style="background-color: #7e759b; color: white; border-color: #7e759b;">Agregar Refacciones al servicio</button>
                                     </div>
                                     </div>  
                                     <div class="row">
@@ -487,10 +505,7 @@
                                         <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}"  class="form-control text-dark m-1"
                                              >
                                     </div>
-                                     <div class="col-md-4">
-                                        <label>Articulo o Servicio en Garantia</label>
-                                         <button class="btn btn-info" style="background-color: #7e759b; color: white; border-color: #7e759b;">Agregar Articulo o Servicio</button>
-                                    </div>
+                                    
                                     </div>
                                     <br>
                                     <div class="form-group" >
@@ -502,6 +517,7 @@
                             </div>
                         </div>
                     </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -581,11 +597,29 @@
                         document.getElementById("ref3").style.display = "none"
                         document.getElementById("ref4").style.display = "none"
                         document.getElementById("ref5").style.display = "none"
+                        document.getElementById("ref6").style.display = "none"
+                        document.getElementById("ref7").style.display = "none"
+                        document.getElementById("ref8").style.display = "none"
 
                         document.getElementById("lav1").style.display = "block"
                         document.getElementById("lav2").style.display = "block"
 
                         document.getElementById("mic1").style.display = "none"
+                        document.getElementById("mic2").style.display = "none"
+                        document.getElementById("mic3").style.display = "none"
+                        document.getElementById("mic4").style.display = "none"
+                        document.getElementById("mic5").style.display = "none"
+                        document.getElementById("mic6").style.display = "none"
+                        document.getElementById("mic7").style.display = "none"
+                        document.getElementById("mic8").style.display = "none"
+                        document.getElementById("mic9").style.display = "none"
+                        document.getElementById("mic10").style.display = "none"
+                        document.getElementById("mic11").style.display = "none"
+                        document.getElementById("mic12").style.display = "none"
+                        document.getElementById("mic13").style.display = "none"
+                        document.getElementById("mic14").style.display = "none"
+                        document.getElementById("mic15").style.display = "none"
+                        document.getElementById("mic16").style.display = "none"
 
                     } else if (document.getElementById("Categoria").selectedIndex == 2) {
 
@@ -594,11 +628,29 @@
                         document.getElementById("ref3").style.display = "block"
                         document.getElementById("ref4").style.display = "block"
                         document.getElementById("ref5").style.display = "block"
+                        document.getElementById("ref6").style.display = "block"
+                        document.getElementById("ref7").style.display = "block"
+                        document.getElementById("ref8").style.display = "block"
 
                         document.getElementById("lav1").style.display = "none"
                         document.getElementById("lav2").style.display = "none"
 
                         document.getElementById("mic1").style.display = "none"
+                        document.getElementById("mic2").style.display = "none"
+                        document.getElementById("mic3").style.display = "none"
+                        document.getElementById("mic4").style.display = "none"
+                        document.getElementById("mic5").style.display = "none"
+                        document.getElementById("mic6").style.display = "none"
+                        document.getElementById("mic7").style.display = "none"
+                        document.getElementById("mic8").style.display = "none"
+                        document.getElementById("mic9").style.display = "none"
+                        document.getElementById("mic10").style.display = "none"
+                        document.getElementById("mic11").style.display = "none"
+                        document.getElementById("mic12").style.display = "none"
+                        document.getElementById("mic13").style.display = "none"
+                        document.getElementById("mic14").style.display = "none"
+                        document.getElementById("mic15").style.display = "none"
+                        document.getElementById("mic16").style.display = "none"
 
                     } else if (document.getElementById("Categoria").selectedIndex == 3) {
                         document.getElementById("ref1").style.display = "none"
@@ -606,13 +658,59 @@
                         document.getElementById("ref3").style.display = "none"
                         document.getElementById("ref4").style.display = "none"
                         document.getElementById("ref5").style.display = "none"
+                        document.getElementById("ref6").style.display = "none"
+                        document.getElementById("ref7").style.display = "none"
+                        document.getElementById("ref8").style.display = "none"
 
                         document.getElementById("lav1").style.display = "none"
                         document.getElementById("lav2").style.display = "none"
 
                         document.getElementById("mic1").style.display = "block"
+                        document.getElementById("mic2").style.display = "block"
+                        document.getElementById("mic3").style.display = "block"
+                        document.getElementById("mic4").style.display = "block"
+                        document.getElementById("mic5").style.display = "block"
+                        document.getElementById("mic6").style.display = "block"
+                        document.getElementById("mic7").style.display = "block"
+                        document.getElementById("mic8").style.display = "block"
+                        document.getElementById("mic9").style.display = "block"
+                        document.getElementById("mic10").style.display = "block"
+                        document.getElementById("mic11").style.display = "block"
+                        document.getElementById("mic12").style.display = "block"
+                        document.getElementById("mic13").style.display = "block"
+                        document.getElementById("mic14").style.display = "block"
+                        document.getElementById("mic15").style.display = "block"
+                        document.getElementById("mic16").style.display = "block"
                     }
                     }
+
+
+
+                    function ocuC(){
+                let doc = document.getElementById("ocuC").style.display
+                if(doc=="block"){
+                    document.getElementById("ocuC").style.display="none"
+                }else{
+                    document.getElementById("ocuC").style.display="block"
+                }
+            }
+
+            function ocuE(){
+                let doc = document.getElementById("ocuE").style.display
+                if(doc=="block"){
+                    document.getElementById("ocuE").style.display="none"
+                }else{
+                    document.getElementById("ocuE").style.display="block"
+                }
+            }
+            function ocuR(){
+                let doc = document.getElementById("ocuR").style.display
+                if(doc=="block"){
+                    document.getElementById("ocuR").style.display="none"
+                }else{
+                    document.getElementById("ocuR").style.display="block"
+                }
+            }
 
 
 </script>
