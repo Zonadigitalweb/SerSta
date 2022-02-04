@@ -138,6 +138,12 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
     if (FechaVencimiento=="") {
         FechaVencimiento=null
     }
+    if (CostoServicio=="") {
+        CostoServicio=null
+    }
+    if (DiasVencimiento=="") {
+        DiasVencimiento=null
+    }
     const newarticulo = {IdSucursal,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,  FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento }
     log(newarticulo)
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
@@ -175,7 +181,7 @@ router.post("/editar_cliente", isLoggedIn, async (req, res) => {
 })
 
 router.post("/editar_registro", isLoggedIn, async (req, res) => {
-    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada, IdAyudanteSegui, IdTecnicoSegui, IdAyudante, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
+    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita, FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui, VisitaRealizada, IdAyudanteSegui, IdTecnicoSegui, IdAyudante, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
     let aaa={ IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal, IdAyudanteSegui, IdTecnicoSegui, IdAyudante,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
     log(aaa)
     let id = req.user.IdUsuario
@@ -189,17 +195,42 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
     }else if (IdTecnico=="Tecnico 4") {
         IdTecnico=4
     }
+
+    if (FechaSolicitud=="") {
+        FechaSolicitud=null
+    }
+    if (FechaVisita=="") {
+        FechaVisita=null
+    }
+    if (FechaTerminadoEstimado=="") {
+        FechaTerminadoEstimado=null
+    }
+    if (FechaTerminado=="") {
+        FechaTerminado=null
+    }
+    if (FechaEntrega=="") {
+        FechaEntrega=null
+    }
+    if (FechaVencimiento=="") {
+        FechaVencimiento=null
+    }
+    if (CostoServicio=="") {
+        CostoServicio=null
+    }
+    if (DiasVencimiento=="") {
+        DiasVencimiento=null
+    }
    
     const cerrado = await pool.query("SELECT * FROM `tblnotas` WHERE IdOrdenServicio = ?",[IdOrdenServicio])
     if (cerrado.length==0) {
-        const neworden = { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+        const neworden = { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita, FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui, VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
     }else {
         if (cerrado[0].NotaCerrada==1){
-        const neworden =  {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+        const neworden =  {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
         }else if (cerrado[0].NotaCerrada==0) {
-            const neworden = {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+            const neworden = {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
         }
     } 
