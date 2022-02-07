@@ -3,7 +3,8 @@ const router = express.Router()
 const pool = require("../database")
 const pdfc =require("../routes/pdf")
 var moment = require('moment');
-const {isLoggedIn, isAdmin} = require("../lib/auth")
+const {isLoggedIn, isAdmin} = require("../lib/auth");
+const { ConsoleMessage } = require("puppeteer");
 
 
 const log = console.log
@@ -174,6 +175,90 @@ router.post("/agregar_equipo", isLoggedIn, async (req, res) => {
     res.redirect("/servistar/agregar_registro"+IdCliente+"/")
 
 })
+router.post("/ver_tecnico", isLoggedIn, async (req, res) => {
+    let { tecnico } = req.body
+    const tec = await pool.query("SELECT * FROM `tbltecnicos` WHERE `Titulo` = ?", [tecnico])
+
+    res.render("layouts/tecnicos_modi",{tec})
+
+})
+router.post("/editar_tecnico", isLoggedIn, async (req, res) => {
+    let { IdTecnico,Titulo,Nombre,Direccion,Telefono } = req.body
+    const newtec = { IdTecnico,Titulo,Nombre,Direccion,Telefono }
+    await pool.query("UPDATE `tbltecnicos` SET ? WHERE IdTecnico = ?", [newtec,IdTecnico])
+
+    res.redirect("/servistar/tecnicos")
+
+})
+router.post("/editar_ayudante", isLoggedIn, async (req, res) => {
+    let { IdAyudante,Titulo,Nombre,Direccion,Telefono } = req.body
+    const newtec = { IdAyudante,Titulo,Nombre,Direccion,Telefono }
+    await pool.query("UPDATE `tblayudantes` SET ? WHERE IdAyudante = ?", [newtec,IdAyudante])
+
+    res.redirect("/servistar/tecnicos")
+
+})
+router.post("/ver_ayudante", isLoggedIn, async (req, res) => {
+    let { ayudante } = req.body
+    const ayu = await pool.query("SELECT * FROM `tblayudantes` WHERE `Titulo` = ?", [ayudante])
+
+    res.render("layouts/ayudante_modi",{ayu})
+
+})
+router.post("/edit_refaccion", isLoggedIn, async (req, res) => {
+    let { IdRefaccion, Descripcion, Existencias, CostoVenta, CostoCompra } = req.body
+    const refa={ Descripcion, Existencias, CostoVenta, CostoCompra}
+    await pool.query("UPDATE `tblrefacciones` SET ? WHERE IdRefaccion = ?", [refa,IdRefaccion ])
+
+    res.redirect("/servistar/refacciones")
+
+})
+router.post("/agregar_refaccion", isLoggedIn, async (req, res) => {
+    let { Descripcion, Existencias, CostoVenta, CostoCompra } = req.body
+    const newrefa ={Descripcion, Existencias, CostoVenta, CostoCompra}
+    await pool.query("INSERT INTO tblrefacciones SET ? ", [newrefa])
+
+    res.redirect("/servistar/refacciones")
+
+})
+router.post("/agregar_servicio", isLoggedIn, async (req, res) => {
+    let { Descripcion, Horas, CostoServicio } = req.body
+    const newrefa ={Descripcion, Horas, CostoServicio}
+    await pool.query("INSERT INTO tblservicios SET ? ", [newrefa])
+
+    res.redirect("/servistar/servicios")
+
+})
+
+router.get("/servistar/ver_refaccion:id/", isLoggedIn, async (req, res) => {
+    let {id} = req.params
+    const Refaccion = await pool.query("SELECT * FROM tblrefacciones WHERE IdRefaccion = ?",[id])
+    res.render("layouts/refacciones_modi",{Refaccion})
+
+})
+router.get("/servistar/ver_servicio:id/", isLoggedIn, async (req, res) => {
+    let {id} = req.params
+    const servicio = await pool.query("SELECT * FROM tblservicios WHERE IdServicio = ?",[id])
+    res.render("layouts/servicio_modi",{Servicio})
+
+})
+router.get("/servistar/tecnicos", isLoggedIn, async (req, res) => {
+    
+    res.render("layouts/tecnicos")
+
+})
+router.get("/servistar/refacciones", isLoggedIn, async (req, res) => {
+    let Refacciones = await pool.query("SELECT * FROM tblrefacciones")
+    res.render("layouts/refacciones", {Refacciones})
+
+})
+router.get("/servistar/servicios", isLoggedIn, async (req, res) => {
+    let Servicios = await pool.query("SELECT * FROM tblservicios")
+    res.render("layouts/servicios",{Servicios})
+
+})
+
+
 
 router.post("/ver_cliente/agregare", isLoggedIn, async (req, res) => {
     let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Serie, Color, Modelo } = req.body

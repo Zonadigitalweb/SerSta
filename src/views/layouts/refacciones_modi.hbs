@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #5b5378;" >
+  <div class="container-fluid" >
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+        <li class="nav-item">
+            <a  class=" nav-link" id="h1" href="/servistar/servicios_pendientes" style="color: white;"><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: white;"><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
+        </li>
+        <li class="nav-item dropdown" style="margin-top: 15px;">
+        <a class="nav-link dropdown-toggle " style="color: #b5b5b5;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <center><i class="fas fa-file-alt fa-2x"></i><br>Catalogo</center>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/servistar/clientes">Clientes</a>
+          <a class="dropdown-item" href="/servistar/tecnicos">Tecnicos</a>
+          <a class="dropdown-item" href="/servistar/refacciones">Refacciones</a>
+          <a class="dropdown-item" href="#">Servicios</a>
+        </div>
+      </li>
+        <li class="nav-item" id="admin" style="display: block;">
+          <a  class="nav-link "  href="/servistar/reportes"><center><i id="adminI" style="color: #707071;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #707071;">Administrador</p></a></center>
+        </li>
+        <li class="nav-item">
+          <a  class="nav-link " ><center><i style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #5b5378;">...</p></a></center>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" style="color: white;"><center><i class="fas fa-user fa-2x"></i></i><br>Hola {{user.Nombre}}</a></center>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container p-4">
+    <div class="row">
+        <div class=" mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-dark mb-3 h4">EDITAR Refaccion</h1>
+                    <div class=" mx-auto">
+                        <div class="card">
+                            <div class="card-body" style="background-color:#d9d9d9;">
+                                {{#each Refaccion}}
+                                <form action="/edit_refaccion" method="POST" >
+                                  <input type="text" style="display: none;"  name="IdRefaccion" value="{{IdRefaccion}}" class="form-control text-dark m-1" 
+                                         >
+                                <div class="row">
+                                <div class="col-md-9">
+                                    <label>Descripcion</label>
+                                    <input type="text"  name="Descripcion" value="{{Descripcion}}" class="form-control text-dark m-1" 
+                                         required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Existencias</label>
+                                    <input type="number" name="Existencias" value="{{Existencias}}" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <label>Costo de Venta</label>
+                                    <input type="number" name="CostoVenta" value="{{CostoVenta}}" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Costo de Compra</label>
+                                    <input type="number" name="CostoCompra" value="{{CostoCompra}}" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                </div>
+                                <button class="btn btn-info size-2" title="GUARDAR"> <i style="color: white;" class="fas fa-check"></i></button>
+
+                                
+                            </form>
+                            {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

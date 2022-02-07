@@ -18,7 +18,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/servistar/clientes">Clientes</a>
-          <a class="dropdown-item" href="/servistar/tecnicos">Tecnicos</a>
+          <a class="dropdown-item" href="#">Tecnicos</a>
           <a class="dropdown-item" href="#">Refacciones</a>
           <a class="dropdown-item" href="#">Servicios</a>
         </div>
@@ -43,123 +43,81 @@
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Clientes</h1>
+                    <h1 class="text-dark mb-3 h4">Tecnicos</h1>
                     <div class=" mx-auto">
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
-                                <h1 class="text-dark mb-3 h4">Buscar</h1>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input  id="busquedaNO" type="text"
-                                            class="form-control" placeholder="Nombre">
-                                        <span class="input-group-addon"></span>
-                                        <input  id="busquedaCO" type="text" 
-                                            class="form-control" placeholder="Colonia">
-                                        <span class="input-group-addon"></span>
-                                        <input  id="busquedaCA" type="text" 
-                                            class="form-control" placeholder="Calle">
-                                        <span class="input-group-addon"></span>
-                                        <input  id="busquedaNU" type="number" 
-                                            class="form-control" placeholder="Numero">
-                                    </div>
+                                <h1 class="text-dark mb-3 h4">Editar</h1>
+                                <form action="/ver_tecnico" method="POST" id="form">
+                               
+                                
+                                <div class="row">
+                                <div class="col-md-4">
+                                    <label>Selecciona un tecnico a modificar</label>
+                                    <select name="tecnico" id="" class="form-select text-dark m-1 " required>
+                                        <option value="">-</option>
+                                        <option value="1">Tecnico 1</option>
+                                        <option value="2">Tecnico 2</option>
+                                        <option value="3">Tecnico 3</option>
+                                        <option value="4">Tecnico 4</option>
+                                        <option value="5">Tecnico 5</option>
+                                        <option value="6">Tecnico 6</option>
+                                        <option value="7">Tecnico 7</option>
+                                        <option value="8">Tecnico 8</option>
+                                        <option value="9">Tecnico 9</option>
+                                        <option value="10">Tecnico 10</option>
+
+                                    </select>
                                 </div>
-                                <div class="form-group px-2">
-                                    <table class="table table-bordered table-hover" id="tblmas">
-                                        <thead id="tblh" style="display:none">
-                                            <tr role="row">
-                                                <th>Nombre</th>
-                                                <th>Colonia</th>
-                                                <th>Calle</th>
-                                                <th>Numero</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tblbody">
-                                            {{#each clientes}}
-                                            <tr id="{{IdCliente}}" style="display:none">
-                                                <td><a href="/servistar/ver_cliente{{IdCliente}}/"
-                                                        class="link-primary">{{Nombre}}</a> </td>
-                                                <td>{{DirColonia}}</td>
-                                                <td>{{DirCalle}}</td>
-                                                <td>{{DirNum}}</td>
-                                            </tr>
-                                            {{/each}}
-                                        </tbody>
-                                    </table>
+                               
                                 </div>
-                                <div class="form-group pu-5">
-                                    <button style="display:none" id="lib" class="btn btn-success">
-                                        <a href="" id="link" class="btn btn-success"></a></button>
-                                </div>
+                               
+                                <button class="btn btn-info size-2" title="GUARDAR"> <i style="color: white;" class="fas fa-check"></i></button>
+
+                                
+                            </form>
                             </div>
                         </div>
-                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container p-4">
+    <div class="row">
+        <div class=" mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-dark mb-3 h4">Ayudantes</h1>
+                    <div class=" mx-auto">
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
-                                <h1 class="text-dark mb-3 h4">Agrega</h1>
-                                <button class="btn btn-info size-2" onclick=Agregar() id="btnadd" title="AGREGAR">
-                                    <i style="color: white;" class="fas fa-plus"></i>
-                                </button>
-                                <form action="/cliente_agregar" method="POST" style="display:none" id="form">
-                                <div class="row">
-                                <div class="col-md-3">
-                                    <label>Id Cliente</label>
-                                    <input type="number" style="display: none;" name="IdCliente"
-                                        class="form-control text-dark m-1" value="{{num}}">
-                                    <input type="number" class="form-control text-dark m-1" value="{{num}}" disabled>
-                                </div>
-                                <div class="col-md-9">
-                                    <label>Nombre</label>
-                                    <input type="text"  id="nombre" name="Nombre" class="form-control text-dark m-1" 
-                                         required>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-5">
-                                    <label>Calle</label>
-                                    <input type="text" id="calle" name="DirCalle" class="form-control text-dark m-1"
-                                         required>
-                                </div>
+                                <h1 class="text-dark mb-3 h4">Editar</h1>
+                                <form action="/ver_ayudante" method="POST" id="form">
+                               
                                 
-                                <div class="col-md-2">
-                                    <label>Numero</label>
-                                    <input type="text" id="numero" name="DirNum" class="form-control text-dark m-1"
-                                         required>
-                                </div>
-                                <div class="col-md-5">
-                                    <label>Colonia</label>
-                                    <input type="text" id="colonia" name="DirColonia" class="form-control text-dark m-1"
-                                         required>
-                                </div>
-                                </div>
                                 <div class="row">
-                                <div class="col-md-9">
-                                    <label>Datos de Ubicacion</label>
-                                    <input type="text" id="entre" name="DirEntre" class="form-control text-dark m-1"
-                                         required>
+                                <div class="col-md-4">
+                                    <label>Selecciona un ayudante a modificar</label>
+                                    <select name="ayudante" id="" class="form-select text-dark m-1 " required>
+                                        <option value="">-</option>
+                                        <option value="1">Ayudante 1</option>
+                                        <option value="2">Ayudante 2</option>
+                                        <option value="3">Ayudante 3</option>
+                                        <option value="4">Ayudante 4</option>
+                                        <option value="5">Ayudante 5</option>
+                                        <option value="6">Ayudante 6</option>
+                                        <option value="7">Ayudante 7</option>
+                                        <option value="8">Ayudante 8</option>
+                                        <option value="9">Ayudante 9</option>
+                                        <option value="10">Ayudante 10</option>
+
+                                    </select>
                                 </div>
-                                <div class="col-md-3">
-                                    <label>Municipio</label>
-                                    <input type="text" id="municipio" name="Municipio"
-                                        class="form-control text-dark m-1" required>
+                               
                                 </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-6">
-                                    <label>Telefono</label>
-                                    <input type="text" id="telefono" name="Telefono" class="form-control text-dark m-1"
-                                     required>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>RFC</label>
-                                    <input type="text" id="rfc" name="RFC" class="form-control text-dark m-1"
-                                         >
-                                </div>
-                                <div class="col-md-3">
-                                    <label>CP</label>
-                                    <input type="text" id="cp" name="CP" class="form-control text-dark m-1"
-                                         >
-                                </div>
-                                </div>
+                               
                                 <button class="btn btn-info size-2" title="GUARDAR"> <i style="color: white;" class="fas fa-check"></i></button>
 
                                 
