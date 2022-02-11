@@ -4,8 +4,8 @@ const pool = require("../database")
 const pdfc =require("../routes/pdf")
 var moment = require('moment');
 const {isLoggedIn, isAdmin} = require("../lib/auth");
-const accountSid ="AC39afd68d5f267d5dab463a75cf7a7f09";
-const authToken = "dff0f96eb572cab43b93d952a0a777ea";
+const accountSid ="";
+const authToken = "";
 const client = require('twilio')(accountSid, authToken);
 const { ConsoleMessage } = require("puppeteer");
 
