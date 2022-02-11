@@ -4,6 +4,9 @@ const pool = require("../database")
 const pdfc =require("../routes/pdf")
 var moment = require('moment');
 const {isLoggedIn, isAdmin} = require("../lib/auth");
+const accountSid ="AC39afd68d5f267d5dab463a75cf7a7f09";
+const authToken = "dff0f96eb572cab43b93d952a0a777ea";
+const client = require('twilio')(accountSid, authToken);
 const { ConsoleMessage } = require("puppeteer");
 
 
@@ -162,6 +165,7 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
     const newarticulo = {IdSucursal,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,  FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento }
     log(newarticulo)
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
+    
     res.redirect("/servistar/ver_cliente"+IdCliente+"/")
 
 })
@@ -251,8 +255,8 @@ router.get("/servistar/gastos_fijos", isLoggedIn, async (req, res) => {
 })
 
 router.post("/edit_gasto", isLoggedIn, async (req, res) => {
-    let { IdGastoFijo, Descripcion, Existencias, CostoVenta, CostoCompra } = req.body
-    const gas={ Descripcion, Existencias, CostoVenta, CostoCompra}
+    let { IdGastoFijo, Descripcion, CostoVenta } = req.body
+    const gas={ Descripcion, CostoVenta}
     await pool.query("UPDATE `tblgastosfijos` SET ? WHERE IdGastoFijo = ?", [gas,IdGastoFijo ])
 
     res.redirect("/servistar/gastos_fijos")
@@ -260,8 +264,8 @@ router.post("/edit_gasto", isLoggedIn, async (req, res) => {
 })
 
 router.post("/agregar_gasto", isLoggedIn, async (req, res) => {
-    let { Descripcion, Existencias, CostoVenta, CostoCompra } = req.body
-    const newgast ={Descripcion, Existencias, CostoVenta, CostoCompra}
+    let { Descripcion, CostoVenta } = req.body
+    const newgast ={Descripcion, CostoVenta}
     await pool.query("INSERT INTO tblgastosfijos SET ? ", [newgast])
 
     res.redirect("/servistar/gastos_fijos")
@@ -441,6 +445,8 @@ router.get("/servistar/servicios_pendientes", isLoggedIn, async (req, res) => {
     const espe_refa = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Esperando Refacciones' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Sin Preparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.FechaGarantia='2021-12-31' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+    
+   
     res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara})
 })
 
@@ -473,6 +479,16 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
             orden[index].IdTecnico="Tecnico 4"
         }
     }
+    
+    let mes="Numero de cliente "+id+". "+cliente[0].Nombre
+    log(mes)
+    client.messages
+    .create({
+       from: 'whatsapp:+14155238886',
+       body: mes,
+       to: 'whatsapp:+5213121994690'
+     })
+    .then(message => console.log(message.sid));
     res.render("layouts/cliente_completo", { equipo, cliente, orden ,id })
 })
 
