@@ -7,11 +7,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
         <li class="nav-item">
-            <a  class=" nav-link" id="h1" href="/servistar/servicios_pendientes" style="color: white;"><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
+            <a  class=" nav-link" id="h1" style="color: white;" href="/servistar/servicios_pendientes" ><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: #b5b5b5;"><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
+          <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: #b5b5b5;" ><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
         </li>
         <li class="nav-item dropdown" style="margin-top: 15px;">
         <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,13 +19,14 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/servistar/clientes">Clientes</a>
-          <a class="dropdown-item" href="#">Tecnicos</a>
-          <a class="dropdown-item" href="#">Refacciones</a>
-          <a class="dropdown-item" href="#">Servicios</a>
+          <a class="dropdown-item" href="/servistar/tecnicos">Tecnicos</a>
+          <a class="dropdown-item" href="/servistar/refacciones">Refacciones</a>
+          <a class="dropdown-item" href="/servistar/gastos_fijos">Gastos Fijos</a>
+          <a class="dropdown-item" href="/servistar/servicios">Descripcion <br> del trabajo</a>
         </div>
       </li>
         <li class="nav-item" id="admin" style="display: block;">
-          <a  class="nav-link "  href="/servistar/reportes"><center><i id="adminI" style="color: #707071;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #707071;">Administrador</p></a></center>
+          <a  class="nav-link "  href="/servistar/reportes"><center><i id="adminI" style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #5b5378;">Administrador</p></a></center>
         </li>
         <li class="nav-item">
           <a  class="nav-link " ><center><i style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #5b5378;">...</p></a></center>
@@ -383,6 +384,12 @@
                                             <option value="2">Tecnico 2</option>
                                             <option value="3">Tecnico 3</option>
                                             <option value="4">Tecnico 4</option>
+                                            <option value="5">Tecnico 5</option>
+                                            <option value="6">Tecnico 6</option>
+                                            <option value="7">Tecnico 7</option>
+                                            <option value="8">Tecnico 8</option>
+                                            <option value="9">Tecnico 9</option>
+                                            <option value="10">Tecnico 10</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
@@ -393,6 +400,12 @@
                                             <option value="2">Ayudante 2</option>
                                             <option value="3">Ayudante 3</option>
                                             <option value="4">Ayudante 4</option>
+                                            <option value="5">Ayudante 5</option>
+                                            <option value="6">Ayudante 6</option>
+                                            <option value="7">Ayudante 7</option>
+                                            <option value="8">Ayudante 8</option>
+                                            <option value="9">Ayudante 9</option>
+                                            <option value="10">Ayudante 10</option>
                                         </select>
                                     </div> 
                                     <div class="col-md-3">
@@ -403,16 +416,28 @@
                                             <option value="2">Tecnico 2</option>
                                             <option value="3">Tecnico 3</option>
                                             <option value="4">Tecnico 4</option>
+                                            <option value="5">Tecnico 5</option>
+                                            <option value="6">Tecnico 6</option>
+                                            <option value="7">Tecnico 7</option>
+                                            <option value="8">Tecnico 8</option>
+                                            <option value="9">Tecnico 9</option>
+                                            <option value="10">Tecnico 10</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Ayudante Seguimiento</label>
                                         <select name="IdAyudanteSegui" id="IdAyudanteSegui{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
                                             <option value="" >Selecciona uno</option>
-                                             <option value="1" >Ayudante 1</option>
+                                             <option value="1"  >Ayudante 1</option>
                                             <option value="2">Ayudante 2</option>
                                             <option value="3">Ayudante 3</option>
                                             <option value="4">Ayudante 4</option>
+                                            <option value="5">Ayudante 5</option>
+                                            <option value="6">Ayudante 6</option>
+                                            <option value="7">Ayudante 7</option>
+                                            <option value="8">Ayudante 8</option>
+                                            <option value="9">Ayudante 9</option>
+                                            <option value="10">Ayudante 10</option>
                                         </select>
                                     </div> 
                                     </div>
@@ -496,6 +521,7 @@
                                             <option  value="Esperando Refacciones">Esperando Refacciones</option>
                                             <option  value="Sin Preparacion">Sin Preparacion</option>
                                             <option  value="No Aceptado">No Aceptado</option>
+                                            <option  value="Terminado">Terminado</option>
                                         </select>
                                     </div>
                                     </div>

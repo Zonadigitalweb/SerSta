@@ -40,49 +40,48 @@
 </nav>
 
 
-   
-
 <div class="container p-4">
     <div class="row">
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Tecnico</h1>
+                    <h1 class="text-dark mb-3 h4">EDITAR Gasto fijo</h1>
                     <div class=" mx-auto">
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
-                                {{#each tec}}
-                                <h1 class="text-dark mb-3 h4">Editar Tecnico {{Titulo}}</h1>
-                                <form action="/editar_tecnico" method="post" >
-                                     <div class="form-group" style="display: none;">
-                                        <input type="number" name="IdTecnico" value="{{IdTecnico}}">
-                                        <input type="number" name="Titulo" value="{{Titulo}}">
-                                    </div>
-                                    
-                                    <div class="row">
-                                    <div class="col-md-4">
-                                    <label>Nombre</label>
-                                    <input type="text" name="Nombre"
-                                        class="form-control text-dark m-1" value="{{Nombre}}" required>
+                                {{#each gasto}}
+                                <form action="/edit_gasto" method="POST" >
+                                  <input type="text" style="display: none;"  name="IdGastoFijo" value="{{IdGastoFijo}}" class="form-control text-dark m-1" 
+                                         >
+                                <div class="row">
+                                <div class="col-md-9">
+                                    <label>Descripcion</label>
+                                    <input type="text"  name="Descripcion" value="{{Descripcion}}" class="form-control text-dark m-1" 
+                                         required>
                                 </div>
-                                 <div class="col-md-4">
-                                    <label>Direccion</label>
-                                    <input type="text" name="Direccion"
-                                        class="form-control text-dark m-1" value="{{Direccion}}" required>
-                                </div>
-                                 <div class="col-md-4">
-                                    <label>Telefono</label>
-                                    <input type="text" name="Telefono"
-                                        class="form-control text-dark m-1" value="{{Telefono}}" required>
+                                <div class="col-md-3">
+                                    <label>Existencias</label>
+                                    <input type="number" name="Existencias" value="{{Existencias}}" class="form-control text-dark m-1"
+                                         required>
                                 </div>
                                 </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-info btn-block mx-1" title="EDITAR TECNICO">
-                                            <i style="color: white;" class="fas fa-check"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                                {{/each}}
+                                <div class="row">
+                                <div class="col-md-6">
+                                    <label>Costo de Venta</label>
+                                    <input type="number" name="CostoVenta" value="{{CostoVenta}}" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Costo de Compra</label>
+                                    <input type="number" name="CostoCompra" value="{{CostoCompra}}" class="form-control text-dark m-1"
+                                         required>
+                                </div>
+                                </div>
+                                <button class="btn btn-info size-2" title="GUARDAR"> <i style="color: white;" class="fas fa-check"></i></button>
+
+                                
+                            </form>
+                            {{/each}}
                             </div>
                         </div>
                     </div>

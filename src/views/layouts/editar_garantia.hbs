@@ -50,72 +50,43 @@
                         <div class="card" >
                             <div class="card-body" style="background-color:#e6e6e6;">
                                 <h1 class=" mb-3 h4">AGREGAR Garantia</h1>
-                                <form action="/editar_garantia" method="post" >
+                                <form action="/editar_garantia_n" method="post" >
+                                {{#each orden}}
                                      <div class="form-group" style="display: none;">
-                                        <input type="number" name="IdOrdenServicio" value="{{id}}">
+                                        <input type="number" name="IdGarantia" value="{{IdGarantia}}">
+                                    </div>
+                                     <div class="form-group" style="display: none;">
+                                        <input type="number" name="IdOrdenServicio" value="{{IdOrdenServicio}}">
                                     </div>
                                      <div class="form-group">
                                         <label>Fecha de Garantia</label>
-                                        <input type="date" name="FechaGarantiaNew" class="form-control text-dark m-1"
+                                        <input type="date" name="FechaGarantiaNew" value="{{moment FechaGarantiaNew}}" class="form-control text-dark m-1"
                                              required >
                                     </div>
                                       <div class="form-group">
                                 <label>Horario</label>
-                                <input type="time" name="HoraGarantia" class="form-control text-dark m-1"
+                                <input type="time" name="HoraGarantia" value="{{HoraGarantia}}" class="form-control text-dark m-1"
                                              required >
                             </div>
                                     <div class="form-group">
                                         <label>Descripcion</label>
-                                        <textarea name="Descripcion"  class="form-control text-dark m-1" rows="3" ></textarea>
+                                        <textarea name="Descripcion"  class="form-control text-dark m-1" rows="3" >{{Descripcion}}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-info btn-block mx-1" title="AGREGAR GARANTIA">
+                                        <button class="btn btn-info btn-block mx-1" title="EDITAR GARANTIA">
                                             <i style="color: white;" class="fas fa-check"></i>
                                         </button>
                                     </div>
+                                    {{/each}}
                                 </form>
-                                {{#if garantia}}
-                                <br><br>
-                                 <table class="table table-bordered table-hover ">
-                                    <thead >
-                                         <tr style="background-color: #5b5378; color: white;">
-                                            <th>FECHA DE GARANTIA</th>
-                                            <th>HORARIO</th>
-                                            <th>DESCRIPCION</th>
-                                            <th>OPCIONES</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody >
-                                        {{#each garantia}}
-                                        <tr class="table-active"> 
-                                            <th style="font-weight:normal">{{moment FechaGarantiaNew}}</th>
-                                            <th style="font-weight:normal">{{HoraGarantia}}</th>
-                                            <th style="font-weight:normal">{{Descripcion}}</th>
-                                            <th style="font-weight:normal"><center>
-                                              <a href="/editar_garantia_n{{IdGarantia}}" title="EDITAR GARANTIA" class="btn btn-info" ><i style="color: white;" class="far fa-file-pdf"></i></a>
-                                              </center>
-                                            </th>
-                                        </tr>
-                                        {{/each}}
-                                        
-                                    </tbody>
-                                </table>
-                                <br><br>
-                                {{/if}}
-                                <br>
-                                <div style="margin-left: 5px;">
-                                <button class="btn btn-info" title="REGRESAR">
-                                <a href="/servistar/ver_cliente{{cliente}}/" ><i style="color: white;" class="fas fa-chevron-left"></i></a>
-                                </button>
-                                <button class="btn btn-info" title="CERRAR GARANTIA" style="margin-left: 96%;">
-                                <a href="/cerrar_garantia{{id}}/" ><i style="color: white;" class="fas fa-exclamation-triangle"></i></a>
-                                </button>
-                                </div>
-                            </div>
-                        </div>
+                                                       </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+          </div>
         </div>
     </div>
 </div>

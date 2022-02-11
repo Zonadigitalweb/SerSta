@@ -45,7 +45,7 @@
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Refacciones</h1>
+                    <h1 class="text-dark mb-3 h4">Gastos Fijos</h1>
                     <div class=" mx-auto">
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
@@ -68,9 +68,9 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
-                                            {{#each Refacciones}}
-                                            <tr id="{{IdRefaccion}}" style="display:none">
-                                                <td><a href="/servistar/ver_refaccion{{IdRefaccion}}/"
+                                            {{#each gasto}}
+                                            <tr id="{{IdGastoFijo}}" style="display:none">
+                                                <td><a href="/servistar/ver_gasto{{IdGastoFijo}}/"
                                                         class="link-primary">{{Descripcion}}</a> </td>
                                                 <td>{{Existencias}}</td>
                                                 <td>{{CostoVenta}}</td>
@@ -93,7 +93,7 @@
                                 <button class="btn btn-info size-2" onclick=Agregar() id="btnadd" title="AGREGAR">
                                     <i style="color: white;" class="fas fa-plus"></i>
                                 </button>
-                                <form action="/agregar_refaccion" method="POST" style="display:none" id="form">
+                                <form action="/agregar_gasto" method="POST" style="display:none" id="form">
                                 <div class="row">
                                 <div class="col-md-9">
                                     <label>Descripcion</label>
@@ -137,9 +137,9 @@
 
 
     let array = []
-    {{#each Refacciones }}
+    {{#each gasto }}
     array.push({
-        IdRefaccion: "{{IdRefaccion}}",
+        IdGastoFijo: "{{IdGastoFijo}}",
         Descripcion: "{{Descripcion}}"
     })
     {{/each}}
@@ -149,17 +149,17 @@
                 if (texto == "") {
                     document.getElementById("tblh").style.display = "none"
                     for (index = 0; index < array.length; index++) {
-                        document.getElementById(array[index].IdRefaccion).style.display = "none"
+                        document.getElementById(array[index].IdGastoFijo).style.display = "none"
                     }
                     return
                 }
                 for (index = 0; index < array.length; index++) {
                     let Descripcion = array[index].Descripcion.toLowerCase()
                     if (Descripcion.indexOf(texto) !== -1) {
-                        document.getElementById(array[index].IdRefaccion).style.display = "block"
+                        document.getElementById(array[index].IdGastoFijo).style.display = "block"
                         document.getElementById("tblh").style.display = "block"
                     } else {
-                        document.getElementById(array[index].IdRefaccion).style.display = "none"
+                        document.getElementById(array[index].IdGastoFijo).style.display = "none"
                     }
                 }
 
