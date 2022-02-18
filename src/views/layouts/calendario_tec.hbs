@@ -1,0 +1,1936 @@
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color: #5b5378;">
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class=" nav-link" id="h1" style="color: white;" href="/servistar/servicios_pendientes">
+                        <center><i class="fas fa-home fa-2x"></i><br>Inicio
+                    </a> </center>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: white;">
+                        <center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio
+                    </a></center>
+                </li>
+                <li class="nav-item dropdown" style="margin-top: 15px;">
+                    <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <center><i class="fas fa-file-alt fa-2x"></i><br>Catalogo</center>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/servistar/clientes">Clientes</a>
+                        <a class="dropdown-item" href="/servistar/tecnicos">Tecnicos</a>
+                        <a class="dropdown-item" href="/servistar/refacciones">Refacciones</a>
+                        <a class="dropdown-item" href="/servistar/gastos_fijos">Gastos Fijos</a>
+                        <a class="dropdown-item" href="/servistar/servicios">Descripcion <br> del trabajo</a>
+                    </div>
+                </li>
+                <li class="nav-item" id="admin" style="display: block;">
+                    <a class="nav-link " href="/servistar/reportes">
+                        <center><i id="adminI" style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br>
+                            <p id="adminS" style="color: #5b5378;">Administrador</p>
+                    </a></center>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ">
+                        <center><i style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br>
+                            <p style="color: #5b5378;">...</p>
+                    </a></center>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;">
+                        <center><i class="fas fa-user fa-2x"></i></i><br>Hola {{user.Nombre}}
+                    </a></center>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="mb-3 h4">Calendario</h1>
+                    <div class=" mx-auto">
+                        <div class="card">
+                            {{#if dias}}
+                            <div class="card-body" style="background-color:#e6e6e6;">
+                                <h1 class=" mb-3 h4">Tecnico 1</h1>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr style="background-color: #5b5378; color: white;">
+                                            <th>Horas</th>
+                                            {{#each dias}}
+                                            <th>{{moment FechaDia}}</th>
+                                            {{/each}}
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-active">
+                                            <th>8:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora1}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>8:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora2}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>9:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora3}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>9:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora4}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>10:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora5}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>10:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora6}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>11:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora7}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>11:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora8}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>12:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora9}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>12:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora10}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>1:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora11}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>1:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora12}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>2:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora13}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>2:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora14}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>3:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora15}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>3:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora16}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>4:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora17}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>4:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora18}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>5:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora19}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>5:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora20}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>6:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora21}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>6:30</th>
+                                            {{#each dias}}
+                                            <th>{{Hora22}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                        <tr class="table-active">
+                                            <th>7:00</th>
+                                            {{#each dias}}
+                                            <th>{{Hora23}} </th>
+
+                                            {{/each}}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    {{/if}}
+
+                    {{#if dias2}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 2</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias2}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias2}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+
+                {{#if dias3}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 3</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias3}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias3}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+
+                 {{#if dias4}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 4</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias4}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias4}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+
+                 {{#if dias5}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 5</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias5}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias5}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+
+                 {{#if dias6}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 6</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias6}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias6}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+
+                 {{#if dias7}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 7</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias7}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias7}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+
+                 {{#if dias8}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 8</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias8}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias8}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+
+                 {{#if dias9}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 9</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias9}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias9}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+
+                 {{#if dias10}}
+                    <div class="card">
+                        <div class="card-body" style="background-color:#d9d9d9;">
+                            <h1 class="text-dark mb-3 h4">Tecnico 10</h1>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr style="background-color: #5b5378; color: white;">
+                                        <th>Horas</th>
+                                        {{#each dias10}}
+                                        <th>{{moment FechaDia}}</th>
+                                        {{/each}}
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <th>8:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora1}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>8:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora2}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora3}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>9:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora4}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora5}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>10:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora6}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora7}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>11:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora8}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora9}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>12:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora10}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora11}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>1:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora12}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora13}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>2:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora14}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora15}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>3:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora16}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora17}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>4:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora18}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora19}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>5:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora20}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora21}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>6:30</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora22}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                    <tr class="table-active">
+                                        <th>7:00</th>
+                                        {{#each dias10}}
+                                        <th>{{Hora23}} </th>
+
+                                        {{/each}}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+
+</script>

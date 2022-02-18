@@ -4,9 +4,6 @@ const pool = require("../database")
 const pdfc =require("../routes/pdf")
 var moment = require('moment');
 const {isLoggedIn, isAdmin} = require("../lib/auth");
-const accountSid ="";
-const authToken = "";
-const client = require('twilio')(accountSid, authToken);
 const { ConsoleMessage } = require("puppeteer");
 
 
@@ -26,6 +23,284 @@ router.get("/servistar/agregar_registro", isLoggedIn, async (req, res)=>{
     let num=await pool.query("SELECT max(IdCliente) as num FROM tblclientes;")
     num=num[0].num+1
     res.render("layouts/agregar_registro",{cliente, num})
+})
+
+router.get("/servistar/tecnicos_ayudantes:id", isLoggedIn, async (req, res)=>{
+    let {id}=req.params
+    let tec=await pool.query("SELECT * FROM `tbltecnicos` WHERE `Habilitado` = 1;")
+    let ayu=await pool.query("SELECT * FROM `tblayudantes` WHERE `Habilitado` = 1;")
+    res.render("layouts/tecnicos_ayudantes",{tec, ayu, id})
+})
+
+router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
+    let tecnicos = await pool.query("SELECT * FROM `tbltecnicos`")
+
+    let dias = await pool.query("SELECT * FROM `tblcalentec1`")
+
+    for (let index = 0; index < dias.length; index++) {
+       if (dias[index].Hora1==0) {
+           dias[index].Hora1="Libre"
+       }
+       if (dias[index].Hora2==0) {
+           dias[index].Hora2="Libre"
+       }
+       if (dias[index].Hora3==0) {
+           dias[index].Hora3="Libre"
+       }
+       if (dias[index].Hora4==0) {
+           dias[index].Hora4="Libre"
+       }
+       if (dias[index].Hora5==0) {
+           dias[index].Hora5="Libre"
+       }
+       if (dias[index].Hora6==0) {
+           dias[index].Hora6="Libre"
+       }
+       if (dias[index].Hora7==0) {
+           dias[index].Hora7="Libre"
+       }
+       if (dias[index].Hora8==0) {
+           dias[index].Hora8="Libre"
+       }
+       if (dias[index].Hora9==0) {
+           dias[index].Hora9="Libre"
+       }
+       if (dias[index].Hora10==0) {
+           dias[index].Hora10="Libre"
+       }
+       if (dias[index].Hora11==0) {
+           dias[index].Hora11="Libre"
+       }
+       if (dias[index].Hora12==0) {
+           dias[index].Hora12="Libre"
+       }
+       if (dias[index].Hora13==0) {
+           dias[index].Hora13="Libre"
+       }
+       if (dias[index].Hora14==0) {
+           dias[index].Hora14="Libre"
+       }
+       if (dias[index].Hora15==0) {
+           dias[index].Hora15="Libre"
+       }
+       if (dias[index].Hora16==0) {
+           dias[index].Hora16="Libre"
+       }
+       if (dias[index].Hora17==0) {
+           dias[index].Hora17="Libre"
+       }
+       if (dias[index].Hora18==0) {
+           dias[index].Hora18="Libre"
+       }
+       if (dias[index].Hora19==0) {
+           dias[index].Hora19="Libre"
+       }
+       if (dias[index].Hora20==0) {
+           dias[index].Hora20="Libre"
+       }
+       if (dias[index].Hora21==0) {
+           dias[index].Hora21="Libre"
+       }
+       if (dias[index].Hora22==0) {
+           dias[index].Hora22="Libre"
+       }
+       if (dias[index].Hora23==0) {
+           dias[index].Hora23="Libre"
+       }
+        
+        
+    }
+    let dias2 = await pool.query("SELECT * FROM `tblcalentec2`")
+
+    for (let index = 0; index < dias.length; index++) {
+       if (dias2[index].Hora1==0) {
+        dias2[index].Hora1="Libre"
+       }
+       if (dias2[index].Hora2==0) {
+        dias2[index].Hora2="Libre"
+       }
+       if (dias2[index].Hora3==0) {
+        dias2[index].Hora3="Libre"
+       }
+       if (dias2[index].Hora4==0) {
+        dias2[index].Hora4="Libre"
+       }
+       if (dias2[index].Hora5==0) {
+        dias2[index].Hora5="Libre"
+       }
+       if (dias2[index].Hora6==0) {
+        dias2[index].Hora6="Libre"
+       }
+       if (dias2[index].Hora7==0) {
+        dias2[index].Hora7="Libre"
+       }
+       if (dias2[index].Hora8==0) {
+        dias2[index].Hora8="Libre"
+       }
+       if (dias2[index].Hora9==0) {
+        dias2[index].Hora9="Libre"
+       }
+       if (dias2[index].Hora10==0) {
+        dias2[index].Hora10="Libre"
+       }
+       if (dias2[index].Hora11==0) {
+        dias2[index].Hora11="Libre"
+       }
+       if (dias2[index].Hora12==0) {
+        dias2[index].Hora12="Libre"
+       }
+       if (dias2[index].Hora13==0) {
+        dias2[index].Hora13="Libre"
+       }
+       if (dias2[index].Hora14==0) {
+        dias2[index].Hora14="Libre"
+       }
+       if (dias2[index].Hora15==0) {
+        dias2[index].Hora15="Libre"
+       }
+       if (dias2[index].Hora16==0) {
+        dias2[index].Hora16="Libre"
+       }
+       if (dias2[index].Hora17==0) {
+        dias2[index].Hora17="Libre"
+       }
+       if (dias2[index].Hora18==0) {
+        dias2[index].Hora18="Libre"
+       }
+       if (dias2[index].Hora19==0) {
+        dias2[index].Hora19="Libre"
+       }
+       if (dias2[index].Hora20==0) {
+        dias2[index].Hora20="Libre"
+       }
+       if (dias2[index].Hora21==0) {
+        dias2[index].Hora21="Libre"
+       }
+       if (dias2[index].Hora22==0) {
+        dias2[index].Hora22="Libre"
+       }
+       if (dias2[index].Hora23==0) {
+        dias2[index].Hora23="Libre"
+       }
+        
+        
+    }
+
+  
+    if (tecnicos[0].Habilitado==0) {
+        dias=null
+    }
+    if (tecnicos[1].Habilitado==0) {
+        dias2=null
+    }
+    res.render("layouts/calendario_tec", {dias,dias2})
+})
+router.post("/calendario_tec", isLoggedIn, async (req, res)=>{
+    let a="Hora"
+    let b="quete"
+    let c="importa"
+    let d="saludos"
+    let abc={}
+
+let {IdOrdenServicio,FechaDia,IdTecnico,Hora1,Hora2,Hora3,Hora4,Hora5,Hora6,Hora7,Hora8,Hora9,Hora10,Hora11,Hora12,Hora13,Hora14,Hora15,Hora16,Hora17,Hora18,Hora19,Hora20,Hora21,Hora22,Hora23} = req.body
+
+    if (Hora1=="on") {
+        Hora1=IdOrdenServicio
+        abc.Hora1=Hora1
+    }
+    if (Hora2=="on") {
+        Hora2=IdOrdenServicio
+        abc.Hora2=Hora2
+    }
+    if (Hora3=="on") {
+        Hora3=IdOrdenServicio
+        abc.Hora3=Hora3
+    }
+    if (Hora4=="on") {
+        Hora4=IdOrdenServicio
+        abc.Hora4=Hora4
+    }
+    if (Hora5=="on") {
+        Hora5=IdOrdenServicio
+        abc.Hora5=Hora5
+    }
+    if (Hora6=="on") {
+        Hora6=IdOrdenServicio
+        abc.Hora6=Hora6
+    }
+    if (Hora7=="on") {
+        Hora7=IdOrdenServicio
+        abc.Hora7=Hora7
+    }
+    if (Hora8=="on") {
+        Hora8=IdOrdenServicio
+        abc.Hora8=Hora8
+    }
+    if (Hora9=="on") {
+        Hora9=IdOrdenServicio
+        abc.Hora9=Hora9
+    }
+    if (Hora10=="on") {
+        Hora10=IdOrdenServicio
+        abc.Hora10=Hora10
+    }
+    if (Hora11=="on") {
+        Hora11=IdOrdenServicio
+        abc.Hora11=Hora11
+    }
+    if (Hora12=="on") {
+        Hora12=IdOrdenServicio
+        abc.Hora12=Hora12
+    }
+    if (Hora13=="on") {
+        Hora13=IdOrdenServicio
+        abc.Hora13=Hora13
+    }
+    if (Hora14=="on") {
+        Hora14=IdOrdenServicio
+        abc.Hora14=Hora14
+    }
+    if (Hora15=="on") {
+        Hora15=IdOrdenServicio
+        abc.Hora15=Hora15
+    }
+    if (Hora16=="on") {
+        Hora16=IdOrdenServicio
+        abc.Hora16=Hora16
+    }
+    if (Hora17=="on") {
+        Hora17=IdOrdenServicio
+        abc.Hora17=Hora17
+    }
+    if (Hora18=="on") {
+        Hora18=IdOrdenServicio
+        abc.Hora18=Hora18
+    }
+    if (Hora19=="on") {
+        Hora19=IdOrdenServicio
+        abc.Hora19=Hora19
+    }
+    if (Hora20=="on") {
+        Hora20=IdOrdenServicio
+        abc.Hora20=Hora20
+    }
+    if (Hora21=="on") {
+        Hora21=IdOrdenServicio
+        abc.Hora21=Hora21
+    }
+    if (Hora22=="on") {
+        Hora22=IdOrdenServicio
+        abc.Hora22=Hora22
+    }
+    if (Hora23=="on") {
+        Hora23=IdOrdenServicio
+        abc.Hora23=Hora23
+    }
+
+    let tec= await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[IdTecnico])
+await pool.query("UPDATE "+tec[0].tbl+" SET ? WHERE FechaDia = ?",[abc,FechaDia])
+
+    res.redirect("/servistar/calendario_tec")
 })
 
 router.get("/servistar/agregar_registro:id/", isLoggedIn, async (req, res) => {
@@ -105,6 +380,167 @@ router.post("/cerrar_nota", isLoggedIn, async (req, res) =>{
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '11', ?,current_timestamp())",[idu,Id])
     await pool.query("UPDATE tblnotas SET NotaCerrada = 1 WHERE IdOrdenServicio=?", [Id])
     res.redirect("/servistar/notas"+Id)
+})
+router.post("/editar_calendario", isLoggedIn, async (req, res) =>{
+    let {IdOrdenServicio,IdTecnico,dia} = req.body
+    let tec = await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[IdTecnico])
+    let dias = await pool.query("SELECT * FROM "+tec[0].tbl+" WHERE FechaDia = ?",[dia])
+
+    for (let index = 0; index < dias.length; index++) {
+        if (dias[index].Hora1==0) {
+            dias[index].Hora1="Libre"
+        }
+        if (dias[index].Hora2==0) {
+            dias[index].Hora2="Libre"
+        }
+        if (dias[index].Hora3==0) {
+            dias[index].Hora3="Libre"
+        }
+        if (dias[index].Hora4==0) {
+            dias[index].Hora4="Libre"
+        }
+        if (dias[index].Hora5==0) {
+            dias[index].Hora5="Libre"
+        }
+        if (dias[index].Hora6==0) {
+            dias[index].Hora6="Libre"
+        }
+        if (dias[index].Hora7==0) {
+            dias[index].Hora7="Libre"
+        }
+        if (dias[index].Hora8==0) {
+            dias[index].Hora8="Libre"
+        }
+        if (dias[index].Hora9==0) {
+            dias[index].Hora9="Libre"
+        }
+        if (dias[index].Hora10==0) {
+            dias[index].Hora10="Libre"
+        }
+        if (dias[index].Hora11==0) {
+            dias[index].Hora11="Libre"
+        }
+        if (dias[index].Hora12==0) {
+            dias[index].Hora12="Libre"
+        }
+        if (dias[index].Hora13==0) {
+            dias[index].Hora13="Libre"
+        }
+        if (dias[index].Hora14==0) {
+            dias[index].Hora14="Libre"
+        }
+        if (dias[index].Hora15==0) {
+            dias[index].Hora15="Libre"
+        }
+        if (dias[index].Hora16==0) {
+            dias[index].Hora16="Libre"
+        }
+        if (dias[index].Hora17==0) {
+            dias[index].Hora17="Libre"
+        }
+        if (dias[index].Hora18==0) {
+            dias[index].Hora18="Libre"
+        }
+        if (dias[index].Hora19==0) {
+            dias[index].Hora19="Libre"
+        }
+        if (dias[index].Hora20==0) {
+            dias[index].Hora20="Libre"
+        }
+        if (dias[index].Hora21==0) {
+            dias[index].Hora21="Libre"
+        }
+        if (dias[index].Hora22==0) {
+            dias[index].Hora22="Libre"
+        }
+        if (dias[index].Hora23==0) {
+            dias[index].Hora23="Libre"
+        }
+         
+         
+     }
+    
+    res.render("layouts/editar_calendario",{IdOrdenServicio,IdTecnico,dia,dias})
+})
+router.post("/agregar_tecnico_c", isLoggedIn, async (req, res) =>{
+    let {IdTecnico, IdOrdenServicio} = req.body
+let tec= await pool.query("SELECT * FROM `tbltecnicos` WHERE IdTecnico = ?",[IdTecnico])
+    let dias = await pool.query("SELECT * FROM "+tec[0].tbl)
+
+    for (let index = 0; index < dias.length; index++) {
+        if (dias[index].Hora1==0) {
+            dias[index].Hora1="Libre"
+        }
+        if (dias[index].Hora2==0) {
+            dias[index].Hora2="Libre"
+        }
+        if (dias[index].Hora3==0) {
+            dias[index].Hora3="Libre"
+        }
+        if (dias[index].Hora4==0) {
+            dias[index].Hora4="Libre"
+        }
+        if (dias[index].Hora5==0) {
+            dias[index].Hora5="Libre"
+        }
+        if (dias[index].Hora6==0) {
+            dias[index].Hora6="Libre"
+        }
+        if (dias[index].Hora7==0) {
+            dias[index].Hora7="Libre"
+        }
+        if (dias[index].Hora8==0) {
+            dias[index].Hora8="Libre"
+        }
+        if (dias[index].Hora9==0) {
+            dias[index].Hora9="Libre"
+        }
+        if (dias[index].Hora10==0) {
+            dias[index].Hora10="Libre"
+        }
+        if (dias[index].Hora11==0) {
+            dias[index].Hora11="Libre"
+        }
+        if (dias[index].Hora12==0) {
+            dias[index].Hora12="Libre"
+        }
+        if (dias[index].Hora13==0) {
+            dias[index].Hora13="Libre"
+        }
+        if (dias[index].Hora14==0) {
+            dias[index].Hora14="Libre"
+        }
+        if (dias[index].Hora15==0) {
+            dias[index].Hora15="Libre"
+        }
+        if (dias[index].Hora16==0) {
+            dias[index].Hora16="Libre"
+        }
+        if (dias[index].Hora17==0) {
+            dias[index].Hora17="Libre"
+        }
+        if (dias[index].Hora18==0) {
+            dias[index].Hora18="Libre"
+        }
+        if (dias[index].Hora19==0) {
+            dias[index].Hora19="Libre"
+        }
+        if (dias[index].Hora20==0) {
+            dias[index].Hora20="Libre"
+        }
+        if (dias[index].Hora21==0) {
+            dias[index].Hora21="Libre"
+        }
+        if (dias[index].Hora22==0) {
+            dias[index].Hora22="Libre"
+        }
+        if (dias[index].Hora23==0) {
+            dias[index].Hora23="Libre"
+        }
+         
+         
+     }
+    res.render("layouts/tecnico_cale",{IdTecnico, IdOrdenServicio, dias})
 })
 
 
@@ -445,7 +881,6 @@ router.get("/servistar/servicios_pendientes", isLoggedIn, async (req, res) => {
     const espe_refa = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Esperando Refacciones' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Sin Preparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.FechaGarantia='2021-12-31' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
-    
    
     res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara})
 })
@@ -479,16 +914,6 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
             orden[index].IdTecnico="Tecnico 4"
         }
     }
-    
-    let mes="Numero de cliente "+id+". "+cliente[0].Nombre
-    log(mes)
-    client.messages
-    .create({
-       from: 'whatsapp:+14155238886',
-       body: mes,
-       to: 'whatsapp:+5213121994690'
-     })
-    .then(message => console.log(message.sid));
     res.render("layouts/cliente_completo", { equipo, cliente, orden ,id })
 })
 
