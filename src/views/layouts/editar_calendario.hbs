@@ -12,6 +12,16 @@
                         <center><i class="fas fa-home fa-2x"></i><br>Inicio
                     </a> </center>
                 </li>
+                 <li class="nav-item dropdown" style="margin-top: 15px;">
+        <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <center><i class="fas fa-calendar-alt fa-2x"></i><br>Calendario</center>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/servistar/calendario_tec">Tecnicos</a>
+          <a class="dropdown-item" href="/servistar/calendario_ayu">Ayudantes</a>
+
+        </div>
+      </li>
 
                 <li class="nav-item">
                     <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: white;">
@@ -56,22 +66,31 @@
 
 <div class="container p-4">
     <div class="row">
-        <div class="col-md-12 mx-auto">
+        <div class="col-md-7 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <h1 class="mb-3 h4">Calendario</h1>
                     <div class=" mx-auto">
                         <div class="card"> 
                             <div class="card-body" style="background-color:#e6e6e6;">
+                                {{#if IdTecnico}}
                                 <h1 class=" mb-3 h4">Tecnico {{IdTecnico}}</h1>
                                 <form action="/calendario_tec" method="post">
                                     <input type="text" value="{{IdOrdenServicio}}" name="IdOrdenServicio" style="display: none;">
                                     <input type="text" value="{{dia}}" name="FechaDia" style="display: none;">
                                     <input type="text" value="{{IdTecnico}}" name="IdTecnico" style="display: none;">
-                                <table class="table table-bordered table-hover">
+                                    {{/if}}
+                                {{#if IdAyudante}}
+                                <h1 class=" mb-3 h4">Ayudante {{IdAyudante}}</h1>
+                                <form action="/calendario_ayu" method="post">
+                                    <input type="text" value="{{IdOrdenServicio}}" name="IdOrdenServicio" style="display: none;">
+                                    <input type="text" value="{{dia}}" name="FechaDia" style="display: none;">
+                                    <input type="text" value="{{IdAyudante}}" name="IdAyudante" style="display: none;">
+                                    {{/if}}
+                                <table class="table table-bordered table-hover" >
                                     <thead>
                                       
-                                        <tr style="background-color: #5b5378; color: white;">
+                                        <tr style="background-color: #5b5378; color: white; text-align: center;">
                                             <th>Horas</th>
                                             {{#each dias}}
                                             <th>{{moment FechaDia}}</th>
@@ -81,164 +100,166 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
+                                            
                                             <th>8:00</th>
                                             {{#each dias}}
-                                            <th  id="hh1">{{Hora1}} <input id="ch1" type="checkbox" style="display: none;" name="Hora1" class="form-check-input"></th>
+                                            <th   id="hh1">{{Hora1}} <input id="ch1" type="checkbox"   name="Hora1" class="form-check-input"></th>
 
                                             {{/each}}
+                                            
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>8:30</th>
                                             {{#each dias}}
-                                            <th  id="hh2">{{Hora2}} <input id="ch2" type="checkbox" style="display: none;" name="Hora2" class="form-check-input"></th>
+                                            <th  id="hh2">{{Hora2}} <input id="ch2" type="checkbox"   name="Hora2" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>9:00</th>
                                             {{#each dias}}
-                                            <th  id="hh3">{{Hora3}} <input id="ch3" type="checkbox" style="display: none;" name="Hora3" class="form-check-input"></th>
+                                            <th  id="hh3">{{Hora3}} <input id="ch3" type="checkbox"   name="Hora3" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>9:30</th>
                                             {{#each dias}}
-                                            <th  id="hh4">{{Hora4}} <input id="ch4" type="checkbox" style="display: none;" name="Hora4" class="form-check-input"></th>
+                                            <th  id="hh4">{{Hora4}} <input id="ch4" type="checkbox"   name="Hora4" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>10:00</th>
                                             {{#each dias}}
-                                            <th id="hh5">{{Hora5}} <input id="ch5" type="checkbox" style="display: none;" name="Hora5" class="form-check-input"></th>
+                                            <th id="hh5">{{Hora5}} <input id="ch5" type="checkbox"   name="Hora5" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>10:30</th>
                                             {{#each dias}}
-                                            <th id="hh6">{{Hora6}} <input id="ch6" type="checkbox" style="display: none;" name="Hora6" class="form-check-input"></th>
+                                            <th id="hh6">{{Hora6}} <input id="ch6" type="checkbox"   name="Hora6" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>11:00</th>
                                             {{#each dias}}
-                                            <th  id="hh7">{{Hora7}} <input id="ch7" type="checkbox" style="display: none;" name="Hora7" class="form-check-input"></th>
+                                            <th  id="hh7">{{Hora7}} <input id="ch7" type="checkbox"   name="Hora7" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>11:30</th>
                                             {{#each dias}}
-                                            <th id="hh8">{{Hora8}} <input id="ch8" type="checkbox" style="display: none;" name="Hora8" class="form-check-input"></th>
+                                            <th id="hh8">{{Hora8}} <input id="ch8" type="checkbox"   name="Hora8" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>12:00</th>
                                             {{#each dias}}
-                                            <th id="hh9">{{Hora9}} <input id="ch9" type="checkbox" style="display: none;" name="Hora9" class="form-check-input"></th>
+                                            <th id="hh9">{{Hora9}} <input id="ch9" type="checkbox"   name="Hora9" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>12:30</th>
                                             {{#each dias}}
-                                            <th id="hh10">{{Hora10}} <input id="ch10" type="checkbox" style="display: none;" name="Hora10" class="form-check-input"></th>
+                                            <th id="hh10">{{Hora10}} <input id="ch10" type="checkbox"   name="Hora10" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>1:00</th>
                                             {{#each dias}}
-                                            <th id="hh11">{{Hora11}} <input id="ch11" type="checkbox" style="display: none;" name="Hora11" class="form-check-input"></th>
+                                            <th id="hh11">{{Hora11}} <input id="ch11" type="checkbox"   name="Hora11" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>1:30</th>
                                             {{#each dias}}
-                                            <th id="hh12">{{Hora12}} <input id="ch12" type="checkbox" style="display: none;" name="Hora12" class="form-check-input"></th>
+                                            <th id="hh12">{{Hora12}} <input id="ch12" type="checkbox"   name="Hora12" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>2:00</th>
                                             {{#each dias}}
-                                            <th id="hh13">{{Hora13}} <input id="ch13" type="checkbox" style="display: none;" name="Hora13" class="form-check-input"></th>
+                                            <th id="hh13">{{Hora13}} <input id="ch13" type="checkbox"   name="Hora13" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>2:30</th>
                                             {{#each dias}}
-                                            <th id="hh14">{{Hora14}} <input id="ch14" type="checkbox" style="display: none;" name="Hora14" class="form-check-input"></th>
+                                            <th id="hh14">{{Hora14}} <input id="ch14" type="checkbox"   name="Hora14" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>3:00</th>
                                             {{#each dias}}
-                                            <th id="hh15">{{Hora15}} <input id="ch15" type="checkbox" style="display: none;" name="Hora15" class="form-check-input"></th>
+                                            <th id="hh15">{{Hora15}} <input id="ch15" type="checkbox"   name="Hora15" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>3:30</th>
                                             {{#each dias}}
-                                            <th id="hh16">{{Hora16}} <input id="ch16" type="checkbox" style="display: none;" name="Hora16" class="form-check-input"></th>
+                                            <th id="hh16">{{Hora16}} <input id="ch16" type="checkbox"   name="Hora16" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>4:00</th>
                                             {{#each dias}}
-                                            <th id="hh17">{{Hora17}} <input id="ch17" type="checkbox" style="display: none;" name="Hora17" class="form-check-input"></th>
+                                            <th id="hh17">{{Hora17}} <input id="ch17" type="checkbox"   name="Hora17" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>4:30</th>
                                             {{#each dias}}
-                                            <th id="hh18">{{Hora18}} <input id="ch18" type="checkbox" style="display: none;" name="Hora18" class="form-check-input"></th>
+                                            <th id="hh18">{{Hora18}} <input id="ch18" type="checkbox"   name="Hora18" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>5:00</th>
                                             {{#each dias}}
-                                            <th id="hh19">{{Hora19}} <input id="ch19" type="checkbox" style="display: none;" name="Hora19" class="form-check-input"></th>
+                                            <th id="hh19">{{Hora19}} <input id="ch19" type="checkbox"   name="Hora19" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>5:30</th>
                                             {{#each dias}}
-                                            <th id="hh20">{{Hora20}} <input id="ch20" type="checkbox" style="display: none;" name="Hora20" class="form-check-input"></th>
+                                            <th id="hh20">{{Hora20}} <input id="ch20" type="checkbox"   name="Hora20" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>6:00</th>
                                             {{#each dias}}
-                                            <th id="hh21">{{Hora21}} <input id="ch21" type="checkbox" style="display: none;" name="Hora21" class="form-check-input"></th>
+                                            <th id="hh21">{{Hora21}} <input id="ch21" type="checkbox"   name="Hora21" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>6:30</th>
                                             {{#each dias}}
-                                            <th id="hh22">{{Hora22}} <input id="ch22" type="checkbox" style="display: none;" name="Hora22" class="form-check-input"></th>
+                                            <th id="hh22">{{Hora22}} <input id="ch22" type="checkbox"   name="Hora22" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
-                                        <tr class="table-active">
+                                        <tr class="table-active" style="text-align: center;">
                                             <th>7:00</th>
                                             {{#each dias}}
-                                            <th id="hh23">{{Hora23}} <input id="ch23" type="checkbox" style="display: none;" name="Hora23" class="form-check-input"></th>
+                                            <th id="hh23">{{Hora23}} <input id="ch23" type="checkbox"   name="Hora23" class="form-check-input"></th>
 
                                             {{/each}}
                                         </tr>
@@ -261,11 +282,151 @@
         </div>
 
         <script>
-            for(let index=1;index < 24; index++){
-                let aa = document.getElementById("hh"+index).innerText
-                if(aa == "LIBRE"){
-                   document.getElementById("ch"+index).style.display="block"
+            let arrayx = []
+            {{#each dias}}
+            arrayx.push({
+                Hora1:"{{Hora1}}",
+                Hora2:"{{Hora2}}",
+                Hora3:"{{Hora3}}",
+                Hora4:"{{Hora4}}",
+                Hora5:"{{Hora5}}",
+                Hora6:"{{Hora6}}",
+                Hora7:"{{Hora7}}",
+                Hora8:"{{Hora8}}",
+                Hora9:"{{Hora9}}",
+                Hora10:"{{Hora10}}",
+                Hora11:"{{Hora11}}",
+                Hora12:"{{Hora12}}",
+                Hora13:"{{Hora13}}",
+                Hora14:"{{Hora14}}",
+                Hora15:"{{Hora15}}",
+                Hora16:"{{Hora16}}",
+                Hora17:"{{Hora17}}",
+                Hora18:"{{Hora18}}",
+                Hora19:"{{Hora19}}",
+                Hora20:"{{Hora20}}",
+                Hora21:"{{Hora21}}",
+                Hora22:"{{Hora22}}",
+                Hora23:"{{Hora23}}"
+            });
+            {{/each}}
+
+                if(arrayx[0].Hora1 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch1").style.display="none"
                 }
-            }
+                if(arrayx[0].Hora2 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch2").style.display="none"
+                }
+                if(arrayx[0].Hora3 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch3").style.display="none"
+                }
+                if(arrayx[0].Hora4 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch4").style.display="none"
+                }
+                if(arrayx[0].Hora5 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch5").style.display="none"
+                }
+                if(arrayx[0].Hora6 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch6").style.display="none"
+                }
+                if(arrayx[0].Hora7 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch7").style.display="none"
+                }
+                if(arrayx[0].Hora8 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch8").style.display="none"
+                }
+                if(arrayx[0].Hora9 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch9").style.display="none"
+                }
+                if(arrayx[0].Hora10 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch10").style.display="none"
+                }
+                if(arrayx[0].Hora11 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch11").style.display="none"
+                }
+                if(arrayx[0].Hora12 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch12").style.display="none"
+                }
+                if(arrayx[0].Hora13 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch13").style.display="none"
+                }
+                if(arrayx[0].Hora14 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch14").style.display="none"
+                }
+                if(arrayx[0].Hora15 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch15").style.display="none"
+                }
+                if(arrayx[0].Hora16 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch16").style.display="none"
+                }
+                if(arrayx[0].Hora17 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch17").style.display="none"
+                }
+                if(arrayx[0].Hora18 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch18").style.display="none"
+                }
+                if(arrayx[0].Hora19 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch19").style.display="none"
+                }
+                if(arrayx[0].Hora20 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch20").style.display="none"
+                }
+                if(arrayx[0].Hora21 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch21").style.display="none"
+                }
+                if(arrayx[0].Hora22 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch22").style.display="none"
+                }
+                if(arrayx[0].Hora23 == "LIBRE"){
+                 
+                }else{
+                    document.getElementById("ch23").style.display="none"
+                }
+                
+            
 
         </script>

@@ -9,6 +9,16 @@
         <li class="nav-item">
             <a  class=" nav-link" id="h1" style="color: white;" href="/servistar/servicios_pendientes" ><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
         </li>
+         <li class="nav-item dropdown" style="margin-top: 15px;">
+        <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <center><i class="fas fa-calendar-alt fa-2x"></i><br>Calendario</center>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/servistar/calendario_tec">Tecnicos</a>
+          <a class="dropdown-item" href="/servistar/calendario_ayu">Ayudantes</a>
+
+        </div>
+      </li>
         
         <li class="nav-item">
           <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: white;" ><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
@@ -43,14 +53,15 @@
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Cliente <button onclick=ocuC() class="btn btn-info" ><i style="color: white;" class="fas fa-arrows-alt-v"></i></button></h1>
+                    <h1 class="text-dark mb-3 h4"><section id="tit">Cliente </section><button onclick=ocuC() class="btn btn-info" ><i style="color: white;" class="fas fa-arrows-alt-v"></i></button></h1>
                         <section id="ocuC" style="display: block;">
                     <div class="card">
                         <div class="card-body" style="background-color:#d9d9d9;">
-                            <h1 class="text-dark mb-3 h4">Datos</h1>
+                            <h1 id="vec0" style="display: block;" class="text-dark mb-3 h4">Datos</h1>
+                            <h1 id="vec" style="display: none;" class="text-dark mb-3 h4">Datos <a id="vec1" href="/vetar_cliente{{id}}" class="btn btn-danger">Vetar Cliente</a></h1>
                             <form action="/editar_cliente" method="POST" >
                                 {{#each cliente}}
-                                <div class="row">
+                                <div class="row" style="">
                                 <div class="col-md-3">
                                     <label>Id Cliente</label>
                                     <input type="number" style="display: none;" name="IdCliente"
@@ -398,7 +409,7 @@
                                      <div class="col-md-4">
                                         <label id="labelIdCliente{{IdOrdenServicio}}">Cliente</label>
                                               <input type="text" value="{{IdCliente}}" id="IdCliente{{IdOrdenServicio}}" class="form-control text-dark m-1" disabled> 
-                                              <input type="text" style="display: none;" value="{{IdCliente}}" id="IdCliente{{IdOrdenServicio}}" name="IdCliente" class="form-control text-dark m-1"> 
+                                              <input type="text" style="display: none;" value="{{IdCliente}}" name="IdCliente" class="form-control text-dark m-1"> 
                                     </div>
                                     <div class="col-md-4">
                                         <label id="labelIdEquipo{{IdOrdenServicio}}">Equipo</label>
@@ -470,30 +481,14 @@
                                             <option value="Conexion Demostracion">Conexion Demostracion</option>
                                         </select>
                                     </div>  
-                                    <div class="col-md-6" style="">
-                                        <label>Reparaciones </label>
-                                        <select name="Reparaciones" id="Reparaciones{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
-                                            <option value="{{Reparaciones}}">{{Reparaciones}}</option>
-                                           <option value="MANTENIMIENTO PREVENTIVO">MANTENIMIENTO PREVENTIVO</option>
-                                            <option value="INSTALACION">INSTALACION</option>
-                                            <option value="CAMBIO ENGRANES DE AGITADOR">CAMBIO ENGRANES DE AGITADOR</option>
-                                            <option value="CAMBIO JUNTA HOMOSINETICA">CAMBIO JUNTA HOMOSINETICA</option>
-                                            <option value="CAMBIO SWITCH CENTRIFUGADO">CAMBIO SWITCH CENTRIFUGADO</option>
-                                            <option value="CAMBIO CONTROL NIVELES">CAMBIO CONTROL NIVELES</option>
-                                            <option value="CAMBIO AGITADOR">CAMBIO AGITADOR</option>
-                                            <option value="CAMBIO BANDA DE TRANSMISION">CAMBIO BANDA DE TRANSMISION</option>
-                                            <option value="CAMBIO CLUTCH DE VELOCIDAD">CAMBIO CLUTCH DE VELOCIDAD</option>
-                                            <option value="CAMBIO VARILLAS DE SUSPENSION">CAMBIO VARILLAS DE SUSPENSION</option>
-                                            <option value="CAMBIO ARO DE SUSPENSION">CAMBIO ARO DE SUSPENSION</option>
-                                            <option value="CAMBIO DE TINA RECUPERADORA">CAMBIO DE TINA RECUPERADORA</option>
-                                            <option value="CAMBIO DE TRANSMISION">CAMBIO DE TRANSMISION</option>
-                                            <option value="REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA">REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA</option>
-                                            <option value="CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO">CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO</option>
-                                        </select>
+                                    <div class="col-md-4" style="">
+                                        <label>Trabajo a realizar </label><br>
+                                        <a href="" class="btn btn-info" style="color:white">Agregar Reparaciones</a>
                                     </div>
                                     <div class="col-md-4">
                                         <label>REFACCIONES</label> <br>
-                                        <button class="btn btn-info" style="color: white; ">Agregar Refacciones al servicioA</button>
+                                         <a href="/servistar/agregar_refaccion{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Refacciones al servicioA</a>
+                                        
                                     </div>
                                     </div>  
                                     <div class="row">
@@ -505,6 +500,10 @@
                                     <div class="form-group">
                                         <label>Diagnostico</label><br>
                                         <textarea name="Diagnostico" disabled id="Diagnostico{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" >{{Diagnostico}}</textarea>
+                                    </div>
+                                     <div class="form-group">
+                                        <label>Descripcion del trabajo realizado</label><br>
+                                        <textarea name="Descripcion" disabled id="Descripcion{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" >{{Descripcion}}</textarea>
                                     </div>
                                     <div class="row">
                                      <div class="col-md-3">
@@ -530,7 +529,7 @@
                                         <label>Vigencia de Garantia</label>
                                         <select name="VigenciaGarantia" id="VigenciaGarantia{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled >
                                             <option value="{{VigenciaGarantia}}">{{VigenciaGarantia}}</option>
-                                            <option value="-">-</option>
+                                            <option value="0">0</option>
                                             <option  value="15">15</option>
                                             <option value="30">30</option>
                                             <option  value="60">60</option>
@@ -592,9 +591,13 @@
                                         <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}" value="{{DiasVencimiento}}" class="form-control text-dark m-1"
                                             disabled >
                                     </div>
-                                     <div class="col-md-4">
+                                     <div class="col-md-3">
                                         <label>Articulo o Servicio en Garantia</label>
-                                         <button class="btn btn-info" style="color: white; ">Agregar Articulo o Servicio</button>
+                                          <a href="/servistar/tecnicos_ayudantes{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Servicio o refaccion</a>
+                                    </div>
+                                     <div class="col-md-4">
+                                        <label>Agregar gastos fijos</label><br>
+                                        <a href="/servistar/tecnicos_ayudantes{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar gastos fijos</a>
                                     </div>
                                     </div>
                                     <br>
@@ -643,6 +646,15 @@
 
     let arrayE = []
     let array = []
+    let arrayC = []
+
+      {{#each cliente}}
+    arrayC.push({
+        IdCliente: "{{IdCliente}}",
+        Nombre:"{{Nombre}}",
+        Vetado:"{{Vetado}}"
+    })
+    {{/each}}
 
     let a = 1
     {{#each equipo}}
@@ -669,6 +681,14 @@
     })
     {{/each}}
 
+    if(arrayC[0].Vetado==1){
+        document.getElementById("tit").innerText="Cliente Vetado"
+        document.getElementById("vec1").innerText="Quitar Veto"
+    }
+        
+  
+
+
             function editar_registro(id){
                 document.getElementById("FechaSolicitud"+id).disabled=false
                 document.getElementById("HoraLLamda"+id).disabled=false
@@ -679,13 +699,14 @@
                 document.getElementById("VisitaRealizada"+id).disabled=false
                 document.getElementById("HoraVisitaReal"+id).disabled=false
                 document.getElementById("TipoTrabajo"+id).disabled=false
-                document.getElementById("Reparaciones"+id).disabled=false
+                //document.getElementById("Reparaciones"+id).disabled=false
               //  document.getElementById("IdTecnico"+id).disabled=false
                // document.getElementById("IdAyudante"+id).disabled=false
                // document.getElementById("IdTecnicoSegui"+id).disabled=false
                 //document.getElementById("IdAyudanteSegui"+id).disabled=false
                 document.getElementById("Diagnostico"+id).disabled=false
-                document.getElementById("Presupuesto"+id).disabled=false
+                document.getElementById("Descripcion"+id).disabled=false
+                //document.getElementById("Presupuesto"+id).disabled=false
                 document.getElementById("CostoServicio"+id).disabled=false
                 document.getElementById("AceptarPresupuesto"+id).disabled=false
                 document.getElementById("FechaTerminadoEstimado"+id).disabled=false
@@ -966,6 +987,8 @@
                 document.getElementById("cp").disabled = false
                 document.getElementById("btneditarc").style.display = "none"
                 document.getElementById("btnaddc").style.display = "block"
+                document.getElementById("vec0").style.display = "none"
+                document.getElementById("vec").style.display = "block"
             }
 
             function editare() {
@@ -1095,8 +1118,8 @@
                     for(let index=0;index<arrayE.length;index++){
                         if(array[inde].IdEquipo==arrayE[index].IdEquipo){
                             e=arrayE[index].Tipo+" "+arrayE[index].Marca
-                            document.getElementById("IdEquipo"+array[index].Id).value=e
-                            document.getElementById("IdCliente"+array[index].Id).value=nombre
+                            document.getElementById("IdEquipo"+array[inde].Id).value=e
+                            document.getElementById("IdCliente"+array[inde].Id).value=nombre
                         }
                     }
                 }
@@ -1108,9 +1131,15 @@
                     if(array[index].Garantia=="2021-12-31"){
                         document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Garantia"
                         document.getElementById("p"+array[index].Id).style.color="#c17ba0"
+                    }else if(array[index].Garantia=="2021-12-30"){
+                        document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Queja del cliente"
+                        document.getElementById("p"+array[index].Id).style.color="#b7b7b7"
+                    }else if(array[index].Garantia=="2021-12-29"){
+                        document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Garantia de la Marca"
+                        document.getElementById("p"+array[index].Id).style.color="#773f04"
                     }else if(array[index].EstadoServicio=="En Ejecucion"){
                         document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" En Ejecucion"
-                        document.getElementById("p"+array[index].Id).style.color="#fffe00"
+                        document.getElementById("p"+array[index].Id).style.color="#d0d015"
                     }else if(array[index].EstadoServicio=="Para Entregar"){
                         document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Para Entregar"
                         document.getElementById("p"+array[index].Id).style.color="green"

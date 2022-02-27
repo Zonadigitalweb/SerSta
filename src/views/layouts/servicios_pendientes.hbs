@@ -9,7 +9,16 @@
         <li class="nav-item">
             <a  class=" nav-link" id="h1" style="color: #b5b5b5;" href="/servistar/servicios_pendientes" ><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
         </li>
-        
+         <li class="nav-item dropdown" style="margin-top: 15px;">
+        <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <center><i class="fas fa-calendar-alt fa-2x"></i><br>Calendario</center>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/servistar/calendario_tec">Tecnicos</a>
+          <a class="dropdown-item" href="/servistar/calendario_ayu">Ayudantes</a>
+
+        </div>
+      </li>
         <li class="nav-item">
           <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: white;" ><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
         </li>
@@ -44,7 +53,7 @@
     <div class="col-md-20 mx-auto">
       <strong>
         {{#if pa_ent}}
-        <h3>Servicios listos para entregar <button onclick=ocu1() class="btn btn-info" style="background-color: #5b5378; border-color:#5b5378;" ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
+        <h3>Servicios listos para entregar <button onclick=ocu1() class="btn btn-info" ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
         <section id="ocu1" style="display: block;">
         <table class="table table-bordered table-hover" style="color: white;">
         <thead>
@@ -78,7 +87,7 @@
       </section>
       <br>
        {{#if en_eje}}
-       <h3>Servicios En Ejecucion <button onclick=ocu2() class="btn btn-info" style="background-color: #5b5378; border-color:#5b5378;" ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
+       <h3>Servicios En Ejecucion <button onclick=ocu2() class="btn btn-info"  ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
        <section id="ocu2" style="display: block;">
         <table class="table table-bordered table-hover" style="color: white;">
         <thead>
@@ -112,7 +121,7 @@
       </section>
       <br>
        {{#if espe}}
-       <h3>Servicios en Espera <button onclick=ocu3() class="btn btn-info" style="background-color: #5b5378; border-color:#5b5378;" ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
+       <h3>Servicios en Espera <button onclick=ocu3() class="btn btn-info"  ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
         <section id="ocu3" style="display: block;">
         <table class="table table-bordered table-hover" style="color: white;">
         <thead>
@@ -146,7 +155,7 @@
       </section>
       <br>
        {{#if espe_refa}}
-       <h3>Servicios esperando refacciones <button onclick=ocu4() class="btn btn-info" style="background-color: #5b5378; border-color:#5b5378;" ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
+       <h3>Servicios esperando refacciones <button onclick=ocu4() class="btn btn-info"  ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
         <section id="ocu4" style="display: block;">
         <table class="table table-bordered table-hover" style="color: white;">
         <thead>
@@ -180,7 +189,7 @@
       </section>
       <br>
        {{#if sin_nada}}
-       <h3>Servicios sin Preparacion <button onclick=ocu5() class="btn btn-info" style="background-color: #5b5378; border-color:#5b5378;" ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
+       <h3>Servicios sin Preparacion <button onclick=ocu5() class="btn btn-info"  ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
         <section id="ocu5" style="display: block;">
         <table class="table table-bordered table-hover" style="color: white;">
         <thead>
@@ -214,7 +223,7 @@
       </section>
       <br>
        {{#if gara}}
-       <h3>Servicios en Garantia <button onclick=ocu6() class="btn btn-info" style="background-color: #5b5378; border-color:#5b5378;" ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
+       <h3>Servicios en Garantia <button onclick=ocu6() class="btn btn-info"  ><i style="color: white; " class="fas fa-arrows-alt-v"></i></button></h3>
         <section id="ocu6" style="display: block;">
         <table class="table table-bordered table-hover" style="color: white;">
         <thead>

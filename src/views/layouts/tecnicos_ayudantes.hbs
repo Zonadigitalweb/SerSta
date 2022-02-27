@@ -9,7 +9,16 @@
         <li class="nav-item">
             <a  class=" nav-link" id="h1" style="color: white;" href="/servistar/servicios_pendientes" ><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
         </li>
-        
+         <li class="nav-item dropdown" style="margin-top: 15px;">
+        <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <center><i class="fas fa-calendar-alt fa-2x"></i><br>Calendario</center>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/servistar/calendario_tec">Tecnicos</a>
+          <a class="dropdown-item" href="/servistar/calendario_ayu">Ayudantes</a>
+
+        </div>
+      </li>
         <li class="nav-item">
           <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: #b5b5b5;" ><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
         </li>
@@ -67,9 +76,9 @@
                                 </form>
                                <hr>
                                  <h1 class=" mb-3 h4">AGREGAR Tecnico de seguimiento</h1>
-                                <form action="/editar_garantia" method="post" >
+                                <form action="/agregar_tecnico_c" method="post" >
                                 <input type="number" value="{{id}}" name="IdOrdenServicio" style="display: none;">
-                                     <select name="IdTecnicoSegui" id="" class="form-select text-dark m-1 " required>
+                                     <select name="IdTecnico" id="" class="form-select text-dark m-1 " required>
                                          <option value="">Selecciona uno</option>
                                          {{#each tec}}
                                          <option value="{{IdTecnico}}">Tecnico {{IdTecnico}}</option>
@@ -83,7 +92,7 @@
                                 </form>
                                <hr>
                                 <h1 class=" mb-3 h4">AGREGAR ayudante</h1>
-                                <form action="/editar_garantia" method="post" >
+                                <form action="/agregar_ayudante_c" method="post" >
                                 <input type="number" value="{{id}}" name="IdOrdenServicio" style="display: none;">
                                      <select name="IdAyudante" id="" class="form-select text-dark m-1 " required>
                                          <option value="">Selecciona uno</option>
@@ -99,9 +108,9 @@
                                 </form>
                                <hr>
                                 <h1 class=" mb-3 h4">AGREGAR ayudante de seguimiento</h1>
-                                <form action="/editar_garantia" method="post" >
+                                <form action="/agregar_ayudante_c" method="post" >
                                 <input type="number" value="{{id}}" name="IdOrdenServicio" style="display: none;">
-                                     <select name="IdAyudanteSegui" id="" class="form-select text-dark m-1 " required>
+                                     <select name="IdAyudante" id="" class="form-select text-dark m-1 " required>
                                          <option value="">Selecciona uno</option>
                                          {{#each ayu}}
                                          <option value="{{IdAyudante}}">Ayudante {{IdAyudante}}</option>

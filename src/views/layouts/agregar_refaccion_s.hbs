@@ -61,26 +61,30 @@
                             <div class="card-body" style="background-color:#d9d9d9;">
                                 <h1 class="text-dark mb-3 h4">Buscar</h1>
                                 <div class="form-group">
-                                    <div class="input-group">
-                                        <input  id="busquedaNO" type="text"
-                                            class="form-control" placeholder="Descripcion">
-                                        <span class="input-group-addon"></span>
-                                    </div>
+                                    
+                                        <div class="row">
+                                             <div class="col-md-5">
+                                        <input  id="busquedaNO" type="text" class="form-control" placeholder="Nombre">
+                                            </div>
+                                            </div>
+                                       
+                                       
+                                    
                                 </div>
                                 <div class="form-group px-2">
                                     <table class="table table-bordered table-hover" id="tblmas">
                                         <thead id="tblh" style="display:none">
                                             <tr role="row">
-                                                <th>Descripcion</th>
+                                                <th>Refaccion</th>
                                                 <th>Existencias</th>
-                                                <th>Costo de Venta</th>
-                                                <th>Costo de Compra</th>
+                                                <th>Costo de venta</th>
+                                                <th>Costo de compra</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
-                                            {{#each Refacciones}}
+                                            {{#each ref}}
                                             <tr id="{{IdRefaccion}}" style="display:none">
-                                                <td><a href="/servistar/ver_refaccion{{IdRefaccion}}/"
+                                                <td><a id="a{{IdRefaccion}}" href="/servistar/agregar_ref{{IdRefaccion}}/"
                                                         class="link-primary">{{Descripcion}}</a> </td>
                                                 <td>{{Existencias}}</td>
                                                 <td>{{CostoVenta}}</td>
@@ -97,43 +101,29 @@
                             </div>
                         </div>
                         <br>
-                        <div class="card">
-                            <div class="card-body" style="background-color:#d9d9d9;">
-                                <h1 class="text-dark mb-3 h4">Agrega</h1>
-                                <button class="btn btn-info size-2" onclick=Agregar() id="btnadd" title="AGREGAR">
-                                    <i style="color: white;" class="fas fa-plus"></i>
-                                </button>
-                                <form action="/agregar_refaccion" method="POST" style="display:none" id="form">
-                                <div class="row">
-                                <div class="col-md-9">
-                                    <label>Descripcion</label>
-                                    <input type="text"  name="Descripcion" class="form-control text-dark m-1" 
-                                         required>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Existencias</label>
-                                    <input type="number" name="Existencias" class="form-control text-dark m-1"
-                                         required>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-6">
-                                    <label>Costo de Venta</label>
-                                    <input type="number" name="CostoVenta" class="form-control text-dark m-1"
-                                         required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Costo de Compra</label>
-                                    <input type="number" name="CostoCompra" class="form-control text-dark m-1"
-                                         required>
-                                </div>
-                                </div>
-                                <button class="btn btn-info size-2" title="GUARDAR"> <i style="color: white;" class="fas fa-check"></i></button>
-
-                                
-                            </form>
-                            </div>
-                        </div>
+                        {{#if refac}}
+                         <table class="table table-bordered table-hover ">
+                                    <thead >
+                                         <tr style="background-color: #5b5378; color: white;">
+                                            <th>Refacciones</th>
+                                            <th>Costo de venta</th>
+                                            <th>Id del servicio</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        {{#each refac}}
+                                        <tr class="table-active"> 
+                                            <th style="font-weight:normal">{{Descripcion}}</th>
+                                            <th style="font-weight:normal">{{CostoVenta}}</th><i ></i>
+                                            <th style="font-weight:normal">{{IdOrdenServicio}}</th>
+                                            <th style="font-weight:normal"><a href="/eliminar_reparacion{{IdReferencia}}/" class="btn btn-info"><i style="color: white;" class="fas fa-times"></i></a></th>
+                                        </tr>
+                                        {{/each}}
+                                        
+                                    </tbody>
+                                </table>
+                           {{/if}}
                     </div>
                 </div>
             </div>
@@ -145,43 +135,47 @@
 
     const busquedaNO = document.getElementById("busquedaNO")
 
-
+    let IdOrdenServicio="{{id}}"
     let array = []
-    {{#each Refacciones }}
+    {{#each ref }}
     array.push({
-        IdRefaccion: "{{IdRefaccion}}",
-        Descripcion: "{{Descripcion}}"
+        id: "{{IdRefaccion}}",
+        nombre: "{{Descripcion}}",
+        calle: "{{Existencias}}",
+        colonia: "{{CostoVenta}}",
+        numero:"{{CostoCompra}}"
     })
     {{/each}}
+    for(let index=0;index<array.length;index++){
+        let doc = document.getElementById("a"+array[index].id)
+        doc.href="/servistar/agregar"+IdOrdenServicio+"/ref"+array[index].id+"/"
+    }
 
             function buscarNO() {
+               
                 const texto = busquedaNO.value.toLowerCase()
                 if (texto == "") {
                     document.getElementById("tblh").style.display = "none"
                     for (index = 0; index < array.length; index++) {
-                        document.getElementById(array[index].IdRefaccion).style.display = "none"
+                        document.getElementById(array[index].id).style.display = "none"
                     }
                     return
                 }
                 for (index = 0; index < array.length; index++) {
-                    let Descripcion = array[index].Descripcion.toLowerCase()
-                    if (Descripcion.indexOf(texto) !== -1) {
-                        document.getElementById(array[index].IdRefaccion).style.display = "block"
+                    let nombre = array[index].nombre.toLowerCase()
+                    if (nombre.indexOf(texto) !== -1) {
+                        document.getElementById(array[index].id).style.display = "block"
                         document.getElementById("tblh").style.display = "block"
                     } else {
-                        document.getElementById(array[index].IdRefaccion).style.display = "none"
+                        document.getElementById(array[index].id).style.display = "none"
                     }
                 }
 
             }
+
             busquedaNO.addEventListener("keyup", buscarNO)
             busquedaNO.addEventListener("keydown", buscarNO)
 
 
-            function Agregar() {
-                document.getElementById("btnadd").style.display = "none"
-                document.getElementById("form").style.display = "block"
-
-            }
 
 </script>

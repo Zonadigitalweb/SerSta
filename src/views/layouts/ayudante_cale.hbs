@@ -73,7 +73,7 @@
                     <div class=" mx-auto">
                         <div class="card"> 
                             <div class="card-body" style="background-color:#e6e6e6;">
-                                <h1 class=" mb-3 h4">Tecnico {{IdTecnico}}</h1>
+                                <h1 class=" mb-3 h4">Ayudante {{IdAyudante}}</h1>
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                         <tr style="background-color: #5b5378; color: white;">
@@ -249,9 +249,9 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <form action="/editar_calendario" method="post">
+                                <form action="/editar_calendarioayu" method="post">
                                     <input type="text" style="display: none;" value="{{IdOrdenServicio}}" name="IdOrdenServicio">
-                                    <input type="text" style="display: none;" value="{{IdTecnico}}" name="IdTecnico"><br>
+                                    <input type="text" style="display: none;" value="{{IdAyudante}}" name="IdAyudante"><br>
                                     <label>Elige un dia para asignarle el servicio</label>
                                     <select name="dia" class="form-select text-dark m-1 " required>
                                         <option value="">Selecciona un dia</option>

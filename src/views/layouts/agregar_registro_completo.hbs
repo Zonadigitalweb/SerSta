@@ -9,6 +9,16 @@
         <li class="nav-item">
             <a  class=" nav-link" id="h1" style="color: white;" href="/servistar/servicios_pendientes" ><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
         </li>
+         <li class="nav-item dropdown" style="margin-top: 15px;">
+        <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <center><i class="fas fa-calendar-alt fa-2x"></i><br>Calendario</center>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/servistar/calendario_tec">Tecnicos</a>
+          <a class="dropdown-item" href="/servistar/calendario_ayu">Ayudantes</a>
+
+        </div>
+      </li>
         
         <li class="nav-item">
           <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: #b5b5b5;" ><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
@@ -353,97 +363,16 @@
                                             <option value="Conexion Demostracion">Conexion Demostracion</option>
                                         </select>
                                     </div>  
-                                    <div class="col-md-6" style="">
-                                        <label>Reparaciones </label>
-                                        <select name="Reparaciones" id="Reparaciones{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
-                                           <option value="" >Selecciona uno</option>
-                                           <option value="MANTENIMIENTO PREVENTIVO">MANTENIMIENTO PREVENTIVO</option>
-                                            <option value="INSTALACION">INSTALACION</option>
-                                            <option value="CAMBIO ENGRANES DE AGITADOR">CAMBIO ENGRANES DE AGITADOR</option>
-                                            <option value="CAMBIO JUNTA HOMOSINETICA">CAMBIO JUNTA HOMOSINETICA</option>
-                                            <option value="CAMBIO SWITCH CENTRIFUGADO">CAMBIO SWITCH CENTRIFUGADO</option>
-                                            <option value="CAMBIO CONTROL NIVELES">CAMBIO CONTROL NIVELES</option>
-                                            <option value="CAMBIO AGITADOR">CAMBIO AGITADOR</option>
-                                            <option value="CAMBIO BANDA DE TRANSMISION">CAMBIO BANDA DE TRANSMISION</option>
-                                            <option value="CAMBIO CLUTCH DE VELOCIDAD">CAMBIO CLUTCH DE VELOCIDAD</option>
-                                            <option value="CAMBIO VARILLAS DE SUSPENSION">CAMBIO VARILLAS DE SUSPENSION</option>
-                                            <option value="CAMBIO ARO DE SUSPENSION">CAMBIO ARO DE SUSPENSION</option>
-                                            <option value="CAMBIO DE TINA RECUPERADORA">CAMBIO DE TINA RECUPERADORA</option>
-                                            <option value="CAMBIO DE TRANSMISION">CAMBIO DE TRANSMISION</option>
-                                            <option value="REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA">REP. DE TRANSMISION, BOMBA Y MANTENIMIENTO A LAVADORA</option>
-                                            <option value="CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO">CAMBIO DE JGO. DE BOBINAS, ESPREAS, TERMOFUSIBLE Y MANTO</option>
-                                        </select>
-                                    </div>
+                                    
                                     </div>  
-                                    <div class="row">
-                                     <div class="col-md-3">
-                                        <label>Tecnico</label>
-                                        <select name="IdTecnico" id="IdTecnico{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
-                                           <option value="" >Selecciona uno</option>
-                                             <option value="1"  >Tecnico 1</option>
-                                            <option value="2">Tecnico 2</option>
-                                            <option value="3">Tecnico 3</option>
-                                            <option value="4">Tecnico 4</option>
-                                            <option value="5">Tecnico 5</option>
-                                            <option value="6">Tecnico 6</option>
-                                            <option value="7">Tecnico 7</option>
-                                            <option value="8">Tecnico 8</option>
-                                            <option value="9">Tecnico 9</option>
-                                            <option value="10">Tecnico 10</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Ayudante</label>
-                                        <select name="IdAyudante" id="IdAyudante{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
-                                           <option value="" >Selecciona uno</option>
-                                             <option value="1"  >Ayudante 1</option>
-                                            <option value="2">Ayudante 2</option>
-                                            <option value="3">Ayudante 3</option>
-                                            <option value="4">Ayudante 4</option>
-                                            <option value="5">Ayudante 5</option>
-                                            <option value="6">Ayudante 6</option>
-                                            <option value="7">Ayudante 7</option>
-                                            <option value="8">Ayudante 8</option>
-                                            <option value="9">Ayudante 9</option>
-                                            <option value="10">Ayudante 10</option>
-                                        </select>
-                                    </div> 
-                                    <div class="col-md-3">
-                                        <label>Tecnico Seguimiento</label>
-                                        <select name="IdTecnicoSegui" id="IdTecnicoSegui{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
-                                           <option value="" >Selecciona uno</option>
-                                            <option value="1"  >Tecnico 1</option>
-                                            <option value="2">Tecnico 2</option>
-                                            <option value="3">Tecnico 3</option>
-                                            <option value="4">Tecnico 4</option>
-                                            <option value="5">Tecnico 5</option>
-                                            <option value="6">Tecnico 6</option>
-                                            <option value="7">Tecnico 7</option>
-                                            <option value="8">Tecnico 8</option>
-                                            <option value="9">Tecnico 9</option>
-                                            <option value="10">Tecnico 10</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Ayudante Seguimiento</label>
-                                        <select name="IdAyudanteSegui" id="IdAyudanteSegui{{IdOrdenServicio}}" class="form-select text-dark m-1 " >
-                                            <option value="" >Selecciona uno</option>
-                                             <option value="1"  >Ayudante 1</option>
-                                            <option value="2">Ayudante 2</option>
-                                            <option value="3">Ayudante 3</option>
-                                            <option value="4">Ayudante 4</option>
-                                            <option value="5">Ayudante 5</option>
-                                            <option value="6">Ayudante 6</option>
-                                            <option value="7">Ayudante 7</option>
-                                            <option value="8">Ayudante 8</option>
-                                            <option value="9">Ayudante 9</option>
-                                            <option value="10">Ayudante 10</option>
-                                        </select>
-                                    </div> 
-                                    </div>
+                                   
                                     <div class="form-group">
                                         <label>Diagnostico</label><br>
                                         <textarea name="Diagnostico"  id="Diagnostico{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descripcion del trabajo realizado</label><br>
+                                        <textarea name="Descripcion"  id="Descripcion{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
                                     <div class="row">
                                      <div class="col-md-3">
@@ -525,14 +454,7 @@
                                         </select>
                                     </div>
                                     </div>
-                                    <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Dias para Vencimiento</label>
-                                        <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}"  class="form-control text-dark m-1"
-                                             >
-                                    </div>
-                                    
-                                    </div>
+                                   
                                     <br>
                                     <div class="form-group" >
                                         <button class="btn btn-info btn-block mx-1 " title="Enviar">

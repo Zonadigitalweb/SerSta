@@ -9,6 +9,16 @@
         <li class="nav-item">
             <a  class=" nav-link" id="h1" href="/servistar/servicios_pendientes" style="color: white;"><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
         </li>
+        <li class="nav-item dropdown" style="margin-top: 15px;">
+        <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <center><i class="fas fa-calendar-alt fa-2x"></i><br>Calendario</center>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/servistar/calendario_tec">Tecnicos</a>
+          <a class="dropdown-item" href="/servistar/calendario_ayu">Ayudantes</a>
+
+        </div>
+      </li>
         <li class="nav-item">
           <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: white;"><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
         </li>
@@ -45,7 +55,7 @@
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Ayudante</h1>
+                    <h1 class="text-dark mb-3 h4">Ayudante </h1>
                     <div class=" mx-auto">
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
@@ -73,6 +83,16 @@
                                     <input type="text" name="Telefono"
                                         class="form-control text-dark m-1" value="{{Telefono}}" required>
                                 </div>
+                                {{/each}}
+                                <div class="col-md-4">
+                                    <label>Habilitar</label>
+                                    <br>
+                                    <input type="checkbox" name="Habilitado"
+                                        class="form-check-input"  
+                                        {{#if habil}} 
+                                        checked 
+                                        {{/if}}>
+                                </div>
                                 </div>
                                     <div class="form-group">
                                         <button class="btn btn-info btn-block mx-1" title="EDITAR AYUDANTE">
@@ -80,7 +100,6 @@
                                         </button>
                                     </div>
                                 </form>
-                                {{/each}}
                             </div>
                         </div>
                     </div>
