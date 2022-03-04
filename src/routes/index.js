@@ -3,7 +3,7 @@ const router = express.Router()
 const pool = require("../database")
 const pdfc =require("../routes/pdf")
 var moment = require('moment');
-const {isLoggedIn, isAdmin} = require("../lib/auth");
+const {isLoggedIn, isAdmin, isTec} = require("../lib/auth");
 const { ConsoleMessage } = require("puppeteer");
 
 
@@ -11,12 +11,26 @@ const log = console.log
 
 //Principal
 router.get("/", isLoggedIn,  (req, res) => { 
-    res.redirect("/servistar/servicios_pendientes")  
+    const idU = req.user 
+    if(idU.IdUsuario<40 && idU.IdUsuario>20){
+        log("tec")
+        res.redirect("/servistar/servicios_pendientes_tecnico")
+    } else{
+        log("sec")
+        res.redirect("/servistar/servicios_pendientes")  
+    }
+})
+
+router.get("/servistar/servicios_pendientes_tecnico", isLoggedIn, async (req, res) => {
+    const idU = req.user 
+
+    const tecp = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE (tblordenservicio.IdTecnico = ? OR tblordenservicio.IdTecnicoSegui = ?) AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC",[idU.IdTecAyu,idU.IdTecAyu])
+    let tecs //= await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE  AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC",[idU.IdTecAyu])
+    res.render("layouts/servicios_pendientes_tec", {tecp, tecs})
 })
 
 
 
-//Agregar get
 
 router.get("/servistar/agregar_registro", isLoggedIn, async (req, res)=>{
     let cliente= await pool.query("SELECT IdCliente, Nombre, DirColonia, DirCalle, DirNum from tblclientes WHERE Nombre <>' ' ORDER BY Nombre ASC")
@@ -32,6 +46,103 @@ router.get("/servistar/tecnicos_ayudantes:id", isLoggedIn, async (req, res)=>{
     res.render("layouts/tecnicos_ayudantes",{tec, ayu, id})
 })
 
+router.get("/servistar/calendario_tec_tec", isLoggedIn, async (req, res)=>{
+    let fecha=new Date()
+    let mes=fecha.getMonth()+1
+    let dia=fecha.getDate()
+    if (mes < 10) {
+        mes="0"+mes
+    }
+    if (dia < 10) {
+        dia="0"+dia
+    }
+    fecha=fecha.getFullYear()+"-"+mes+"-"+dia
+
+    function diaPlus(dias){
+        for (let index = 0; index < dias.length; index++) {
+            if (dias[index].Hora1==0) {
+                dias[index].Hora1="Libre"
+            }
+            if (dias[index].Hora2==0) {
+                dias[index].Hora2="Libre"
+            }
+            if (dias[index].Hora3==0) {
+                dias[index].Hora3="Libre"
+            }
+            if (dias[index].Hora4==0) {
+                dias[index].Hora4="Libre"
+            }
+            if (dias[index].Hora5==0) {
+                dias[index].Hora5="Libre"
+            }
+            if (dias[index].Hora6==0) {
+                dias[index].Hora6="Libre"
+            }
+            if (dias[index].Hora7==0) {
+                dias[index].Hora7="Libre"
+            }
+            if (dias[index].Hora8==0) {
+                dias[index].Hora8="Libre"
+            }
+            if (dias[index].Hora9==0) {
+                dias[index].Hora9="Libre"
+            }
+            if (dias[index].Hora10==0) {
+                dias[index].Hora10="Libre"
+            }
+            if (dias[index].Hora11==0) {
+                dias[index].Hora11="Libre"
+            }
+            if (dias[index].Hora12==0) {
+                dias[index].Hora12="Libre"
+            }
+            if (dias[index].Hora13==0) {
+                dias[index].Hora13="Libre"
+            }
+            if (dias[index].Hora14==0) {
+                dias[index].Hora14="Libre"
+            }
+            if (dias[index].Hora15==0) {
+                dias[index].Hora15="Libre"
+            }
+            if (dias[index].Hora16==0) {
+                dias[index].Hora16="Libre"
+            }
+            if (dias[index].Hora17==0) {
+                dias[index].Hora17="Libre"
+            }
+            if (dias[index].Hora18==0) {
+                dias[index].Hora18="Libre"
+            }
+            if (dias[index].Hora19==0) {
+                dias[index].Hora19="Libre"
+            }
+            if (dias[index].Hora20==0) {
+                dias[index].Hora20="Libre"
+            }
+            if (dias[index].Hora21==0) {
+                dias[index].Hora21="Libre"
+            }
+            if (dias[index].Hora22==0) {
+                dias[index].Hora22="Libre"
+            }
+            if (dias[index].Hora23==0) {
+                dias[index].Hora23="Libre"
+            }
+             
+             
+         }
+         return dias
+    }
+    let id = req.user
+    let tecnicos = await pool.query("SELECT * FROM `tbltecnicos` WHERE IdTecnico ="+id.IdTecAyu)
+    let idtec=tecnicos[0].IdTecnico
+
+    let diaaaaa = await pool.query("SELECT * FROM "+tecnicos[0].tbl+" WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    diaaaaa = diaPlus(diaaaaa)
+    
+    res.render("layouts/calendario_tec", {diaaaaa,idtec})
+})
 router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
     let fecha=new Date()
     let mes=fecha.getMonth()+1
@@ -185,7 +296,8 @@ router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
     if (tecnicos[9].Habilitado==0) {
         di10=null
     }
-    res.render("layouts/calendario_tec", {di,di2,di3,di4,di5,di6,di7,di8,di9,di10})
+    let menu=1
+    res.render("layouts/calendario_tec", {di,di2,di3,di4,di5,di6,di7,di8,di9,di10,menu})
 })
 router.get("/servistar/calendario_ayu", isLoggedIn, async (req, res)=>{
     let fecha=new Date()
@@ -345,7 +457,7 @@ router.get("/servistar/calendario_ayu", isLoggedIn, async (req, res)=>{
 router.post("/calendario_tec", isLoggedIn, async (req, res)=>{
     let abc={}
 
-let {IdOrdenServicio,FechaDia,IdTecnico,Hora1,Hora2,Hora3,Hora4,Hora5,Hora6,Hora7,Hora8,Hora9,Hora10,Hora11,Hora12,Hora13,Hora14,Hora15,Hora16,Hora17,Hora18,Hora19,Hora20,Hora21,Hora22,Hora23} = req.body
+let {IsTecP,IdOrdenServicio,FechaDia,IdTecnico,Hora1,Hora2,Hora3,Hora4,Hora5,Hora6,Hora7,Hora8,Hora9,Hora10,Hora11,Hora12,Hora13,Hora14,Hora15,Hora16,Hora17,Hora18,Hora19,Hora20,Hora21,Hora22,Hora23} = req.body
 
     if (Hora1=="on") {
         Hora1=IdOrdenServicio
@@ -442,13 +554,18 @@ let {IdOrdenServicio,FechaDia,IdTecnico,Hora1,Hora2,Hora3,Hora4,Hora5,Hora6,Hora
 
     let tec= await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[IdTecnico])
 await pool.query("UPDATE "+tec[0].tbl+" SET ? WHERE FechaDia = ?",[abc,FechaDia])
+if (IsTecP==1) {
+    await pool.query("UPDATE tblordenservicio SET IdTecnico = ? WHERE IdOrdenServicio ="+IdOrdenServicio,[IdTecnico])
+}else{
+    await pool.query("UPDATE tblordenservicio SET IdTecnicoSegui = ? WHERE IdOrdenServicio ="+IdOrdenServicio,[IdTecnico])
+}
 let cliente = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = "+IdOrdenServicio)
     res.redirect("/servistar/ver_cliente"+cliente[0].IdCliente)
 })
 router.post("/calendario_ayu", isLoggedIn, async (req, res)=>{
     let abc={}
 
-let {IdOrdenServicio,FechaDia,IdAyudante,Hora1,Hora2,Hora3,Hora4,Hora5,Hora6,Hora7,Hora8,Hora9,Hora10,Hora11,Hora12,Hora13,Hora14,Hora15,Hora16,Hora17,Hora18,Hora19,Hora20,Hora21,Hora22,Hora23} = req.body
+let {IsAyuP,IdOrdenServicio,FechaDia,IdAyudante,Hora1,Hora2,Hora3,Hora4,Hora5,Hora6,Hora7,Hora8,Hora9,Hora10,Hora11,Hora12,Hora13,Hora14,Hora15,Hora16,Hora17,Hora18,Hora19,Hora20,Hora21,Hora22,Hora23} = req.body
 
     if (Hora1=="on") {
         Hora1=IdOrdenServicio
@@ -545,6 +662,11 @@ let {IdOrdenServicio,FechaDia,IdAyudante,Hora1,Hora2,Hora3,Hora4,Hora5,Hora6,Hor
 
     let tec= await pool.query("SELECT * FROM tblayudantes WHERE IdAyudante = ?",[IdAyudante])
 await pool.query("UPDATE "+tec[0].tbl+" SET ? WHERE FechaDia = ?",[abc,FechaDia])
+if (IsAyuP==1) {
+    await pool.query("UPDATE tblordenservicio SET IdAyudante = ? WHERE IdOrdenServicio ="+IdOrdenServicio,[IdAyudante])
+}else{
+    await pool.query("UPDATE tblordenservicio SET IdAyudanteSegui = ? WHERE IdOrdenServicio ="+IdOrdenServicio,[IdAyudante])
+}
 let cliente = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = "+IdOrdenServicio)
     res.redirect("/servistar/ver_cliente"+cliente[0].IdCliente)
 })
@@ -562,6 +684,8 @@ router.get("/servistar/agregar_registro:id/", isLoggedIn, async (req, res) => {
     sucu=sucu[0].Sucursal
     res.render("layouts/agregar_registro_completo", { equipo, cliente, nombre, num, idcliente, sucu })
 })
+
+
 router.get("/servistar/agregar_refaccion:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
     let ref = await pool.query("SELECT * FROM `tblrefacciones` WHERE Existencias > 0")
@@ -569,6 +693,83 @@ router.get("/servistar/agregar_refaccion:id/", isLoggedIn, async (req, res) => {
 
     
     res.render("layouts/agregar_refaccion_s", {id, ref, refac})
+})
+router.get("/servistar/gastos_fijos:id/", isLoggedIn, async (req, res) => {
+    const { id } = req.params
+
+    let orden = await pool.query("SELECT * FROM `tblordenservicio` WHERE`IdOrdenServicio`="+id)
+    let gastos = await pool.query("SELECT * FROM `tblgastoservicio` WHERE`IdOrdenServicio`="+id)
+    let togastos= await pool.query("SELECT * from tblgastosfijos, tblgastoservicio WHERE tblgastoservicio.IdOrdenServicio = ? AND tblgastosfijos.IdGastoFijo=tblgastoservicio.IdGastoFijo;",[id])
+    if(orden[0].AgregoGastos==1){
+        let gastos_fijos = await pool.query("SELECT * FROM `tblgastosfijos`")
+        res.render("layouts/agregar_gastos_s",{gastos,gastos_fijos,id,togastos})
+    } else {
+        let gastos_fijos = await pool.query("SELECT * FROM `tblgastosfijos`")
+        let cantidad=0
+        let exi
+        for (let index = 0; index < gastos_fijos.length; index++) {
+           await pool.query("INSERT INTO tblgastoservicio SET IdGastoFijo = "+gastos_fijos[index].IdGastoFijo+", IdOrdenServicio = "+id)
+           gastos_fijos[index].Existencias=parseInt(gastos_fijos[index].Existencias,10)
+           exi=gastos_fijos[index].Existencias-1
+           await pool.query("UPDATE tblgastosfijos SET Existencias = ? WHERE IdGastoFijo="+gastos_fijos[index].IdGastoFijo,[exi])
+           gastos_fijos[index].CostoVenta=parseInt(gastos_fijos[index].CostoVenta,10)
+           cantidad=cantidad+gastos_fijos[index].CostoVenta
+        }
+        orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
+        cantidad=cantidad+orden[0].Presupuesto
+        await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio = ?",[cantidad,id])
+        await pool.query("UPDATE tblordenservicio SET AgregoGastos = 1 WHERE IdOrdenServicio = ?",[id])
+        res.redirect("/servistar/gastos_fijos"+id)
+        
+
+    }
+  
+    
+})
+
+router.get("/servistar/garantia:id/", isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    let ref = await pool.query("SELECT * FROM `tblrefacciones` WHERE Existencias > 0")
+    let ser = await pool.query("SELECT * FROM `tblservicios`")
+    let refac= await pool.query("SELECT * from tblrefacciones, tblgarantiaservicio WHERE tblgarantiaservicio.IdRefaccion <> 'null' AND  tblgarantiaservicio.IdOrdenServicio = ? AND tblrefacciones.IdRefaccion=tblgarantiaservicio.IdRefaccion;",[id])
+    let serv= await pool.query("SELECT * from tblservicios, tblgarantiaservicio WHERE tblgarantiaservicio.IdServicio <> 'null' AND tblgarantiaservicio.IdOrdenServicio = ? AND tblservicios.IdServicio=tblgarantiaservicio.IdServicio;",[id])
+
+    
+    res.render("layouts/agregar_garantia_s", {id, ref, refac,serv,ser})
+})
+router.get("/eliminar_garantia:id/", isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    
+    let serv= await pool.query("SELECT * FROM tblgarantiaservicio WHERE IdReferencia = ?",[id])
+    await pool.query("DELETE FROM tblgarantiaservicio WHERE IdReferencia = ?",[id])
+    
+    res.redirect("/servistar/garantia"+serv[0].IdOrdenServicio)
+})
+router.get("/eliminar_gasto:id/", isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    
+    let serv= await pool.query("SELECT * FROM tblgastoservicio WHERE IdReferencia = ?",[id])
+    let se= await pool.query("SELECT * FROM `tblgastosfijos` WHERE`IdGastoFijo`="+serv[0].IdGastoFijo)
+    let orden= await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio ="+serv[0].IdOrdenServicio)
+    se[0].CostoVenta=parseInt(se[0].CostoVenta,10)
+    orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
+    log(orden[0].Presupuesto+"+"+se[0].CostoVenta)
+    let Cantidad=orden[0].Presupuesto-se[0].CostoVenta
+
+    await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio = ?",[Cantidad,serv[0].IdOrdenServicio])
+    Cantidad=se[0].Existencias+1
+    await pool.query("UPDATE tblgastosfijos SET Existencias = ? WHERE IdGastoFijo = ?",[Cantidad,serv[0].IdGastoFijo])
+    await pool.query("DELETE FROM tblgastoservicio WHERE IdReferencia = ?",[id])
+    
+    res.redirect("/servistar/gastos_fijos"+serv[0].IdOrdenServicio)
+})
+router.get("/servistar/agregar_servicios:id/", isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    let ser = await pool.query("SELECT * FROM `tblservicios`")
+    let serv = await pool.query("SELECT * from tblservicios, tblreparacioneservicio WHERE tblreparacioneservicio.IdOrdenServicio = ? AND tblservicios.IdServicio=tblreparacioneservicio.IdServicio;",[id])
+
+    
+    res.render("layouts/agregar_servicios_s", {id, ser, serv})
 })
 router.get("/servistar/agregar:ido/ref:idr/", isLoggedIn, async (req, res) => {
     let { ido,idr } = req.params
@@ -590,6 +791,54 @@ router.get("/servistar/agregar:ido/ref:idr/", isLoggedIn, async (req, res) => {
     await pool.query("INSERT INTO tblrefaccionservicio SET IdOrdenServicio = "+ido+", IdRefaccion ="+idr)
     res.redirect("/servistar/agregar_refaccion"+ido+"/")
 })
+router.get("/servistar/addgarantia:ido/ref:idr/", isLoggedIn, async (req, res) => {
+    let { ido,idr } = req.params
+    await pool.query("INSERT INTO tblgarantiaservicio SET IdOrdenServicio = "+ido+", IdRefaccion ="+idr)
+    res.redirect("/servistar/garantia"+ido+"/")
+})
+router.get("/servistar/agregar:ido/gas:idr/", isLoggedIn, async (req, res) => {
+    let { ido,idr } = req.params
+    let se= await pool.query("SELECT * FROM `tblgastosfijos` WHERE`IdGastoFijo`="+idr)
+    let orden= await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio ="+ido)
+    se[0].CostoVenta=parseInt(se[0].CostoVenta,10)
+    orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
+    let Cantidad=orden[0].Presupuesto+se[0].CostoVenta
+    await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio = ?",[Cantidad,ido])
+    Cantidad=se[0].Existencias-1
+    await pool.query("UPDATE tblgastosfijos SET Existencias = ? WHERE IdGastoFijo = ?",[Cantidad,idr])
+    await pool.query("INSERT INTO tblgastoservicio SET IdOrdenServicio = "+ido+", IdGastoFijo ="+idr)
+    
+    res.redirect("/servistar/gastos_fijos"+ido)
+})
+router.get("/servistar/addgarantia:ido/ser:idr/", isLoggedIn, async (req, res) => {
+    let { ido,idr } = req.params
+    await pool.query("INSERT INTO tblgarantiaservicio SET IdOrdenServicio = "+ido+", IdServicio ="+idr)
+    res.redirect("/servistar/garantia"+ido+"/")
+})
+
+
+router.get("/servistar/agregar:ido/ser:idr/", isLoggedIn, async (req, res) => {
+    let { ido,idr } = req.params
+    let ser= await pool.query("SELECT * FROM tblservicios WHERE IdServicio ="+idr)
+    let orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio ="+ido)
+    let Cantidad=0 
+    if(ser[0].CostoServicio==null){
+        ser[0].CostoServicio=0
+    }
+    ser[0].CostoServicio=parseInt(ser[0].CostoServicio,10)
+
+    if(orden[0].Presupuesto==null || orden[0].Presupuesto==""){
+        orden[0].Presupuesto=0
+    }
+    orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
+    Cantidad=orden[0].Presupuesto+ser[0].CostoServicio
+    
+    Cantidad=parseInt(Cantidad,10)
+    await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio ="+ido,[Cantidad])
+    await pool.query("INSERT INTO tblreparacioneservicio SET IdOrdenServicio = "+ido+", IdServicio ="+idr)
+    res.redirect("/servistar/agregar_servicios"+ido+"/")
+})
+
 router.get("/eliminar_reparacion:id/", isLoggedIn, async (req, res) => {
     let { id } = req.params
     let ref= await pool.query("SELECT * FROM `tblrefaccionservicio` WHERE IdReferencia ="+id)
@@ -601,7 +850,7 @@ router.get("/eliminar_reparacion:id/", isLoggedIn, async (req, res) => {
         refacc[0].CostoVenta=0
     }
     refacc[0].CostoVenta=parseInt(refacc[0].CostoVenta,10)
-    if(orden[0].Presupuesto==null){
+    if(orden[0].Presupuesto==null || orden[0].Presupuesto==""){
         orden[0].Presupuesto=0
     }
     orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
@@ -610,6 +859,26 @@ router.get("/eliminar_reparacion:id/", isLoggedIn, async (req, res) => {
     await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio ="+ref[0].IdOrdenServicio,[Cantidad])
     await pool.query("DELETE FROM `tblrefaccionservicio` WHERE IdReferencia ="+id)
     res.redirect("/servistar/agregar_refaccion"+ref[0].IdOrdenServicio+"/")
+})
+router.get("/eliminar_servicio:id/", isLoggedIn, async (req, res) => {
+    let { id } = req.params
+    let ser= await pool.query("SELECT * FROM `tblreparacioneservicio` WHERE IdReferencia ="+id)
+    let servi= await pool.query("SELECT * FROM `tblservicios` WHERE IdServicio ="+ser[0].IdServicio)
+    let Cantida
+    let orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio ="+ser[0].IdOrdenServicio)
+    if(servi[0].CostoServicio==null){
+        servi[0].CostoServicio=0
+    }
+    servi[0].CostoServicio=parseInt(servi[0].CostoServicio,10)
+    if(orden[0].Presupuesto==null || orden[0].Presupuesto==""){
+        orden[0].Presupuesto=0
+    }
+    orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
+    Cantidad=orden[0].Presupuesto-servi[0].CostoServicio
+    Cantidad=parseInt(Cantidad,10)
+    await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio ="+ser[0].IdOrdenServicio,[Cantidad])
+    await pool.query("DELETE FROM `tblreparacioneservicio` WHERE IdReferencia ="+id)
+    res.redirect("/servistar/agregar_servicios"+ser[0].IdOrdenServicio+"/")
 })
 
 
@@ -678,7 +947,7 @@ router.post("/cerrar_nota", isLoggedIn, async (req, res) =>{
     res.redirect("/servistar/notas"+Id)
 })
 router.post("/editar_calendario", isLoggedIn, async (req, res) =>{
-    let {IdOrdenServicio,IdTecnico,dia} = req.body
+    let {IdOrdenServicio,IdTecnico,dia,IsTecP} = req.body
     let tec = await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[IdTecnico])
     let dias = await pool.query("SELECT * FROM "+tec[0].tbl+" WHERE FechaDia = ?",[dia])
 
@@ -756,10 +1025,10 @@ router.post("/editar_calendario", isLoggedIn, async (req, res) =>{
          
      }
     
-    res.render("layouts/editar_calendario",{IdOrdenServicio,IdTecnico,dia,dias})
+    res.render("layouts/editar_calendario",{IdOrdenServicio,IdTecnico,dia,dias,IsTecP})
 })
 router.post("/editar_calendarioayu", isLoggedIn, async (req, res) =>{
-    let {IdOrdenServicio,IdAyudante,dia} = req.body
+    let {IdOrdenServicio,IdAyudante,dia,IsAyuP} = req.body
     let tec = await pool.query("SELECT * FROM tblayudantes WHERE IdAyudante = ?",[IdAyudante])
     log(tec[0])
     let dias = await pool.query("SELECT * FROM "+tec[0].tbl+" WHERE FechaDia = ?",[dia])
@@ -838,10 +1107,10 @@ router.post("/editar_calendarioayu", isLoggedIn, async (req, res) =>{
          
      }
     
-    res.render("layouts/editar_calendario",{IdOrdenServicio,IdAyudante,dia,dias})
+    res.render("layouts/editar_calendario",{IdOrdenServicio,IdAyudante,dia,dias,IsAyuP})
 })
 router.post("/agregar_tecnico_c", isLoggedIn, async (req, res) =>{
-    let {IdTecnico, IdOrdenServicio} = req.body
+    let {IdTecnico, IdOrdenServicio, IsTecP} = req.body
     let fecha=new Date()
     let mes=fecha.getMonth()+1
     let dia=fecha.getDate()
@@ -929,10 +1198,10 @@ let tec= await pool.query("SELECT * FROM `tbltecnicos` WHERE IdTecnico = ?",[IdT
          
          
      }
-    res.render("layouts/tecnico_cale",{IdTecnico, IdOrdenServicio, dias})
+    res.render("layouts/tecnico_cale",{IdTecnico, IdOrdenServicio, dias,IsTecP})
 })
 router.post("/agregar_ayudante_c", isLoggedIn, async (req, res) =>{
-    let {IdAyudante, IdOrdenServicio} = req.body
+    let {IdAyudante, IdOrdenServicio,IsAyuP} = req.body
     let fecha=new Date()
     let mes=fecha.getMonth()+1
     let dia=fecha.getDate()
@@ -1020,7 +1289,7 @@ let tec= await pool.query("SELECT * FROM `tblayudantes` WHERE IdAyudante = ?",[I
          
          
      }
-    res.render("layouts/ayudante_cale",{IdAyudante, IdOrdenServicio, dias})
+    res.render("layouts/ayudante_cale",{IdAyudante, IdOrdenServicio, dias,IsAyuP})
 })
 
 
@@ -1255,20 +1524,12 @@ router.post("/editar_cliente", isLoggedIn, async (req, res) => {
 })
 
 router.post("/editar_registro", isLoggedIn, async (req, res) => {
-    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita, FechaVisita, VisitaRealizada, Descripcion,IdAyudanteSegui, IdTecnicoSegui, IdAyudante, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
-    let aaa={ IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,Descripcion, IdAyudanteSegui, IdTecnicoSegui, IdAyudante,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita, FechaVisita, VisitaRealizada, Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
+    let aaa={ IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,Descripcion,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
     log(aaa)
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '7', ?, current_timestamp())",[id,IdOrdenServicio])
-    if (IdTecnico=="Tecnico 1") {
-        IdTecnico=1
-    }else if (IdTecnico=="Tecnico 2") {
-        IdTecnico=2
-    }else if (IdTecnico=="Tecnico 3") {
-        IdTecnico=3
-    }else if (IdTecnico=="Tecnico 4") {
-        IdTecnico=4
-    }
+    
 
     if (FechaSolicitud=="") {
         FechaSolicitud=null
@@ -1297,19 +1558,38 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
    
     const cerrado = await pool.query("SELECT * FROM `tblnotas` WHERE IdOrdenServicio = ?",[IdOrdenServicio])
     if (cerrado.length==0) {
-        const neworden = { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita, FechaVisita, Descripcion, IdAyudante, IdTecnicoSegui, IdAyudanteSegui, VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+        const neworden = { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita, FechaVisita, Descripcion, VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
     }else {
         if (cerrado[0].NotaCerrada==1){
-        const neworden =  {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita,Descripcion,IdAyudante, IdTecnicoSegui, IdAyudanteSegui, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+        const neworden =  {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita,Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
         }else if (cerrado[0].NotaCerrada==0) {
-            const neworden = {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita,Descripcion, IdAyudante, IdTecnicoSegui, IdAyudanteSegui, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+            const neworden = {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita,Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
         }
     } 
 
     res.redirect("/servistar/ver_cliente"+IdCliente+"/")
+
+})
+router.post("/editar_registro_tec", isLoggedIn, async (req, res) => {
+    let { IdOrdenServicio,IdSucursal,IdCliente,IdEquipo,Falla,FechaVisita,HoraVisita,TipoTrabajo, Diagnostico, Descripcion} = req.body
+    let aaa={ IdOrdenServicio,IdSucursal,IdCliente,IdEquipo,Falla,FechaVisita,HoraVisita,TipoTrabajo, Diagnostico, Descripcion}
+    log(aaa)
+    let id = req.user.IdUsuario
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '7', ?, current_timestamp())",[id,IdOrdenServicio])
+    
+    if (FechaVisita=="") {
+        FechaVisita=null
+    }
+
+        const neworden = {Falla,FechaVisita,HoraVisita,TipoTrabajo, Diagnostico, Descripcion}
+        await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
+
+        
+
+    res.redirect("/servistar/ver_cliente_tec/"+IdCliente+"/")
 
 })
 
@@ -1413,6 +1693,13 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
         }
     }
     res.render("layouts/cliente_completo", { equipo, cliente, orden ,id })
+})
+router.get("/servistar/ver_cliente_tec/:id/", isLoggedIn, async (req, res) => {
+    const { id } = req.params
+    let idU = req.user
+    let cliente= await pool.query("SELECT * from tblclientes WHERE IdCliente = ?",[id])
+    const orden = await pool.query("SELECT * FROM tblordenservicio WHERE (IdTecnico = ? OR IdTecnicoSegui = ?) AND IdCliente = ? ORDER BY IdOrdenServicio DESC",[idU.IdTecAyu,idU.IdTecAyu,id])
+    res.render("layouts/cliente_completo_tec", {cliente, orden ,id })
 })
 
 

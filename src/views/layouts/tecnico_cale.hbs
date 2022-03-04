@@ -251,7 +251,8 @@
                                 </table>
                                 <form action="/editar_calendario" method="post">
                                     <input type="text" style="display: none;" value="{{IdOrdenServicio}}" name="IdOrdenServicio">
-                                    <input type="text" style="display: none;" value="{{IdTecnico}}" name="IdTecnico"><br>
+                                    <input type="text" style="display: none;" value="{{IdTecnico}}" name="IdTecnico">
+                                    <input type="number" value="{{IsTecP}}" name="IsTecP" style="display: none;"><br>
                                     <label>Elige un dia para asignarle el servicio</label>
                                     <select name="dia" class="form-select text-dark m-1 " required>
                                         <option value="">Selecciona un dia</option>

@@ -61,6 +61,7 @@
                                 <h1 class=" mb-3 h4">AGREGAR Tecnico</h1>
                                 <form action="/agregar_tecnico_c" method="post" >
                                 <input type="number" value="{{id}}" name="IdOrdenServicio" style="display: none;">
+                                <input type="number" value="1" name="IsTecP" style="display: none;">
                                      <select name="IdTecnico" id="" class="form-select text-dark m-1 " required>
                                          <option value="">Selecciona uno</option>
                                          {{#each tec}}
@@ -78,6 +79,7 @@
                                  <h1 class=" mb-3 h4">AGREGAR Tecnico de seguimiento</h1>
                                 <form action="/agregar_tecnico_c" method="post" >
                                 <input type="number" value="{{id}}" name="IdOrdenServicio" style="display: none;">
+                                <input type="number" value="0" name="IsTecP" style="display: none;">
                                      <select name="IdTecnico" id="" class="form-select text-dark m-1 " required>
                                          <option value="">Selecciona uno</option>
                                          {{#each tec}}
@@ -94,6 +96,7 @@
                                 <h1 class=" mb-3 h4">AGREGAR ayudante</h1>
                                 <form action="/agregar_ayudante_c" method="post" >
                                 <input type="number" value="{{id}}" name="IdOrdenServicio" style="display: none;">
+                                <input type="number" value="1" name="IsAyuP" style="display: none;">
                                      <select name="IdAyudante" id="" class="form-select text-dark m-1 " required>
                                          <option value="">Selecciona uno</option>
                                          {{#each ayu}}
@@ -110,6 +113,7 @@
                                 <h1 class=" mb-3 h4">AGREGAR ayudante de seguimiento</h1>
                                 <form action="/agregar_ayudante_c" method="post" >
                                 <input type="number" value="{{id}}" name="IdOrdenServicio" style="display: none;">
+                                <input type="number" value="0" name="IsAyuP" style="display: none;">
                                      <select name="IdAyudante" id="" class="form-select text-dark m-1 " required>
                                          <option value="">Selecciona uno</option>
                                          {{#each ayu}}

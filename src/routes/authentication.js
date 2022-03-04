@@ -22,7 +22,7 @@ router.get("/servistar/iniciar_sesion", (req,res) =>{
 
 
 router.post("/iniciar_sesion", passport.authenticate("local.signin",{
-    successRedirect: "/servistar/servicios_pendientes",
+    successRedirect: "/",
     failureRedirect: "/servistar/iniciar_sesion"
 
 }))

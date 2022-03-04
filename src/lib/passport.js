@@ -50,49 +50,49 @@ passport.use("local.signin", new LocalStrategy({
             }
             let dia1 = await pool.query("SELECT * FROM `tblcalenayu1` WHERE FechaDia ='"+fecha+"'")
             if (dia1.length<1) {
-                console.log("Es menor")
+               
               agregar(fecha)
             }
             fecha = moment(fecha).add(1,'d')
             fecha= moment(fecha).format("yyyy-MM-DD");
             let dia2 = await pool.query("SELECT * FROM `tblcalenayu1` WHERE FechaDia ='"+fecha+"'")
             if (dia2.length<1) {
-                console.log("Es menor")
+
               agregar(fecha)
             }
             fecha = moment(fecha).add(1,'d')
             fecha= moment(fecha).format("yyyy-MM-DD");
             let dia3 = await pool.query("SELECT * FROM `tblcalenayu1` WHERE FechaDia ='"+fecha+"'")
             if (dia3.length<1) {
-                console.log("Es menor")
+
               agregar(fecha)
             }
             fecha = moment(fecha).add(1,'d')
             fecha= moment(fecha).format("yyyy-MM-DD");
             let dia4 = await pool.query("SELECT * FROM `tblcalenayu1` WHERE FechaDia ='"+fecha+"'")
             if (dia4.length<1) {
-                console.log("Es menor")
+
               agregar(fecha)
             }
             fecha = moment(fecha).add(1,'d')
             fecha= moment(fecha).format("yyyy-MM-DD");
             let dia5 = await pool.query("SELECT * FROM `tblcalenayu1` WHERE FechaDia ='"+fecha+"'")
             if (dia5.length<1) {
-                console.log("Es menor")
+
               agregar(fecha)
             }
             fecha = moment(fecha).add(1,'d')
             fecha= moment(fecha).format("yyyy-MM-DD");
             let dia6 = await pool.query("SELECT * FROM `tblcalenayu1` WHERE FechaDia ='"+fecha+"'")
             if (dia6.length<1) {
-                console.log("Es menor")
+
               agregar(fecha)
             }
             fecha = moment(fecha).add(1,'d')
             fecha= moment(fecha).format("yyyy-MM-DD");
             let dia7 = await pool.query("SELECT * FROM `tblcalenayu1` WHERE FechaDia ='"+fecha+"'")
             if (dia7.length<1) {
-                console.log("Es menor")
+
               agregar(fecha)
             }
             done(null, user[0])

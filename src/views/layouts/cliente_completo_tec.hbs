@@ -7,37 +7,12 @@
     <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
         <li class="nav-item">
-            <a  class=" nav-link" id="h1" style="color: white;" href="/servistar/servicios_pendientes" ><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
+            <a  class=" nav-link" id="h1" style="color: white;" href="/servistar/servicios_pendientes_tecnico" ><center><i class="fas fa-home fa-2x"></i><br>Inicio</a> </center>
         </li>
-         <li class="nav-item dropdown" style="margin-top: 15px;">
-        <a class="nav-link dropdown-toggle " style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <center><i class="fas fa-calendar-alt fa-2x"></i><br>Calendario</center>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/servistar/calendario_tec">Tecnicos</a>
-          <a class="dropdown-item" href="/servistar/calendario_ayu">Ayudantes</a>
-
-        </div>
-      </li>
-        
         <li class="nav-item">
-          <a class="nav-link" id="h3" href="/servistar/agregar_registro" style="color: white;" ><center><i class="fas fa-file-alt fa-2x"></i><br>Registrar <br> Servicio </a></center>
+            <a  class=" nav-link" id="h1" style="color: white;" href="/servistar/calendario_tec_tec" ><center><i class="fas fa-calendar-alt fa-2x"></i><br>Calendario</a> </center>
         </li>
-        <li class="nav-item dropdown" style="margin-top: 15px;">
-        <a class="nav-link dropdown-toggle " style="color: #b5b5b5;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <center><i class="fas fa-file-alt fa-2x"></i><br>Catalogo</center>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/servistar/clientes">Clientes</a>
-          <a class="dropdown-item" href="/servistar/tecnicos">Tecnicos</a>
-          <a class="dropdown-item" href="/servistar/refacciones">Refacciones</a>
-          <a class="dropdown-item" href="/servistar/gastos_fijos">Gastos Fijos</a>
-          <a class="dropdown-item" href="/servistar/servicios">Descripcion <br> del trabajo</a>
-        </div>
-      </li>
-        <li class="nav-item" id="admin" style="display: block;">
-          <a  class="nav-link "  href="/servistar/reportes"><center><i id="adminI" style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br><p id="adminS" style="color: #5b5378;">Administrador</p></a></center>
-        </li>
+       
         <li class="nav-item">
           <a  class="nav-link " ><center><i style="color: #5b5378;" class="fas fa-user-tie fa-2x"></i><br><p style="color: #5b5378;">...</p></a></center>
         </li>
@@ -121,232 +96,8 @@
                                         value="{{CP}}" disabled>
                                 </div>
                                 </div>
-                                {{/each}}
-                                <button class="btn btn-info size-2" onclick=AgregarC() id="btnaddc" title="GUARDAR"
-                                    style="display: none;"> <i style="color: white;" class="fas fa-check"></i></button>
-
-                                
                             </form>
-                            <button class="btn btn-info" title="EDITAR" id="btneditarc" onclick=editarc()
-                                style="display: block;"><i style="color: white;" class="far fa-edit"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-    <br>
-    <div class=" mx-auto">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="text-dark mb-3 h4">Equipo <button onclick=ocuE() class="btn btn-info" ><i style="color: white;" class="fas fa-arrows-alt-v"></i></button></h1>
-                <div class=" mx-auto">
-                        <section id="ocuE" style="display: block;">
-                    <div class="card">
-                        <div class="card-body" style="display:block; background-color:#d9d9d9;" id="busE">
-                            <h1 class="text-dark mb-3 h4">Buscar</h1>
-                            {{#each equipo}}
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Equipo {{IdEquipo}}/{{Tipo}}/{{Marca}}</div>
-                                    Ver equipo =>
-                                    <button class="btn btn-info" title="VER EQUIPO" onclick=SelE({{IdEquipo}})><i style="color: white;" class="fas fa-camera-retro"></i></button>
-                                </div>
-                            </li>
-                            {{/each}}
-                        </div>
-                    </div>
-                    <br>
-                    <div class="card">
-                        <div class="card-body" style="background-color:#d9d9d9;">
-                            <h1 class="text-dark mb-3 h4">Agregar</h1>
-                            <button class="btn btn-info size-2" onclick=Agregar() id="btnadd" title="AGREGAR EQUIPO"><i style="color: white;"
-                                    class="fas fa-plus"></i></button>
-                            <form action="/ver_cliente/agregare" method="POST" style="display:none" id="agregare">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label>Id cliente</label>
-                                    <input type="number" class="form-control text-dark m-1" disabled id="IdClienterr"
-                                        value="{{id}}">
-                                    <input type="number" value="{{id}}" name="IdCliente" id="IdCliente"
-                                        class="form-control text-dark m-1" style="display:none">
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Id equipo</label>
-                                    <input type="number" id="IdEquipo" class="form-control text-dark m-1" disabled>
-                                    <input type="number" name="IdEquipo" id="IdEquiporr"
-                                        class="form-control text-dark m-1" style="display:none">
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-5">
-                                    <label>Categoria</label>
-                                    <select name="Categoria" id="Categoria" class="form-select text-dark m-1 "
-                                        onclick=tipo() disabled>
-                                        <option value="">Elige una categoria</option>
-                                        <option value="LAVADO">LAVADO</option>
-                                        <option value="REFRIGERACION">REFRIGERACION</option>
-                                        <option value="COCINA">COCINA</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-7">
-                                    <label>Tipo</label>
-                                    <select name="Tipo" id="Tipo" class="form-select text-dark m-1 " disabled>
-                                        <option value="">Elige un tipo</option>
-                                         <option id="lav1" style="display:none" value="LAVADORA">LAVADORA</option>
-                                        <option id="lav2" style="display:none" value="SECADORA">SECADORA</option>
-                                        <option id="ref1" style="display:none" value="REFRIGERADOR">REFRIGERADOR
-                                        </option>
-                                        <option id="ref2" style="display:none" value="ENFRIADOR DE AGUA">ENFRIADOR DE
-                                            AGUA</option>
-                                        <option id="ref3" style="display:none" value="CONGELADOR">CONGELADOR</option>
-                                        <option id="ref4" style="display:none" value="ENFRIADOR DE BOTELLAS">ENFRIADOR DE BOTELLAS</option>
-                                        <option id="ref5" style="display:none" value="REFRIGERADOR CON DESPACHADOR">REFRIGERADOR CON DESPACHADOR</option>
-                                        <option id="ref6" style="display:none" value="REFRIGERADOR SIN DESPACHADOR">REFRIGERADOR SIN DESPACHADOR</option>
-                                        <option id="ref7" style="display:none" value="REFRIGERADOR PANELABLE CAFETERA">REFRIGERADOR PANELABLE CAFETERA</option>
-                                        <option id="ref8" style="display:none" value="SERVIBAR">SERVIBAR</option>
-                                        <option id="mic1" style="display:none" value="ESTUFAS 120 -150 CM">ESTUFAS 120 -150 CM</option>
-                                        <option id="mic2" style="display:none" value="ESTUFA 90CM ">ESTUFA 90CM </option>
-                                        <option id="mic3" style="display:none" value="HORNO DOBLE">HORNO DOBLE</option>
-                                        <option id="mic4" style="display:none" value="HORNO 60 70 90 CM Y 30">HORNO 60 70 90 CM Y 30</option>
-                                        <option id="mic5" style="display:none" value="HORNO COMPACTO">HORNO COMPACTO</option>
-                                        <option id="mic6" style="display:none" value="PARRILLA ELÉCTRICA DE INDUCCIÓN 60 90 CM  Y 30 ">PARRILLA ELÉCTRICA DE INDUCCIÓN 60 90 CM  Y 30</option>
-                                        <option id="mic7" style="display:none" value="DOMINÓ ELÉCTRICO ,INDUCCIÓN Y GAS">DOMINÓ ELÉCTRICO ,INDUCCIÓN Y GAS </option>
-                                        <option id="mic8" style="display:none" value="CAVA DE VINOS 82CM CAVA DE VINO 60 Y 45 CM">CAVA DE VINOS 82CM CAVA DE VINO 60 Y 45 CM</option>
-                                        <option id="mic9" style="display:none" value="PARRILLA DE GAS">PARRILLA DE GAS</option>
-                                        <option id="mic10" style="display:none" value="LAVAVAJILLAS">LAVAVAJILLAS</option>
-                                        <option id="mic11" style="display:none" value="CAMPANA DE ISLA">CAMPANA DE ISLA</option>
-                                        <option id="mic12" style="display:none" value="CAMPANA DE INTEGRACIÓN CAMPANA DE PARED 120 -150 CM ">CAMPANA DE INTEGRACIÓN CAMPANA DE PARED 120 -150 CM </option>
-                                        <option id="mic13" style="display:none" value="CAMPANA DE PARED">CAMPANA DE PARED</option>
-                                        <option id="mic14" style="display:none" value="CAMPANA TELESCÓPICA Y BAJO ALACENA">CAMPANA TELESCÓPICA Y BAJO ALACENA</option>
-                                        <option id="mic15" style="display:none" value="CAJONES TÉRMICOS">CAJONES TÉRMICOS</option>
-                                        <option id="mic16" style="display:none" value="ASADORES  Y COCINAS EXTERIOR">ASADORES  Y COCINAS EXTERIOR</option>
-                                    </select>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-3">
-                                    <label>Marca</label>
-                                    <input type="text" name="Marca" id="Marca" class="form-control text-dark m-1"
-                                        disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Color</label>
-                                    <input type="text" name="Color" id="Color" class="form-control text-dark m-1"
-                                        disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Modelo</label>
-                                    <input type="text" name="Modelo" id="Modelo" class="form-control text-dark m-1"
-                                        disabled>
-                                </div>
-                                 <div class="col-md-3">
-                                    <label>Serie</label>
-                                    <input type="text" name="Serie" id="Serie" class="form-control text-dark m-1"
-                                        disabled>
-                                </div>
-                                </div>
-                                <div class="form-group" id="btnagr" style="display:none" title="GUARDAR">
-                                    <button class="btn btn-info btn-block mx-1 ">
-                                        <i style="color: white;" class="fas fa-check"></i>
-                                    </button>
-                                </div>
-                            </form>
-
-                            <form action="/editar_equipo" method="POST" style="display:none" id="editare">
-                                <div class="row">
-                                <div class="col-md-2">
-                                    <label>Id cliente</label>
-                                    <input type="number" class="form-control text-dark m-1" disabled id="IdClienterrE"
-                                        value="{{id}}">
-
-                                    <input type="number" name="IdCliente" value="{{id}}" id="IdClienteE"
-                                        class="form-control text-dark m-1" style="display:none">
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Id equipo</label>
-                                    <input type="number" id="IdEquipoE" class="form-control text-dark m-1" disabled>
-                                    <input type="number" name="IdEquipo" id="IdEquiporrE"
-                                        class="form-control text-dark m-1" style="display:none">
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col-md-5">
-                                    <label>Categoria</label>
-                                    <select name="Categoria" id="CategoriaE" class="form-select text-dark m-1 "
-                                        onclick=tipo("E") disabled>
-                                        <option value="">Elige una categoria</option>
-                                        <option value="LAVADO">LAVADO</option>
-                                        <option value="REFRIGERACION">REFRIGERACION</option>
-                                        <option value="COCINA">COCINA</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-7">
-                                    <label>Tipo</label>
-                                    <select name="Tipo" id="TipoE" class="form-select text-dark m-1 " disabled>
-                                        <option value="">Elige un tipo</option>
-                                         <option id="lav1E" style="display:none" value="LAVADORA">LAVADORA</option>
-                                        <option id="lav2E" style="display:none" value="SECADORA">SECADORA</option>
-                                        <option id="ref1E" style="display:none" value="REFRIGERADOR">REFRIGERADOR
-                                        </option>
-                                        <option id="ref2E" style="display:none" value="ENFRIADOR DE AGUA">ENFRIADOR DE
-                                            AGUA</option>
-                                        <option id="ref3E" style="display:none" value="CONGELADOR">CONGELADOR</option>
-                                        <option id="ref4E" style="display:none" value="ENFRIADOR DE BOTELLAS">ENFRIADOR DE BOTELLAS</option>
-                                        <option id="ref5E" style="display:none" value="REFRIGERADOR CON DESPACHADOR">REFRIGERADOR CON DESPACHADOR</option>
-                                        <option id="ref6E" style="display:none" value="REFRIGERADOR SIN DESPACHADOR">REFRIGERADOR SIN DESPACHADOR</option>
-                                        <option id="ref7E" style="display:none" value="REFRIGERADOR PANELABLE CAFETERA">REFRIGERADOR PANELABLE CAFETERA</option>
-                                        <option id="ref8E" style="display:none" value="SERVIBAR">SERVIBAR</option>
-                                        <option id="mic1E" style="display:none" value="ESTUFAS 120 -150 CM">ESTUFAS 120 -150 CM</option>
-                                        <option id="mic2E" style="display:none" value="ESTUFA 90CM ">ESTUFA 90CM </option>
-                                        <option id="mic3E" style="display:none" value="HORNO DOBLE">HORNO DOBLE</option>
-                                        <option id="mic4E" style="display:none" value="HORNO 60 70 90 CM Y 30">HORNO 60 70 90 CM Y 30</option>
-                                        <option id="mic5E" style="display:none" value="HORNO COMPACTO">HORNO COMPACTO</option>
-                                        <option id="mic6E" style="display:none" value="PARRILLA ELÉCTRICA DE INDUCCIÓN 60 90 CM  Y 30 ">PARRILLA ELÉCTRICA DE INDUCCIÓN 60 90 CM  Y 30</option>
-                                        <option id="mic7E" style="display:none" value="DOMINÓ ELÉCTRICO ,INDUCCIÓN Y GAS">DOMINÓ ELÉCTRICO ,INDUCCIÓN Y GAS </option>
-                                        <option id="mic8E" style="display:none" value="CAVA DE VINOS 82CM CAVA DE VINO 60 Y 45 CM">CAVA DE VINOS 82CM CAVA DE VINO 60 Y 45 CM</option>
-                                        <option id="mic9E" style="display:none" value="PARRILLA DE GAS">PARRILLA DE GAS</option>
-                                        <option id="mic10E" style="display:none" value="LAVAVAJILLAS">LAVAVAJILLAS</option>
-                                        <option id="mic11E" style="display:none" value="CAMPANA DE ISLA">CAMPANA DE ISLA</option>
-                                        <option id="mic12E" style="display:none" value="CAMPANA DE INTEGRACIÓN CAMPANA DE PARED 120 -150 CM ">CAMPANA DE INTEGRACIÓN CAMPANA DE PARED 120 -150 CM </option>
-                                        <option id="mic13E" style="display:none" value="CAMPANA DE PARED">CAMPANA DE PARED</option>
-                                        <option id="mic14E" style="display:none" value="CAMPANA TELESCÓPICA Y BAJO ALACENA">CAMPANA TELESCÓPICA Y BAJO ALACENA</option>
-                                        <option id="mic15E" style="display:none" value="CAJONES TÉRMICOS">CAJONES TÉRMICOS</option>
-                                        <option id="mic16E" style="display:none" value="ASADORES  Y COCINAS EXTERIOR">ASADORES  Y COCINAS EXTERIOR</option>
-                                    </select>
-                                </div>
-                                </div>
-                                 <div class="row">
-                                <div class="col-md-3">
-                                    <label>Marca</label>
-                                    <input type="text" name="Marca" id="MarcaE" class="form-control text-dark m-1"
-                                        disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Color</label>
-                                    <input type="text" name="Color" id="ColorE" class="form-control text-dark m-1"
-                                        disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Modelo</label>
-                                    <input type="text" name="Modelo" id="ModeloE" class="form-control text-dark m-1"
-                                        disabled>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Serie</label>
-                                    <input type="text" name="Serie" id="SerieE" class="form-control text-dark m-1"
-                                        disabled>
-                                </div>
-                                </div>
-                                <div class="form-group" id="btnagrE" style="display:none" title="GUARDAR">
-                                    <button class="btn btn-info  mx-1 ">
-                                        <i style="color: white;" class="fas fa-check"></i>
-                                    </button>
-                                </div>
-                            </form>
-                            <button class="btn btn-info" title="EDITAR" id="btneditare" onclick=editare()
-                                style="display: none;"><i style="color: white;" class="far fa-edit"></i></button>
+                            <a href="https://www.google.com/maps/place/{{DirCalle}}+{{DirNum}},+{{DirColonia}},+{{Municipio}},+Col" target="_Blank" class="btn btn-info"><i style="color: white;" class="fas fa-map-marked-alt"></i></a>                                {{/each}}
                         </div>
                     </div>
                 </div>
@@ -392,7 +143,7 @@
 
                         </div>
 
-                        <form action="/editar_registro" method="POST" style="display:none; line-height: 30px;" id="{{IdOrdenServicio}}">
+                        <form action="/editar_registro_tec" method="POST" style="display:none; line-height: 30px;" id="{{IdOrdenServicio}}">
 
                              <div class="row">
                                 <div class="col-md-2">
@@ -418,28 +169,6 @@
                                     </div>
                             
                             </div>
-                              <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Fecha de Solicitud</label>
-                                        <input type="date" name="FechaSolicitud" id="FechaSolicitud{{IdOrdenServicio}}" value="{{moment FechaSolicitud}}" class="form-control text-dark m-1" disabled>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Hora de llamda</label>
-                                        <input type="time" name="HoraLLamda" id="HoraLLamda{{IdOrdenServicio}}" value="{{HoraLLamda}}" class="form-control text-dark m-1" disabled>
-                                    </div> 
-                                    <div class="col-md-3">
-                                        <label>Medio de contacto</label>
-                                        <select  name="MedioDeInformacion" id="MedioDeInformacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
-
-                                            <option value="{{MedioDeInformacion}}">{{MedioDeInformacion}}</option>
-                                           <option value="Seccion Amarilla">Seccion Amarilla</option>
-                                            <option value="Volante" >Volante</option>
-                                            <option value="Red social">Red social</option>
-                                             <option value="Recomendacion">Recomendacion</option>
-                                             <option value="Cliente">Cliente</option>
-                                          </select>
-                                    </div>  
-                                    </div>
                                     <div class="form-group">
                                         <label>Falla Reportada</label>
                                         <input type="text" name="Falla" id="Falla{{IdOrdenServicio}}" value="{{Falla}}" class="form-control text-dark m-1"
@@ -454,19 +183,6 @@
                                         <label>Horario de Visita</label>
                                         <input type="time" name="HoraVisita" id="HoraVisita{{IdOrdenServicio}}" value="{{HoraVisita}}" class="form-control text-dark m-1" disabled>
                                     </div>  
-                                    <div class="col-md-3">
-                                        <label>Se realizo la visita</label>
-                                        <select name="VisitaRealizada" id="VisitaRealizada{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
-                                            <option value="{{VisitaRealizada}}">{{VisitaRealizada}}</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                            <option  value="Pendiente">Pendiente</option>
-                                        </select>
-                                    </div> 
-                                     <div class="col-md-3">
-                                        <label>Horario Real de Visita</label>
-                                        <input type="time" name="HoraVisitaReal" id="HoraVisitaReal{{IdOrdenServicio}}" value="{{HoraVisitaReal}}" class="form-control text-dark m-1" disabled>
-                                    </div> 
                                     </div>
                                     <div class="row">
                                     <div class="col-md-2">
@@ -481,21 +197,6 @@
                                             <option value="Conexion Demostracion">Conexion Demostracion</option>
                                         </select>
                                     </div>  
-                                    <div class="col-md-4" style="">
-                                        <label>Trabajo a realizar </label><br>
-                                        <a href="/servistar/agregar_servicios{{IdOrdenServicio}}" target="_blank" class="btn btn-info" style="color:white">Agregar Reparaciones</a>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>REFACCIONES</label> <br>
-                                         <a disabled ='true' href="/servistar/agregar_refaccion{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Refacciones al servicioA</a>
-                                        
-                                    </div>
-                                    </div>  
-                                    <div class="row">
-                                     <div class="col-md-4">
-                                        <label>Tecnicos y Ayudantes</label>
-                                        <a href="/servistar/tecnicos_ayudantes{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar tecnicos y ayudantes</a>
-                                    </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Diagnostico</label><br>
@@ -505,103 +206,7 @@
                                         <label>Descripcion del trabajo realizado</label><br>
                                         <textarea name="Descripcion" disabled id="Descripcion{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" >{{Descripcion}}</textarea>
                                     </div>
-                                    <div class="row">
-                                     <div class="col-md-3">
-                                        <label>Presupuesto</label>
-                                        <input name="Presupuesto" type="number" id="Presupuesto{{IdOrdenServicio}}"  value="{{Presupuesto}}" class="form-control text-dark m-1"
-                                            disabled >
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Costo Real del Servicio</label>
-                                        <input type="number" name="CostoServicio" id="CostoServicio{{IdOrdenServicio}}" value="{{CostoServicio}}" class="form-control text-dark m-1"
-                                        disabled >
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Aceptacion de Presupuestos</label>
-                                        <select name="AceptarPresupuesto" id="AceptarPresupuesto{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
-                                            <option value="{{AceptarPresupuesto}}">{{AceptarPresupuesto}}</option>
-                                            <option value="No" >No</option>
-                                            <option value="Si" >Si</option>
-                                            <option value="En Espera" >En Espera</option>
-                                        </select>
-                                    </div>
-                                     <div class="col-md-3">
-                                        <label>Vigencia de Garantia</label>
-                                        <select name="VigenciaGarantia" id="VigenciaGarantia{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled >
-                                            <option value="{{VigenciaGarantia}}">{{VigenciaGarantia}}</option>
-                                            <option value="0">0</option>
-                                            <option  value="15">15</option>
-                                            <option value="30">30</option>
-                                            <option  value="60">60</option>
-                                            <option  value="90">90</option>
-                                            <option  value="180">180</option>
-                                        </select>
-                                    </div>
-                                    </div>
-                                    
-                                     <div class="row">
-                                     <div class="col-md-3">
-                                        <label>Fecha Estimada terminado</label>
-                                        <input type="date" id="FechaTerminadoEstimado{{IdOrdenServicio}}" name="FechaTerminadoEstimado" value="{{moment FechaTerminadoEstimado}}" class="form-control text-dark m-1"
-                                             disabled>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Fecha Real de terminado</label>
-                                        <input name="FechaTerminado" type="date" id="FechaTerminado{{IdOrdenServicio}}"  value="{{moment FechaTerminado}}" class="form-control text-dark m-1"
-                                            disabled >
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Fecha de Entrega</label>
-                                        <input type="date" name="FechaEntrega" id="FechaEntrega{{IdOrdenServicio}}" value="{{moment FechaEntrega}}" class="form-control text-dark m-1"
-                                            disabled >
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Fecha de Vencimiento</label>
-                                        <input type="date" name="FechaVencimiento" id="FechaVencimiento{{IdOrdenServicio}}" value="{{moment FechaVencimiento}}" class="form-control text-dark m-1"
-                                            disabled >
-                                    </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                     <div class="col-md-3">
-                                        <label>Lugar de Reparacion</label>
-                                        <select name="LugarReparacion" id="LugarReparacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
-                                            <option value="{{LugarReparacion}}">{{LugarReparacion}}</option>
-                                            <option value="Casa del cliente">Casa del cliente</option>
-                                            <option   value="Taller">Taller</option>
-                                        </select>
-                                    </div> 
-                                    <div class="col-md-3">
-                                        <label>Estado del Servicio</label>
-                                        <select name="EstadoServicio" id="EstadoServicio{{IdOrdenServicio}}" class="form-select text-dark m-1 "disabled >
-                                            <option value="{{EstadoServicio}}">{{EstadoServicio}}</option>
-                                            <option value="En Ejecucion">En Ejecucion</option>
-                                            <option  value="Para Entregar">Para Entregar</option>
-                                            <option value="Esperando">Esperando</option>
-                                            <option  value="Esperando Refacciones">Esperando Refacciones</option>
-                                            <option  value="Sin Preparacion">Sin Preparacion</option>
-                                            <option  value="No Aceptado">No Aceptado</option>
-                                            <option  value="Terminado">Terminado</option>
-                                        </select>
-                                    </div>
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-md-3">
-                                        <label>Dias para Vencimiento</label>
-                                        <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}" value="{{DiasVencimiento}}" class="form-control text-dark m-1"
-                                            disabled >
-                                    </div>
-                                     <div class="col-md-3">
-                                        <label>Articulo o Servicio en Garantia</label>
-                                          <a href="/servistar/garantia{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Servicio o refaccion</a>
-                                    </div>
-                                     <div class="col-md-4">
-                                        <label>Agregar gastos fijos</label><br>
-                                        <a href="/servistar/gastos_fijos{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar gastos fijos</a>
-                                    </div>
-                                    </div>
-                                    <br>
-                                    <div class="form-group" >
+                                     <div class="form-group" >
                                         <button class="btn btn-info btn-block mx-1 " id="{{IdOrdenServicio}}BTN" style="display: none;" title="Enviar">
                                             <i class="fas fa-check" style="color: white;"></i>
                                         </button>
@@ -643,7 +248,7 @@
 <script>
     
     const busqueda = document.getElementById("busqueda")
-   
+
     let arrayE = []
     let array = []
     let arrayC = []
@@ -690,33 +295,12 @@
 
 
             function editar_registro(id){
-                document.getElementById("FechaSolicitud"+id).disabled=false
-                document.getElementById("HoraLLamda"+id).disabled=false
-                document.getElementById("MedioDeInformacion"+id).disabled=false
                 document.getElementById("Falla"+id).disabled=false
                 document.getElementById("HoraVisita"+id).disabled=false
                 document.getElementById("FechaVisita"+id).disabled=false
-                document.getElementById("VisitaRealizada"+id).disabled=false
-                document.getElementById("HoraVisitaReal"+id).disabled=false
                 document.getElementById("TipoTrabajo"+id).disabled=false
-                //document.getElementById("Reparaciones"+id).disabled=false
-              //  document.getElementById("IdTecnico"+id).disabled=false
-               // document.getElementById("IdAyudante"+id).disabled=false
-               // document.getElementById("IdTecnicoSegui"+id).disabled=false
-                //document.getElementById("IdAyudanteSegui"+id).disabled=false
                 document.getElementById("Diagnostico"+id).disabled=false
                 document.getElementById("Descripcion"+id).disabled=false
-                //document.getElementById("Presupuesto"+id).disabled=false
-                document.getElementById("CostoServicio"+id).disabled=false
-                document.getElementById("AceptarPresupuesto"+id).disabled=false
-                document.getElementById("FechaTerminadoEstimado"+id).disabled=false
-                document.getElementById("LugarReparacion"+id).disabled=false
-                document.getElementById("EstadoServicio"+id).disabled=false
-                document.getElementById("FechaTerminado"+id).disabled=false
-                document.getElementById("FechaEntrega"+id).disabled=false
-                document.getElementById("VigenciaGarantia"+id).disabled=false
-                document.getElementById("FechaVencimiento"+id).disabled=false
-                document.getElementById("DiasVencimiento"+id).disabled=false
                 document.getElementById(id+"BTN").style.display="block"
                 document.getElementById("btn"+id).style.display="none"
 
