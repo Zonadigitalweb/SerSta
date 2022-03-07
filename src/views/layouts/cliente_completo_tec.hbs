@@ -61,10 +61,15 @@
                                     <input type="text" id="numero" name="DirNum" class="form-control text-dark m-1"
                                         value="{{DirNum}}" disabled required>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <label>Colonia</label>
                                     <input type="text" id="colonia" name="DirColonia" class="form-control text-dark m-1"
                                         value="{{DirColonia}}" disabled required>
+                                </div>
+                                <div class="col-md-1">
+                                    <label>Maps</label>
+                                    <a href="https://www.google.com/maps/place/{{DirCalle}}+{{DirNum}},+{{DirColonia}},+{{Municipio}},+Col" target="_Blank" class="btn btn-info"><i style="color: white;" class="fas fa-map-marked-alt"></i></a>
+
                                 </div>
                                 </div>
                                 <div class="row">
@@ -96,8 +101,8 @@
                                         value="{{CP}}" disabled>
                                 </div>
                                 </div>
-                            </form>
-                            <a href="https://www.google.com/maps/place/{{DirCalle}}+{{DirNum}},+{{DirColonia}},+{{Municipio}},+Col" target="_Blank" class="btn btn-info"><i style="color: white;" class="fas fa-map-marked-alt"></i></a>                                {{/each}}
+                            </form>                            
+                            {{/each}}
                         </div>
                     </div>
                 </div>
@@ -295,9 +300,9 @@
 
 
             function editar_registro(id){
-                document.getElementById("Falla"+id).disabled=false
-                document.getElementById("HoraVisita"+id).disabled=false
-                document.getElementById("FechaVisita"+id).disabled=false
+               // document.getElementById("Falla"+id).disabled=false
+              //  document.getElementById("HoraVisita"+id).disabled=false
+            //    document.getElementById("FechaVisita"+id).disabled=false
                 document.getElementById("TipoTrabajo"+id).disabled=false
                 document.getElementById("Diagnostico"+id).disabled=false
                 document.getElementById("Descripcion"+id).disabled=false

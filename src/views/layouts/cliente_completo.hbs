@@ -438,6 +438,19 @@
                                              <option value="Recomendacion">Recomendacion</option>
                                              <option value="Cliente">Cliente</option>
                                           </select>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <label>Estado del Servicio</label>
+                                        <select name="EstadoServicio" id="EstadoServicio{{IdOrdenServicio}}" class="form-select text-dark m-1 "disabled >
+                                            <option value="{{EstadoServicio}}">{{EstadoServicio}}</option>
+                                            <option value="En Ejecucion">En Ejecucion</option>
+                                            <option  value="Para Entregar">Para Entregar</option>
+                                            <option value="Esperando">Esperando</option>
+                                            <option  value="Esperando Refacciones">Esperando Refacciones</option>
+                                            <option  value="Sin Preparacion">Sin Preparacion</option>
+                                            <option  value="No Aceptado">No Aceptado</option>
+                                            <option  value="Terminado">Terminado</option>
+                                        </select>
                                     </div>  
                                     </div>
                                     <div class="form-group">
@@ -487,14 +500,14 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>REFACCIONES</label> <br>
-                                         <a disabled ='true' href="/servistar/agregar_refaccion{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Refacciones al servicioA</a>
+                                         <a target="_blank" href="/servistar/agregar_refaccion{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Refacciones al servicioA</a>
                                         
                                     </div>
                                     </div>  
                                     <div class="row">
                                      <div class="col-md-4">
                                         <label>Tecnicos y Ayudantes</label>
-                                        <a href="/servistar/tecnicos_ayudantes{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar tecnicos y ayudantes</a>
+                                        <a target="_blank" href="/servistar/tecnicos_ayudantes{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar tecnicos y ayudantes</a>
                                     </div>
                                     </div>
                                     <div class="form-group">
@@ -571,33 +584,21 @@
                                             <option   value="Taller">Taller</option>
                                         </select>
                                     </div> 
-                                    <div class="col-md-3">
-                                        <label>Estado del Servicio</label>
-                                        <select name="EstadoServicio" id="EstadoServicio{{IdOrdenServicio}}" class="form-select text-dark m-1 "disabled >
-                                            <option value="{{EstadoServicio}}">{{EstadoServicio}}</option>
-                                            <option value="En Ejecucion">En Ejecucion</option>
-                                            <option  value="Para Entregar">Para Entregar</option>
-                                            <option value="Esperando">Esperando</option>
-                                            <option  value="Esperando Refacciones">Esperando Refacciones</option>
-                                            <option  value="Sin Preparacion">Sin Preparacion</option>
-                                            <option  value="No Aceptado">No Aceptado</option>
-                                            <option  value="Terminado">Terminado</option>
-                                        </select>
-                                    </div>
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-md-3">
+                                   <div class="col-md-3">
                                         <label>Dias para Vencimiento</label>
                                         <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}" value="{{DiasVencimiento}}" class="form-control text-dark m-1"
                                             disabled >
                                     </div>
+                                    </div>
+                                    <div class="row">
+                                    
                                      <div class="col-md-3">
                                         <label>Articulo o Servicio en Garantia</label>
-                                          <a href="/servistar/garantia{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Servicio o refaccion</a>
+                                          <a target="_blank" href="/servistar/garantia{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Servicio o refaccion</a>
                                     </div>
                                      <div class="col-md-4">
                                         <label>Agregar gastos fijos</label><br>
-                                        <a href="/servistar/gastos_fijos{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar gastos fijos</a>
+                                        <a target="_blank" href="/servistar/gastos_fijos{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar gastos fijos</a>
                                     </div>
                                     </div>
                                     <br>
@@ -715,8 +716,8 @@
                 document.getElementById("FechaTerminado"+id).disabled=false
                 document.getElementById("FechaEntrega"+id).disabled=false
                 document.getElementById("VigenciaGarantia"+id).disabled=false
-                document.getElementById("FechaVencimiento"+id).disabled=false
-                document.getElementById("DiasVencimiento"+id).disabled=false
+               // document.getElementById("FechaVencimiento"+id).disabled=false
+                //document.getElementById("DiasVencimiento"+id).disabled=false
                 document.getElementById(id+"BTN").style.display="block"
                 document.getElementById("btn"+id).style.display="none"
 

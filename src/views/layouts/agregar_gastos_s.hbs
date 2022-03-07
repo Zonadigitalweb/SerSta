@@ -55,7 +55,7 @@
         <div class=" mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="text-dark mb-3 h4">Gastos Fijos</h1>
+                    <h1 class="text-dark mb-3 h4">Gastos Fijos  {{id}}</h1>
                     <div class=" mx-auto">
                         <div class="card">
                             <div class="card-body" style="background-color:#d9d9d9;">
@@ -75,9 +75,8 @@
                                     <table class="table table-bordered table-hover" id="tblmas">
                                         <thead id="tblh" style="display:none">
                                             <tr role="row">
-                                                <th>Servicio</th>
-                                                <th>Horas de trabajo</th>
-                                                <th>Costo de servcio</th>
+                                                <th>Descripcion</th>
+                                                <th>Costo de venta</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
@@ -85,7 +84,6 @@
                                             <tr id="{{IdGastoFijo}}" style="display:none">
                                                 <td><a id="a{{IdGastoFijo}}" href=""
                                                         class="link-primary">{{Descripcion}}</a> </td>
-                                                <td>{{Existencias}}</td>
                                                 <td>{{CostoVenta}}</td>
                                             </tr>
                                             {{/each}}

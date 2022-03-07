@@ -688,7 +688,7 @@ router.get("/servistar/agregar_registro:id/", isLoggedIn, async (req, res) => {
 
 router.get("/servistar/agregar_refaccion:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
-    let ref = await pool.query("SELECT * FROM `tblrefacciones` WHERE Existencias > 0")
+    let ref = await pool.query("SELECT * FROM `tblrefacciones`")
     let refac= await pool.query("SELECT * from tblrefacciones, tblrefaccionservicio WHERE tblrefaccionservicio.IdOrdenServicio = ? AND tblrefacciones.IdRefaccion=tblrefaccionservicio.IdRefaccion;",[id])
 
     
@@ -1575,16 +1575,11 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
 })
 router.post("/editar_registro_tec", isLoggedIn, async (req, res) => {
     let { IdOrdenServicio,IdSucursal,IdCliente,IdEquipo,Falla,FechaVisita,HoraVisita,TipoTrabajo, Diagnostico, Descripcion} = req.body
-    let aaa={ IdOrdenServicio,IdSucursal,IdCliente,IdEquipo,Falla,FechaVisita,HoraVisita,TipoTrabajo, Diagnostico, Descripcion}
-    log(aaa)
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '7', ?, current_timestamp())",[id,IdOrdenServicio])
     
-    if (FechaVisita=="") {
-        FechaVisita=null
-    }
 
-        const neworden = {Falla,FechaVisita,HoraVisita,TipoTrabajo, Diagnostico, Descripcion}
+        const neworden = {TipoTrabajo, Diagnostico, Descripcion}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
 
         
@@ -1692,6 +1687,15 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
             orden[index].IdTecnico="Tecnico 4"
         }
     }
+    orden[0].FechaVencimiento=moment(orden[0].FechaEntrega).add(orden[0].VigenciaGarantia,'d')
+
+
+    var fecha1 = moment();
+var fecha2 = moment(orden[0].FechaVencimiento);
+
+orden[0].DiasVencimiento = fecha2.diff(fecha1, 'days')
+
+
     res.render("layouts/cliente_completo", { equipo, cliente, orden ,id })
 })
 router.get("/servistar/ver_cliente_tec/:id/", isLoggedIn, async (req, res) => {
