@@ -711,7 +711,7 @@ router.get("/servistar/gastos_fijos:id/", isLoggedIn, async (req, res) => {
            await pool.query("INSERT INTO tblgastoservicio SET IdGastoFijo = "+gastos_fijos[index].IdGastoFijo+", IdOrdenServicio = "+id)
            gastos_fijos[index].Existencias=parseInt(gastos_fijos[index].Existencias,10)
            exi=gastos_fijos[index].Existencias-1
-           await pool.query("UPDATE tblgastosfijos SET Existencias = ? WHERE IdGastoFijo="+gastos_fijos[index].IdGastoFijo,[exi])
+           //await pool.query("UPDATE tblgastosfijos SET Existencias = ? WHERE IdGastoFijo="+gastos_fijos[index].IdGastoFijo,[exi])
            gastos_fijos[index].CostoVenta=parseInt(gastos_fijos[index].CostoVenta,10)
            cantidad=cantidad+gastos_fijos[index].CostoVenta
         }
@@ -1413,10 +1413,16 @@ router.post("/ver_ayudante", isLoggedIn, async (req, res) => {
 
 })
 router.post("/edit_refaccion", isLoggedIn, async (req, res) => {
+    let User=req.user
     let { IdRefaccion, Descripcion, Existencias, CostoVenta, CostoCompra } = req.body
-    const refa={ Descripcion, Existencias, CostoVenta, CostoCompra}
-    await pool.query("UPDATE `tblrefacciones` SET ? WHERE IdRefaccion = ?", [refa,IdRefaccion ])
+    if (User.IdUsuario==20||User.IdUsuario==18) {
+        const refa={ Descripcion, Existencias, CostoVenta, CostoCompra}
+        await pool.query("UPDATE `tblrefacciones` SET ? WHERE IdRefaccion = ?", [refa,IdRefaccion ])
+    }else{
+        const refa={ Descripcion, Existencias, CostoVenta}
+        await pool.query("UPDATE `tblrefacciones` SET ? WHERE IdRefaccion = ?", [refa,IdRefaccion ])
 
+    }
     res.redirect("/servistar/refacciones")
 
 })
@@ -1447,8 +1453,17 @@ router.post("/agregar_servicio", isLoggedIn, async (req, res) => {
 
 router.get("/servistar/ver_refaccion:id/", isLoggedIn, async (req, res) => {
     let {id} = req.params
+    let User= req.user
     const Refaccion = await pool.query("SELECT * FROM tblrefacciones WHERE IdRefaccion = ?",[id])
-    res.render("layouts/refacciones_modi",{Refaccion})
+    if (User.IdUsuario==20||User.IdUsuario==18) {
+        let aaa=1
+        res.render("layouts/refacciones_modi",{Refaccion,aaa})
+        log("hola")
+    } else{
+        log("hoasdasdasdla")
+
+        res.render("layouts/refacciones_modi",{Refaccion})
+    }
     
 })
 router.get("/servistar/gastos_fijos", isLoggedIn, async (req, res) => {
@@ -1652,10 +1667,11 @@ router.get("/servistar/servicios_pendientes", isLoggedIn, async (req, res) => {
     const pa_ent = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Para Entregar' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const espe = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Esperando' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const espe_refa = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Esperando Refacciones' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
-    const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Sin Preparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+    const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Sin Reparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+    const pen_visi = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Pendiente de Visita' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.FechaGarantia='2021-12-31' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
    
-    res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara})
+    res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara,pen_visi})
 })
 
 
@@ -1687,13 +1703,19 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
             orden[index].IdTecnico="Tecnico 4"
         }
     }
-    orden[0].FechaVencimiento=moment(orden[0].FechaEntrega).add(orden[0].VigenciaGarantia,'d')
 
-
-    var fecha1 = moment();
-var fecha2 = moment(orden[0].FechaVencimiento);
-
-orden[0].DiasVencimiento = fecha2.diff(fecha1, 'days')
+    if (orden.length!=0) {
+        if ((orden[0].FechaEntrega != null || orden[0].FechaEntrega != undefined) && (orden[0].VigenciaGarantia != null ||orden[0].VigenciaGarantia != undefined)) {
+            orden[0].FechaVencimiento=moment(orden[0].FechaEntrega).add(orden[0].VigenciaGarantia,'d')
+        
+        
+            var fecha1 = moment();
+        var fecha2 = moment(orden[0].FechaVencimiento);
+        
+        orden[0].DiasVencimiento = fecha2.diff(fecha1, 'days') 
+        }
+        
+    }
 
 
     res.render("layouts/cliente_completo", { equipo, cliente, orden ,id })

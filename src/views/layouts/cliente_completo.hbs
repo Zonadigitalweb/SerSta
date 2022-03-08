@@ -447,9 +447,10 @@
                                             <option  value="Para Entregar">Para Entregar</option>
                                             <option value="Esperando">Esperando</option>
                                             <option  value="Esperando Refacciones">Esperando Refacciones</option>
-                                            <option  value="Sin Preparacion">Sin Preparacion</option>
+                                            <option  value="Sin Reparacion">Sin Reparacion</option>
                                             <option  value="No Aceptado">No Aceptado</option>
                                             <option  value="Terminado">Terminado</option>
+                                            <option  value="Pendiente de Visita">Pendiente de Visita</option>
                                         </select>
                                     </div>  
                                     </div>
@@ -1150,8 +1151,11 @@
                     }else if(array[index].EstadoServicio=="Esperando Refacciones"){
                         document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Esperando Refacciones"
                         document.getElementById("p"+array[index].Id).style.color="#9900ff"
-                    }else if(array[index].EstadoServicio=="Sin Preparacion"){
-                        document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Sin Preparacion"
+                    }else if(array[index].EstadoServicio=="Sin Reparacion"){
+                        document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Sin Reparacion"
+                        document.getElementById("p"+array[index].Id).style.color="#00ff01"
+                    }else if(array[index].EstadoServicio=="Pendiente de Visita"){
+                        document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" Pendiente de Visita"
                         document.getElementById("p"+array[index].Id).style.color="#00ff01"
                     }else if(array[index].EstadoServicio=="No Aceptado"){
                         document.getElementById("p"+array[index].Id).innerText=document.getElementById("p"+array[index].Id).innerText+" No Aceptado"

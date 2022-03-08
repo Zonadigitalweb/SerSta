@@ -81,17 +81,22 @@
                                     <input type="number" name="CostoVenta" value="{{CostoVenta}}" class="form-control text-dark m-1"
                                          required>
                                 </div>
+                                {{/each}}
+                                {{#if aaa}}
+                                {{#each Refaccion}}
                                 <div class="col-md-6">
                                     <label>Costo de Compra</label>
                                     <input type="number" name="CostoCompra" value="{{CostoCompra}}" class="form-control text-dark m-1"
                                          required>
                                 </div>
+                                {{/each}}
+                                {{/if}}
                                 </div>
                                 <button class="btn btn-info size-2" title="GUARDAR"> <i style="color: white;" class="fas fa-check"></i></button>
 
                                 
                             </form>
-                            {{/each}}
+                            
                             </div>
                         </div>
                     </div>
