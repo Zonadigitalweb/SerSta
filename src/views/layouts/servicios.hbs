@@ -71,6 +71,7 @@
                                         <thead id="tblh" style="display:none">
                                             <tr role="row">
                                                 <th>Descripcion</th>
+                                                <th>Equipo</th>
                                                 <th>Horas</th>
                                                 <th>Costo de servicio</th>
                                             </tr>
@@ -80,6 +81,7 @@
                                             <tr id="{{IdServicio }}" style="display:none">
                                                 <td><a href="/servistar/ver_servicio{{IdServicio }}/"
                                                         class="link-primary">{{Descripcion}}</a> </td>
+                                                <td>{{Equipo}}</td>
                                                 <td>{{Horas}}</td>
                                                 <td>{{CostoServicio}}</td>
 
@@ -115,6 +117,41 @@
                                 </div>
                                 </div>
                                 <div class="row">
+                                <div class="col-md-6">
+                                    <label>Equipo</label>
+                                     <select name="Equipo" class="form-select text-dark m-1 " required>
+                                         <option value="">Equipo</option>
+                                        <option id="lav1"  value="LAVADORA">LAVADORA</option>
+                                        <option id="lav2"  value="SECADORA">SECADORA</option>
+                                        <option id="ref1"  value="REFRIGERADOR">REFRIGERADOR
+                                        </option>
+                                        <option id="ref2"  value="ENFRIADOR DE AGUA">ENFRIADOR DE
+                                            AGUA</option>
+                                        <option id="ref3"  value="CONGELADOR">CONGELADOR</option>
+                                        <option id="ref4"  value="ENFRIADOR DE BOTELLAS">ENFRIADOR DE BOTELLAS</option>
+                                        <option id="ref5"  value="REFRIGERADOR CON DESPACHADOR">REFRIGERADOR CON DESPACHADOR</option>
+                                        <option id="ref6"  value="REFRIGERADOR SIN DESPACHADOR">REFRIGERADOR SIN DESPACHADOR</option>
+                                        <option id="ref7"  value="REFRIGERADOR PANELABLE CAFETERA">REFRIGERADOR PANELABLE CAFETERA</option>
+                                        <option id="ref8"  value="SERVIBAR">SERVIBAR</option>
+                                        <option id="mic1"  value="ESTUFAS 120 -150 CM">ESTUFAS 120 -150 CM</option>
+                                        <option id="mic2"  value="ESTUFA 90CM ">ESTUFA 90CM </option>
+                                        <option id="mic3"  value="HORNO DOBLE">HORNO DOBLE</option>
+                                        <option id="mic4"  value="HORNO 60 70 90 CM Y 30">HORNO 60 70 90 CM Y 30</option>
+                                        <option id="mic5"  value="HORNO COMPACTO">HORNO COMPACTO</option>
+                                        <option id="mic6"  value="PARRILLA ELÉCTRICA DE INDUCCIÓN 60 90 CM  Y 30 ">PARRILLA ELÉCTRICA DE INDUCCIÓN 60 90 CM  Y 30</option>
+                                        <option id="mic7"  value="DOMINÓ ELÉCTRICO ,INDUCCIÓN Y GAS">DOMINÓ ELÉCTRICO ,INDUCCIÓN Y GAS </option>
+                                        <option id="mic8"  value="CAVA DE VINOS 82CM CAVA DE VINO 60 Y 45 CM">CAVA DE VINOS 82CM CAVA DE VINO 60 Y 45 CM</option>
+                                        <option id="mic9"  value="PARRILLA DE GAS">PARRILLA DE GAS</option>
+                                        <option id="mic10"  value="LAVAVAJILLAS">LAVAVAJILLAS</option>
+                                        <option id="mic11"  value="CAMPANA DE ISLA">CAMPANA DE ISLA</option>
+                                        <option id="mic12"  value="CAMPANA DE INTEGRACIÓN CAMPANA DE PARED 120 -150 CM ">CAMPANA DE INTEGRACIÓN CAMPANA DE PARED 120 -150 CM </option>
+                                        <option id="mic13"  value="CAMPANA DE PARED">CAMPANA DE PARED</option>
+                                        <option id="mic14"  value="CAMPANA TELESCÓPICA Y BAJO ALACENA">CAMPANA TELESCÓPICA Y BAJO ALACENA</option>
+                                        <option id="mic15"  value="CAJONES TÉRMICOS">CAJONES TÉRMICOS</option>
+                                        <option id="mic16"  value="ASADORES  Y COCINAS EXTERIOR">ASADORES  Y COCINAS EXTERIOR</option>
+                                    </select>
+                                </div>
+                                
                                 <div class="col-md-6">
                                     <label>Costo del Servicio</label>
                                     <input type="number" name="CostoServicio" class="form-control text-dark m-1"

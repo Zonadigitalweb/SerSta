@@ -765,7 +765,9 @@ router.get("/eliminar_gasto:id/", isLoggedIn, async (req, res) => {
 })
 router.get("/servistar/agregar_servicios:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
-    let ser = await pool.query("SELECT * FROM `tblservicios`")
+    let orden=await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio="+id)
+    orden= await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ? AND IdEquipo = ?",[orden[0].IdCliente,orden[0].IdEquipo])
+    let ser = await pool.query("SELECT * FROM `tblservicios` WHERE Equipo = ?",[orden[0].Tipo])
     let serv = await pool.query("SELECT * from tblservicios, tblreparacioneservicio WHERE tblreparacioneservicio.IdOrdenServicio = ? AND tblservicios.IdServicio=tblreparacioneservicio.IdServicio;",[id])
 
     
@@ -777,11 +779,11 @@ router.get("/servistar/agregar:ido/ref:idr/", isLoggedIn, async (req, res) => {
     let Cantidad=ref[0].Existencias-1
     await pool.query("UPDATE tblrefacciones SET Existencias = ? WHERE IdRefaccion ="+idr,[Cantidad])
     let orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio ="+ido)
-    if(ref[0].CostoVenta==null){
+    if(ref[0].CostoVenta==null || ref[0].CostoVenta==""){
         ref[0].CostoVenta=0
     }
     ref[0].CostoVenta=parseInt(ref[0].CostoVenta,10)
-    if(orden[0].Presupuesto==null){
+    if(orden[0].Presupuesto==null || orden[0].Presupuesto==""){
         orden[0].Presupuesto=0
     }
     orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
@@ -1427,8 +1429,8 @@ router.post("/edit_refaccion", isLoggedIn, async (req, res) => {
 
 })
 router.post("/edit_servicio", isLoggedIn, async (req, res) => {
-    let { IdServicio, Descripcion, Horas, CostoServicio } = req.body
-    const ser={ Descripcion, Horas, CostoServicio }
+    let { IdServicio, Descripcion, Horas, CostoServicio, Equipo } = req.body
+    const ser={ Descripcion, Horas, CostoServicio,Equipo }
     await pool.query("UPDATE `tblservicios` SET ? WHERE IdServicio = ?", [ser,IdServicio ])
     
     res.redirect("/servistar/servicios")
@@ -1443,8 +1445,8 @@ router.post("/agregar_refaccion", isLoggedIn, async (req, res) => {
     
 })
 router.post("/agregar_servicio", isLoggedIn, async (req, res) => {
-    let { Descripcion, Horas, CostoServicio } = req.body
-    const newrefa ={Descripcion, Horas, CostoServicio}
+    let { Descripcion, Horas, CostoServicio,Equipo } = req.body
+    const newrefa ={Descripcion, Horas, CostoServicio,Equipo}
     await pool.query("INSERT INTO tblservicios SET ? ", [newrefa])
     
     res.redirect("/servistar/servicios")
