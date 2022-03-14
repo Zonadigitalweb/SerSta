@@ -512,6 +512,24 @@
                                     </div>
                                     <div class="row">
                                      <div class="col-md-3">
+                                        <label>Gastos fijos</label><br>
+                                        <textarea  disabled id="gastos{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <label>Servicio</label><br>
+                                        <textarea  disabled id="servicio{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <label>Refacciones</label><br>
+                                        <textarea  disabled id="refaccion{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
+                                    </div>
+                                     <div class="col-md-3">
+                                        <label>Servicio y Refacciones en garantia</label><br>
+                                        <textarea  disabled id="servicio{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                     <div class="col-md-3">
                                         <label>Presupuesto</label>
                                         <input name="Presupuesto" type="number" id="Presupuesto{{IdOrdenServicio}}"  value="{{Presupuesto}}" class="form-control text-dark m-1"
                                             disabled >
@@ -640,6 +658,43 @@
     let arrayE = []
     let array = []
     let arrayC = []
+    let gas = []
+    let ser = []
+    let ref = []
+
+      {{#each gas}}
+   {{#each this}}  
+    gas.push({
+        IdReferencia: "{{IdReferencia}}",
+        IdGastoFijo:"{{IdGastoFijo}}",
+        IdOrdenServicio:"{{IdOrdenServicio}}",
+        Descripcion:"{{Descripcion}}"
+    })
+    {{/each}}
+    {{/each}}
+
+      {{#each ser}}
+   {{#each this}}  
+    ser.push({
+        IdReferencia: "{{IdReferencia}}",
+        IdServicio:"{{IdServicio}}",
+        IdOrdenServicio:"{{IdOrdenServicio}}",
+        Descripcion:"{{Descripcion}}"
+    })
+    {{/each}}
+    {{/each}}
+
+      {{#each ref}}
+   {{#each this}}  
+    ref.push({
+        IdReferencia: "{{IdReferencia}}",
+        IdRefaccion:"{{IdRefaccion}}",
+        IdOrdenServicio:"{{IdOrdenServicio}}",
+        Descripcion:"{{Descripcion}}"
+    })
+    {{/each}}
+    {{/each}}
+
 
       {{#each cliente}}
     arrayC.push({
@@ -964,8 +1019,42 @@
                     document.getElementById(id).style.display = "block"
                     document.getElementById("btn" + id).style.display = "block"
                     document.getElementById("registros").style.display = "none"
+                    gastos(id)
                    //garantia(id)
                 }
+            }
+
+            function gastos(id){
+                let gastos=""
+                for(let index=0;index<gas.length;index++){
+                    if(gas[index].IdOrdenServicio==id){
+                        gastos=gastos+gas[index].Descripcion+"\n"
+                    }
+                }
+               document.getElementById("gastos"+id).textContent=gastos
+               servicio(id)
+            }
+
+            function servicio(id){
+                let servicio=""
+                for(let index=0;index<ser.length;index++){
+                    if(ser[index].IdOrdenServicio==id){
+                        servicio=servicio+ser[index].Descripcion+"\n"
+                    }
+                }
+               document.getElementById("servicio"+id).textContent=servicio
+               refaccion(id)
+            }
+
+            function refaccion(id){
+                let refaccion=""
+                for(let index=0;index<ref.length;index++){
+                    if(ref[index].IdOrdenServicio==id){
+                        refaccion=refaccion+ref[index].Descripcion+"\n"
+                    }
+                }
+               document.getElementById("refaccion"+id).textContent=refaccion
+
             }
 
             function editarc() {

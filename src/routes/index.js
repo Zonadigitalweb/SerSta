@@ -154,6 +154,10 @@ router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
         dia="0"+dia
     }
     fecha=fecha.getFullYear()+"-"+mes+"-"+dia
+    
+    
+    let dias = await pool.query("SELECT * FROM tblcalentec1 WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+
 
     function diaPlus(dias){
         for (let index = 0; index < dias.length; index++) {
@@ -297,7 +301,222 @@ router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
         di10=null
     }
     let menu=1
-    res.render("layouts/calendario_tec", {di,di2,di3,di4,di5,di6,di7,di8,di9,di10,menu})
+    res.render("layouts/calendario_tec", {di,di2,di3,di4,di5,di6,di7,di8,di9,di10,menu,dias})
+})
+router.post("/flitrado_fecha", isLoggedIn, async (req, res)=>{
+    let {diaE}=req.body
+    let fecha=new Date()
+    let mes=fecha.getMonth()+1
+    let dia=fecha.getDate()
+    if (mes < 10) {
+        mes="0"+mes
+    }
+    if (dia < 10) {
+        dia="0"+dia
+    }
+    fecha=fecha.getFullYear()+"-"+mes+"-"+dia
+    let tecnicos = await pool.query("SELECT * FROM `tbltecnicos`")
+    
+    
+    let dias = await pool.query("SELECT * FROM tblcalentec1 WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    let tec=[]
+    let aa
+    if (tecnicos[0].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec1`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=1;",[diaE])
+        log(aa)
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[1].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec2`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=2;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[2].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec3`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=3;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[3].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec4`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=4;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[4].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec5`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=5;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[5].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec6`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=6;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[6].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec7`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=7;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[7].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec8`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=8;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[8].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec9`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=9;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+    if (tecnicos[9].Habilitado==1) {
+        aa = await pool.query("SELECT * FROM `tblcalentec10`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=10;",[diaE])
+        aa= diaPlus(aa) 
+        tec.push(aa)
+    }
+
+
+    function diaPlus(dias){
+        for (let index = 0; index < dias.length; index++) {
+            if (dias[index].Hora1==0) {
+                dias[index].Hora1="Libre"
+            }
+            if (dias[index].Hora2==0) {
+                dias[index].Hora2="Libre"
+            }
+            if (dias[index].Hora3==0) {
+                dias[index].Hora3="Libre"
+            }
+            if (dias[index].Hora4==0) {
+                dias[index].Hora4="Libre"
+            }
+            if (dias[index].Hora5==0) {
+                dias[index].Hora5="Libre"
+            }
+            if (dias[index].Hora6==0) {
+                dias[index].Hora6="Libre"
+            }
+            if (dias[index].Hora7==0) {
+                dias[index].Hora7="Libre"
+            }
+            if (dias[index].Hora8==0) {
+                dias[index].Hora8="Libre"
+            }
+            if (dias[index].Hora9==0) {
+                dias[index].Hora9="Libre"
+            }
+            if (dias[index].Hora10==0) {
+                dias[index].Hora10="Libre"
+            }
+            if (dias[index].Hora11==0) {
+                dias[index].Hora11="Libre"
+            }
+            if (dias[index].Hora12==0) {
+                dias[index].Hora12="Libre"
+            }
+            if (dias[index].Hora13==0) {
+                dias[index].Hora13="Libre"
+            }
+            if (dias[index].Hora14==0) {
+                dias[index].Hora14="Libre"
+            }
+            if (dias[index].Hora15==0) {
+                dias[index].Hora15="Libre"
+            }
+            if (dias[index].Hora16==0) {
+                dias[index].Hora16="Libre"
+            }
+            if (dias[index].Hora17==0) {
+                dias[index].Hora17="Libre"
+            }
+            if (dias[index].Hora18==0) {
+                dias[index].Hora18="Libre"
+            }
+            if (dias[index].Hora19==0) {
+                dias[index].Hora19="Libre"
+            }
+            if (dias[index].Hora20==0) {
+                dias[index].Hora20="Libre"
+            }
+            if (dias[index].Hora21==0) {
+                dias[index].Hora21="Libre"
+            }
+            if (dias[index].Hora22==0) {
+                dias[index].Hora22="Libre"
+            }
+            if (dias[index].Hora23==0) {
+                dias[index].Hora23="Libre"
+            }
+             
+             
+         }
+         return dias
+    }
+
+
+    let di = await pool.query("SELECT * FROM `tblcalentec1` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di = diaPlus(di)
+    
+    let di2 = await pool.query("SELECT * FROM `tblcalentec2` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di2 = diaPlus(di2)
+
+    let di3 = await pool.query("SELECT * FROM `tblcalentec3` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di3 = diaPlus(di3)
+    
+    let di4 = await pool.query("SELECT * FROM `tblcalentec4` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di4 = diaPlus(di4)
+    
+    let di5 = await pool.query("SELECT * FROM `tblcalentec5` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di5 = diaPlus(di5)
+
+    let di6 = await pool.query("SELECT * FROM `tblcalentec6` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di6 = diaPlus(di6)
+
+    let di7 = await pool.query("SELECT * FROM `tblcalentec7` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di7 = diaPlus(di7)
+
+    let di8 = await pool.query("SELECT * FROM `tblcalentec8` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di8 = diaPlus(di8)
+
+    let di9 = await pool.query("SELECT * FROM `tblcalentec9` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di9 = diaPlus(di9)
+
+    let di10 = await pool.query("SELECT * FROM `tblcalentec10` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
+    di10 = diaPlus(di10)
+
+  
+  
+    if (tecnicos[0].Habilitado==0) {
+        di=null
+    }
+    if (tecnicos[1].Habilitado==0) {
+        di2=null
+    }
+    if (tecnicos[2].Habilitado==0) {
+        di3=null
+    }
+    if (tecnicos[3].Habilitado==0) {
+        di4=null
+    }
+    if (tecnicos[4].Habilitado==0) {
+        di5=null
+    }
+    if (tecnicos[5].Habilitado==0) {
+        di6=null
+    }
+    if (tecnicos[6].Habilitado==0) {
+        di7=null
+    }
+    if (tecnicos[7].Habilitado==0) {
+        di8=null
+    }
+    if (tecnicos[8].Habilitado==0) {
+        di9=null
+    }
+    if (tecnicos[9].Habilitado==0) {
+        di10=null
+    }
+    let menu=1
+
+    res.render("layouts/calendario_tec_2", {di,di2,di3,di4,di5,di6,di7,di8,di9,di10,menu,dias,tec})
 })
 router.get("/servistar/calendario_ayu", isLoggedIn, async (req, res)=>{
     let fecha=new Date()
@@ -1682,6 +1901,11 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
     const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ?", [id])
     let cliente= await pool.query("SELECT * from tblclientes WHERE IdCliente = ?",[id])
     const orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdCliente = ? ORDER BY IdOrdenServicio DESC",[id])
+    //const orden = await pool.query("SELECT * FROM tblordenservicio,tblgastoservicio WHERE tblordenservicio.IdCliente=? AND tblgastoservicio.IdOrdenServicio=tblordenservicio.IdOrdenServicio ORDER BY tblordenservicio.IdOrdenServicio DESC;",[id])
+    let ser=[],
+    gara=[],
+    ref=[],
+    gas=[]
     for (let index = 0; index < orden.length; index++) {
         if (orden[index].Realizado==0) {
             orden[index].Realizado="No"
@@ -1692,8 +1916,20 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
         }else{
             orden[index].Realizado="Si"
         }
-        
+
+        let a= await pool.query("SELECT * FROM tblgastoservicio,tblgastosfijos WHERE tblgastoservicio.IdOrdenServicio= ? AND tblgastosfijos.IdGastoFijo=tblgastoservicio.IdGastoFijo;",[orden[index].IdOrdenServicio])
+        gas.push(a)
+        let b= await pool.query("SELECT * FROM tblreparacioneservicio,tblservicios WHERE tblreparacioneservicio.IdOrdenServicio = ? AND tblservicios.IdServicio=tblreparacioneservicio.IdServicio;",[orden[index].IdOrdenServicio])
+        ser.push(b)
+        let c= await pool.query("SELECT * FROM tblrefaccionservicio,tblrefacciones WHERE tblrefaccionservicio.IdOrdenServicio = ? AND tblrefacciones.IdRefaccion=tblrefaccionservicio.IdRefaccion;",[orden[index].IdOrdenServicio])
+        ref.push(c)
+        let d= await pool.query("SELECT * FROM tblgarantiaservicio,tblrefacciones WHERE tblgarantiaservicio.IdOrdenServicio = ? AND tblrefacciones.IdRefaccion=tblgarantiaservicio.IdRefaccion;",[orden[index].IdOrdenServicio])
+        gara.push(d)
+        log(gara)
+
+ 
     }
+
     for (let index = 0; index < orden.length; index++) {
         if (orden[index].IdTecnico==1) {
             orden[index].IdTecnico="Tecnico 1"
@@ -1720,7 +1956,7 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
     }
 
 
-    res.render("layouts/cliente_completo", { equipo, cliente, orden ,id })
+    res.render("layouts/cliente_completo", { equipo, cliente, orden, id, gas, ser, ref, gara})
 })
 router.get("/servistar/ver_cliente_tec/:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
