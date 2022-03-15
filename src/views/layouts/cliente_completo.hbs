@@ -511,21 +511,27 @@
                                         <textarea name="Descripcion" disabled id="Descripcion{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" >{{Descripcion}}</textarea>
                                     </div>
                                     <div class="row">
-                                     <div class="col-md-3">
+                                     <div class="col-md-4">
                                         <label>Gastos fijos</label><br>
                                         <textarea  disabled id="gastos{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
-                                     <div class="col-md-3">
+                                     <div class="col-md-4">
                                         <label>Servicio</label><br>
                                         <textarea  disabled id="servicio{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
-                                     <div class="col-md-3">
+                                     <div class="col-md-4">
                                         <label>Refacciones</label><br>
                                         <textarea  disabled id="refaccion{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
-                                     <div class="col-md-3">
-                                        <label>Servicio y Refacciones en garantia</label><br>
-                                        <textarea  disabled id="servicio{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
+                                    </div>
+                                    <div class="row">
+                                     <div class="col-md-4">
+                                        <label>Refacciones en garantia</label><br>
+                                        <textarea  disabled id="refaccion_g{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
+                                    </div>
+                                     <div class="col-md-4">
+                                        <label>Servicios en garantia</label><br>
+                                        <textarea  disabled id="servicio_g{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
                                     </div>
                                     <div class="row">
@@ -661,6 +667,8 @@
     let gas = []
     let ser = []
     let ref = []
+    let gara = []
+    let garaa = []
 
       {{#each gas}}
    {{#each this}}  
@@ -684,9 +692,31 @@
     {{/each}}
     {{/each}}
 
+      {{#each garaa}}
+   {{#each this}}  
+    garaa.push({
+        IdReferencia: "{{IdReferencia}}",
+        IdServicio:"{{IdServicio}}",
+        IdOrdenServicio:"{{IdOrdenServicio}}",
+        Descripcion:"{{Descripcion}}"
+    })
+    {{/each}}
+    {{/each}}
+
       {{#each ref}}
    {{#each this}}  
     ref.push({
+        IdReferencia: "{{IdReferencia}}",
+        IdRefaccion:"{{IdRefaccion}}",
+        IdOrdenServicio:"{{IdOrdenServicio}}",
+        Descripcion:"{{Descripcion}}"
+    })
+    {{/each}}
+    {{/each}}
+
+      {{#each gara}}
+   {{#each this}}  
+    gara.push({
         IdReferencia: "{{IdReferencia}}",
         IdRefaccion:"{{IdRefaccion}}",
         IdOrdenServicio:"{{IdOrdenServicio}}",
@@ -1054,6 +1084,28 @@
                     }
                 }
                document.getElementById("refaccion"+id).textContent=refaccion
+                refaccion_g(id)
+            }
+
+            function refaccion_g(id){
+                let refaccion=""
+                for(let index=0;index<gara.length;index++){
+                    if(gara[index].IdOrdenServicio==id){
+                        refaccion=refaccion+gara[index].Descripcion+"\n"
+                    }
+                }
+               document.getElementById("refaccion_g"+id).textContent=refaccion
+                servicio_g(id)
+            }
+
+            function servicio_g(id){
+                let servicio=""
+                for(let index=0;index<garaa.length;index++){
+                    if(garaa[index].IdOrdenServicio==id){
+                        servicio=servicio+garaa[index].Descripcion+"\n"
+                    }
+                }
+               document.getElementById("servicio_g"+id).textContent=servicio
 
             }
 

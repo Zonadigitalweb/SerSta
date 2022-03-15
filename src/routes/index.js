@@ -323,7 +323,6 @@ router.post("/flitrado_fecha", isLoggedIn, async (req, res)=>{
     let aa
     if (tecnicos[0].Habilitado==1) {
         aa = await pool.query("SELECT * FROM `tblcalentec1`,tbltecnicos  WHERE FechaDia = ? AND tbltecnicos.IdTecnico=1;",[diaE])
-        log(aa)
         aa= diaPlus(aa) 
         tec.push(aa)
     }
@@ -1901,11 +1900,12 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
     const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ?", [id])
     let cliente= await pool.query("SELECT * from tblclientes WHERE IdCliente = ?",[id])
     const orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdCliente = ? ORDER BY IdOrdenServicio DESC",[id])
-    //const orden = await pool.query("SELECT * FROM tblordenservicio,tblgastoservicio WHERE tblordenservicio.IdCliente=? AND tblgastoservicio.IdOrdenServicio=tblordenservicio.IdOrdenServicio ORDER BY tblordenservicio.IdOrdenServicio DESC;",[id])
+    
     let ser=[],
     gara=[],
     ref=[],
-    gas=[]
+    gas=[],
+    garaa=[]
     for (let index = 0; index < orden.length; index++) {
         if (orden[index].Realizado==0) {
             orden[index].Realizado="No"
@@ -1925,11 +1925,13 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
         ref.push(c)
         let d= await pool.query("SELECT * FROM tblgarantiaservicio,tblrefacciones WHERE tblgarantiaservicio.IdOrdenServicio = ? AND tblrefacciones.IdRefaccion=tblgarantiaservicio.IdRefaccion;",[orden[index].IdOrdenServicio])
         gara.push(d)
-        log(gara)
-
- 
+        let e= await pool.query("SELECT * FROM tblgarantiaservicio,tblservicios WHERE tblgarantiaservicio.IdOrdenServicio = ? AND tblservicios.IdServicio=tblgarantiaservicio.IdServicio;",[orden[index].IdOrdenServicio])
+        garaa.push(e)
+        
+        
     }
-
+    
+    log(gara)
     for (let index = 0; index < orden.length; index++) {
         if (orden[index].IdTecnico==1) {
             orden[index].IdTecnico="Tecnico 1"
@@ -1956,7 +1958,7 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
     }
 
 
-    res.render("layouts/cliente_completo", { equipo, cliente, orden, id, gas, ser, ref, gara})
+    res.render("layouts/cliente_completo", { equipo, cliente, orden, id, gas, ser, ref, gara, garaa})
 })
 router.get("/servistar/ver_cliente_tec/:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
