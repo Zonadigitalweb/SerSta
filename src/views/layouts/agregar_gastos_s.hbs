@@ -97,6 +97,56 @@
                             </div>
                         </div>
                         <br>
+                            <div class="card-body" style="background-color:#d9d9d9;">
+                                <h1 class="text-dark mb-3 h4">Gasto Fijos</h1>
+                                <form>
+                                   <div class="row">
+                                <div class="col-md-4">
+                                    <label>Comision a Tecnico</label>
+                                    <input type="text" class="form-control text-dark m-1" value="{{com}}" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Total de Gastos</label>
+                                    <input type="text" class="form-control text-dark m-1"  value="{{total}}" readonly >
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Utilidad</label>
+                                    <input type="text" class="form-control text-dark m-1"  value="{{utili}}" readonly >
+                                </div>
+                                </div>
+                                </form>
+                        </div>
+                        </div>
+                        <br>
+                        {{#each orden}}
+                            <div class="card-body" style="background-color:#d9d9d9;">
+                                <h1 class="text-dark mb-3 h4">Gasto Fijos</h1>
+                                <form  action="/editar_gastos" method="post">
+                                   <input type="number" style="display: none;" name="id"  class="form-control text-dark m-1" value="{{IdOrdenServicio}}">
+                                   <div class="row">
+                                <div class="col-md-4">
+                                    <label>Dolares</label>
+                                    <input type="number" class="form-control text-dark m-1" name="Dolares" value="{{Dolares}}" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Reparaciones</label>
+                                    <input type="text" class="form-control text-dark m-1" name="RefaccionesGastoFijo" value="{{RefaccionesGastoFijo}}" required >
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Reparaciones PEP</label>
+                                    <input type="text" class="form-control text-dark m-1" name="RefaccionesPEP"  value="{{RefaccionesPEP}}" required >
+                                </div>
+                                </div>
+                                 <div class="form-group" title="GUARDAR">
+                                    <button class="btn btn-info btn-block mx-1 ">
+                                        <i style="color: white;" class="fas fa-check"></i>
+                                    </button>
+                                </div>
+                                </form>
+                        </div>
+                        </div>
+                        <br>
+                        {{/each}}
                         {{#if togastos}}
                          <table class="table table-bordered table-hover ">
                                     <thead >

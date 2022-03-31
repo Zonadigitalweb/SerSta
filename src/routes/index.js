@@ -912,6 +912,13 @@ router.get("/servistar/agregar_refaccion:id/", isLoggedIn, async (req, res) => {
     
     res.render("layouts/agregar_refaccion_s", {id, ref, refac})
 })
+
+router.post("/editar_gastos", isLoggedIn, async (req, res) => {
+    const { Dolares,RefaccionesGastoFijo,RefaccionesPEP,id } = req.body
+    let gastos_fijos={Dolares,RefaccionesGastoFijo,RefaccionesPEP}
+    await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?",[gastos_fijos,id])
+    res.redirect("/servistar/gastos_fijos"+id)
+})
 router.get("/servistar/gastos_fijos:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
 
@@ -920,7 +927,37 @@ router.get("/servistar/gastos_fijos:id/", isLoggedIn, async (req, res) => {
     let togastos= await pool.query("SELECT * from tblgastosfijos, tblgastoservicio WHERE tblgastoservicio.IdOrdenServicio = ? AND tblgastosfijos.IdGastoFijo=tblgastoservicio.IdGastoFijo;",[id])
     if(orden[0].AgregoGastos==1){
         let gastos_fijos = await pool.query("SELECT * FROM `tblgastosfijos`")
-        res.render("layouts/agregar_gastos_s",{gastos,gastos_fijos,id,togastos})
+        let com,total,utili
+
+        if (orden[0].Dolares==null) {
+            orden[0].Dolares=0
+        }
+        if (orden[0].PrecioServicios==null) {
+            orden[0].PrecioServicios=0
+        }
+        
+        orden[0].PrecioServicios=parseInt(orden[0].PrecioServicios,10)
+        orden[0].Dolares=parseInt(orden[0].Dolares,10)
+        
+        com=orden[0].PrecioServicios-orden[0].Dolares
+        if (com <= 1200) {
+            com=0
+        } else if(com <= 1700){
+            com=150
+        } else if(com <= 2200){
+            com=200
+        } else if(com <= 2500){
+            com=250
+        } else {
+            com=300
+        }
+
+        orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
+        total=orden[0].Presupuesto-orden[0].PrecioServicios
+        utili=orden[0].PrecioServicios-com
+    
+
+        res.render("layouts/agregar_gastos_s",{gastos,gastos_fijos,id,togastos,com,total,utili,orden})
     } else {
         let gastos_fijos = await pool.query("SELECT * FROM `tblgastosfijos`")
         let cantidad=0
@@ -1055,6 +1092,16 @@ router.get("/servistar/agregar:ido/ser:idr/", isLoggedIn, async (req, res) => {
     
     Cantidad=parseInt(Cantidad,10)
     await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio ="+ido,[Cantidad])
+    Cantidad=0
+    if(orden[0].PrecioServicios==null || orden[0].PrecioServicios==""){
+        orden[0].PrecioServicios=0
+    }
+    orden[0].PrecioServicios=parseInt(orden[0].PrecioServicios,10)
+    Cantidad=orden[0].PrecioServicios+ser[0].CostoServicio
+    Cantidad=parseInt(Cantidad,10)
+    
+    await pool.query("UPDATE tblordenservicio SET PrecioServicios = ? WHERE IdOrdenServicio ="+ido,[Cantidad])
+    
     await pool.query("INSERT INTO tblreparacioneservicio SET IdOrdenServicio = "+ido+", IdServicio ="+idr)
     res.redirect("/servistar/agregar_servicios"+ido+"/")
 })
@@ -1568,7 +1615,7 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
 
 
     const newarticulo = {IdSucursal,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita, Descripcion, FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento }
-    log(newarticulo)
+
     await pool.query("INSERT INTO tblordenservicio SET ?", [newarticulo])
     
     res.redirect("/servistar/ver_cliente"+IdCliente+"/")
@@ -1931,7 +1978,7 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
         
     }
     
-    log(gara)
+
     for (let index = 0; index < orden.length; index++) {
         if (orden[index].IdTecnico==1) {
             orden[index].IdTecnico="Tecnico 1"
