@@ -2215,7 +2215,7 @@ router.get("/servistar/servicios_pendientes", isLoggedIn, async (req, res) => {
     const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Sin Reparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const pen_visi = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Pendiente de Visita' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
     const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.FechaGarantia='2021-12-31' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
-   
+
     res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara,pen_visi})
 })
 
@@ -2257,17 +2257,7 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
     }
     
 
-    for (let index = 0; index < orden.length; index++) {
-        if (orden[index].IdTecnico==1) {
-            orden[index].IdTecnico="Tecnico 1"
-        }else if (orden[index].IdTecnico==2) {
-            orden[index].IdTecnico="Tecnico 2"
-        }else if (orden[index].IdTecnico==3) {
-            orden[index].IdTecnico="Tecnico 3"
-        }else if(orden[index].IdTecnico==4){
-            orden[index].IdTecnico="Tecnico 4"
-        }
-    }
+
 
     if (orden.length!=0) {
         if ((orden[0].FechaEntrega != null || orden[0].FechaEntrega != undefined) && (orden[0].VigenciaGarantia != null ||orden[0].VigenciaGarantia != undefined)) {
@@ -2281,7 +2271,6 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
         }
         
     }
-
 
     res.render("layouts/cliente_completo", { equipo, cliente, orden, id, gas, ser, ref, gara, garaa})
 })
