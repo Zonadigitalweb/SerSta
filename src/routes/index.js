@@ -171,154 +171,154 @@ router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
             if (dias[index].Hora2==0) {
                 dias[index].Hora2="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora2])
 
                 dias[index].Colonia2=aa[0].DirColonia
             }
             if (dias[index].Hora3==0) {
                 dias[index].Hora3="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora3])
 
                 dias[index].Colonia3=aa[0].DirColonia
             }
             if (dias[index].Hora4==0) {
                 dias[index].Hora4="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
-
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora4])
+                
                 dias[index].Colonia4=aa[0].DirColonia
             }
             if (dias[index].Hora5==0) {
                 dias[index].Hora5="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora5])
 
                 dias[index].Colonia5=aa[0].DirColonia
             }
             if (dias[index].Hora6==0) {
                 dias[index].Hora6="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora6])
 
                 dias[index].Colonia7=aa[0].DirColonia
             }
             if (dias[index].Hora7==0) {
                 dias[index].Hora7="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora7])
 
                 dias[index].Colonia7=aa[0].DirColonia
             }
             if (dias[index].Hora8==0) {
                 dias[index].Hora8="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora8])
 
                 dias[index].Colonia8=aa[0].DirColonia
             }
             if (dias[index].Hora9==0) {
                 dias[index].Hora9="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora9])
 
                 dias[index].Colonia9=aa[0].DirColonia
             }
             if (dias[index].Hora10==0) {
                 dias[index].Hora10="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora10])
 
                 dias[index].Colonia10=aa[0].DirColonia
             }
             if (dias[index].Hora11==0) {
                 dias[index].Hora11="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora11])
 
                 dias[index].Colonia11=aa[0].DirColonia
             }
             if (dias[index].Hora12==0) {
                 dias[index].Hora12="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora12])
 
                 dias[index].Colonia12=aa[0].DirColonia
             }
             if (dias[index].Hora13==0) {
                 dias[index].Hora13="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora13])
 
                 dias[index].Colonia13=aa[0].DirColonia
             }
             if (dias[index].Hora14==0) {
                 dias[index].Hora14="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora14])
 
                 dias[index].Colonia14=aa[0].DirColonia
             }
             if (dias[index].Hora15==0) {
                 dias[index].Hora15="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora15])
 
                 dias[index].Colonia15=aa[0].DirColonia
             }
             if (dias[index].Hora16==0) {
                 dias[index].Hora16="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora16])
 
                 dias[index].Colonia16=aa[0].DirColonia
             }
             if (dias[index].Hora17==0) {
                 dias[index].Hora17="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora17])
 
                 dias[index].Colonia17=aa[0].DirColonia
             }
             if (dias[index].Hora18==0) {
                 dias[index].Hora18="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora18])
 
                 dias[index].Colonia18=aa[0].DirColonia
             }
             if (dias[index].Hora19==0) {
                 dias[index].Hora19="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora19])
 
                 dias[index].Colonia19=aa[0].DirColonia
             }
             if (dias[index].Hora20==0) {
                 dias[index].Hora20="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora20])
 
                 dias[index].Colonia20=aa[0].DirColonia
             }
             if (dias[index].Hora21==0) {
                 dias[index].Hora21="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora21])
 
                 dias[index].Colonia21=aa[0].DirColonia
             }
             if (dias[index].Hora22==0) {
                 dias[index].Hora22="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora22])
 
                 dias[index].Colonia22=aa[0].DirColonia
             }
             if (dias[index].Hora23==0) {
                 dias[index].Hora23="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora23])
 
                 dias[index].Colonia23=aa[0].DirColonia
             }
@@ -334,31 +334,31 @@ router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
     di = await diaPlus(di)
 
     let di2 = await pool.query("SELECT * FROM `tblcalentec2` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di2 = diaPlus(di2)
+    di2 = await diaPlus(di2)
 
     let di3 = await pool.query("SELECT * FROM `tblcalentec3` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di3 = diaPlus(di3)
+    di3 = await diaPlus(di3)
     
     let di4 = await pool.query("SELECT * FROM `tblcalentec4` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di4 = diaPlus(di4)
+    di4 = await diaPlus(di4)
     
     let di5 = await pool.query("SELECT * FROM `tblcalentec5` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di5 = diaPlus(di5)
+    di5 = await diaPlus(di5)
 
     let di6 = await pool.query("SELECT * FROM `tblcalentec6` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di6 = diaPlus(di6)
+    di6 = await diaPlus(di6)
 
     let di7 = await pool.query("SELECT * FROM `tblcalentec7` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di7 = diaPlus(di7)
+    di7 = await diaPlus(di7)
 
     let di8 = await pool.query("SELECT * FROM `tblcalentec8` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di8 = diaPlus(di8)
+    di8 = await diaPlus(di8)
 
     let di9 = await pool.query("SELECT * FROM `tblcalentec9` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di9 = diaPlus(di9)
+    di9 = await diaPlus(di9)
 
     let di10 = await pool.query("SELECT * FROM `tblcalentec10` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
-    di10 = diaPlus(di10)
+    di10 = await diaPlus(di10)
 
   
   
@@ -393,6 +393,7 @@ router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
         di10=null
     }
     let menu=1
+    
     res.render("layouts/calendario_tec", {di,di2,di3,di4,di5,di6,di7,di8,di9,di10,menu,dias})
 })
 router.post("/flitrado_fecha", isLoggedIn, async (req, res)=>{
@@ -477,154 +478,154 @@ router.post("/flitrado_fecha", isLoggedIn, async (req, res)=>{
             if (dias[index].Hora2==0) {
                 dias[index].Hora2="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora2])
 
                 dias[index].Colonia2=aa[0].DirColonia
             }
             if (dias[index].Hora3==0) {
                 dias[index].Hora3="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora3])
 
                 dias[index].Colonia3=aa[0].DirColonia
             }
             if (dias[index].Hora4==0) {
                 dias[index].Hora4="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
-
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora4])
+                
                 dias[index].Colonia4=aa[0].DirColonia
             }
             if (dias[index].Hora5==0) {
                 dias[index].Hora5="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora5])
 
                 dias[index].Colonia5=aa[0].DirColonia
             }
             if (dias[index].Hora6==0) {
                 dias[index].Hora6="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora6])
 
                 dias[index].Colonia7=aa[0].DirColonia
             }
             if (dias[index].Hora7==0) {
                 dias[index].Hora7="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora7])
 
                 dias[index].Colonia7=aa[0].DirColonia
             }
             if (dias[index].Hora8==0) {
                 dias[index].Hora8="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora8])
 
                 dias[index].Colonia8=aa[0].DirColonia
             }
             if (dias[index].Hora9==0) {
                 dias[index].Hora9="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora9])
 
                 dias[index].Colonia9=aa[0].DirColonia
             }
             if (dias[index].Hora10==0) {
                 dias[index].Hora10="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora10])
 
                 dias[index].Colonia10=aa[0].DirColonia
             }
             if (dias[index].Hora11==0) {
                 dias[index].Hora11="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora11])
 
                 dias[index].Colonia11=aa[0].DirColonia
             }
             if (dias[index].Hora12==0) {
                 dias[index].Hora12="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora12])
 
                 dias[index].Colonia12=aa[0].DirColonia
             }
             if (dias[index].Hora13==0) {
                 dias[index].Hora13="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora13])
 
                 dias[index].Colonia13=aa[0].DirColonia
             }
             if (dias[index].Hora14==0) {
                 dias[index].Hora14="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora14])
 
                 dias[index].Colonia14=aa[0].DirColonia
             }
             if (dias[index].Hora15==0) {
                 dias[index].Hora15="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora15])
 
                 dias[index].Colonia15=aa[0].DirColonia
             }
             if (dias[index].Hora16==0) {
                 dias[index].Hora16="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora16])
 
                 dias[index].Colonia16=aa[0].DirColonia
             }
             if (dias[index].Hora17==0) {
                 dias[index].Hora17="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora17])
 
                 dias[index].Colonia17=aa[0].DirColonia
             }
             if (dias[index].Hora18==0) {
                 dias[index].Hora18="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora18])
 
                 dias[index].Colonia18=aa[0].DirColonia
             }
             if (dias[index].Hora19==0) {
                 dias[index].Hora19="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora19])
 
                 dias[index].Colonia19=aa[0].DirColonia
             }
             if (dias[index].Hora20==0) {
                 dias[index].Hora20="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora20])
 
                 dias[index].Colonia20=aa[0].DirColonia
             }
             if (dias[index].Hora21==0) {
                 dias[index].Hora21="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora21])
 
                 dias[index].Colonia21=aa[0].DirColonia
             }
             if (dias[index].Hora22==0) {
                 dias[index].Hora22="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora22])
 
                 dias[index].Colonia22=aa[0].DirColonia
             }
             if (dias[index].Hora23==0) {
                 dias[index].Hora23="Libre"
             }else{
-                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
+                let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora23])
 
                 dias[index].Colonia23=aa[0].DirColonia
             }
@@ -633,7 +634,6 @@ router.post("/flitrado_fecha", isLoggedIn, async (req, res)=>{
          }
          return dias
     }
-
 
     let di = await pool.query("SELECT * FROM `tblcalentec1` WHERE FechaDia >= ? ORDER BY `FechaDia` ASC LIMIT 7",[fecha])
     di = await diaPlus(di)
@@ -1300,7 +1300,7 @@ router.get("/servistar/agregar_servicios:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
     let orden=await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio="+id)
     orden= await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ? AND IdEquipo = ?",[orden[0].IdCliente,orden[0].IdEquipo])
-    let ser = await pool.query("SELECT * FROM `tblservicios` WHERE Equipo = ?",[orden[0].Tipo])
+    let ser = await pool.query("SELECT * FROM `tblservicios` WHERE Equipo = ? AND Marca = ?",[orden[0].Tipo,orden[0].Marca])
     let serv = await pool.query("SELECT * from tblservicios, tblreparacioneservicio WHERE tblreparacioneservicio.IdOrdenServicio = ? AND tblservicios.IdServicio=tblreparacioneservicio.IdServicio;",[id])
 
     
@@ -1972,8 +1972,8 @@ router.post("/edit_refaccion", isLoggedIn, async (req, res) => {
 
 })
 router.post("/edit_servicio", isLoggedIn, async (req, res) => {
-    let { IdServicio, Descripcion, Horas, CostoServicio, Equipo } = req.body
-    const ser={ Descripcion, Horas, CostoServicio,Equipo }
+    let { IdServicio, Descripcion, Horas, CostoServicio, Equipo, Marca } = req.body
+    const ser={ Descripcion, Horas, CostoServicio,Equipo,Marca  }
     await pool.query("UPDATE `tblservicios` SET ? WHERE IdServicio = ?", [ser,IdServicio ])
     
     res.redirect("/servistar/servicios")
@@ -1988,8 +1988,8 @@ router.post("/agregar_refaccion", isLoggedIn, async (req, res) => {
     
 })
 router.post("/agregar_servicio", isLoggedIn, async (req, res) => {
-    let { Descripcion, Horas, CostoServicio,Equipo } = req.body
-    const newrefa ={Descripcion, Horas, CostoServicio,Equipo}
+    let { Descripcion, Horas, CostoServicio,Equipo,Marca } = req.body
+    const newrefa ={Descripcion, Horas, CostoServicio,Equipo,Marca}
     await pool.query("INSERT INTO tblservicios SET ? ", [newrefa])
     
     res.redirect("/servistar/servicios")
