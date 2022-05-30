@@ -32,7 +32,7 @@
           <a class="dropdown-item" href="/servistar/tecnicos">Tecnicos</a>
           <a class="dropdown-item" href="/servistar/refacciones">Refacciones</a>
           <a class="dropdown-item" href="/servistar/gastos_fijos">Gastos Fijos</a>
-          <a class="dropdown-item" href="/servistar/servicios">Descripcion <br> del trabajo</a>
+          <a style="display: none;" class="dropdown-item" href="/servistar/servicios">Descripcion <br> del trabajo</a>
         </div>
       </li>
         <li class="nav-item" id="admin" style="display: block;">
@@ -522,7 +522,7 @@
                                             <option value="Conexion Demostracion">Conexion Demostracion</option>
                                         </select>
                                     </div>  
-                                    <div class="col-md-4" style="">
+                                    <div class="col-md-4" style="display: none;">
                                         <label>Trabajo a realizar </label><br>
                                         <a href="/servistar/agregar_servicios{{IdOrdenServicio}}" target="_blank" class="btn btn-info" style="color:white">Agregar Reparaciones</a>
                                     </div>
@@ -531,12 +531,12 @@
                                          <a target="_blank" href="/servistar/agregar_refaccion{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Refacciones al servicio</a>
                                         
                                     </div>
-                                    </div>  
-                                    <div class="row">
                                      <div class="col-md-4">
                                         <label>Tecnico {{IdTecnico}} y Ayudante {{IdAyudante}}</label>
                                         <a target="_blank" href="/servistar/tecnicos_ayudantes{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar tecnicos y ayudantes</a>
                                     </div>
+                                    </div>  
+                                    <div class="row">
                                     </div>
                                     <div class="form-group">
                                         <label>Diagnostico</label><br>
@@ -547,37 +547,38 @@
                                         <textarea name="Descripcion" disabled id="Descripcion{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" >{{Descripcion}}</textarea>
                                     </div>
                                     <div class="row">
-                                     <div class="col-md-4">
-                                        <label>Gastos fijos</label><br>
-                                        <textarea  disabled id="gastos{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
-                                    </div>
-                                     <div class="col-md-4">
-                                        <label>Servicio</label><br>
-                                        <textarea  disabled id="servicio{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
-                                    </div>
-                                     <div class="col-md-4">
+                                     <div class="col-md-6">
                                         <label>Refacciones</label><br>
                                         <textarea  disabled id="refaccion{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
+                                     <div class="col-md-4" style="display: none;">
+                                        <label>Servicio</label><br>
+                                        <textarea  disabled id="servicio{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
-                                    <div class="row">
-                                     <div class="col-md-4">
+                                     <div class="col-md-6">
                                         <label>Refacciones en garantia</label><br>
                                         <textarea  disabled id="refaccion_g{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
-                                     <div class="col-md-4">
+                                    </div>
+                                    <div class="row">
+                                     <div class="col-md-6">
+                                        <label>Gastos fijos</label><br>
+                                        <textarea  disabled id="gastos{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
+                                    </div>
+                                     <div class="col-md-6" style="display: none;">
                                         <label>Servicios en garantia</label><br>
                                         <textarea  disabled id="servicio_g{{IdOrdenServicio}}" class="form-control text-dark m-1" rows="4" ></textarea>
                                     </div>
                                     </div>
                                     <div class="row">
-                                     <div class="col-md-3">
+                                        
+                                     <div class="col-md-3" style="display: none;">
                                         <label>Presupuesto</label>
                                         <input name="Presupuesto" type="number" id="Presupuesto{{IdOrdenServicio}}"  value="{{Presupuesto}}" class="form-control text-dark m-1"
-                                            disabled >
+                                            disabled required>
                                     </div>
                                     <div class="col-md-3">
-                                        <label>Costo Real del Servicio</label>
+                                        <label>Costo del Servicio</label>
                                         <input type="number" name="CostoServicio" id="CostoServicio{{IdOrdenServicio}}" value="{{CostoServicio}}" class="form-control text-dark m-1"
                                         disabled >
                                     </div>
@@ -602,6 +603,14 @@
                                             <option  value="180">180</option>
                                         </select>
                                     </div>
+                                     <div class="col-md-3">
+                                        <label>Lugar de Reparacion</label>
+                                        <select name="LugarReparacion" id="LugarReparacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
+                                            <option value="{{LugarReparacion}}">{{LugarReparacion}}</option>
+                                            <option value="Casa del cliente">Casa del cliente</option>
+                                            <option   value="Taller">Taller</option>
+                                        </select>
+                                    </div> 
                                     </div>
                                     
                                      <div class="row">
@@ -628,14 +637,7 @@
                                     </div>
                                     
                                     <div class="row">
-                                     <div class="col-md-3">
-                                        <label>Lugar de Reparacion</label>
-                                        <select name="LugarReparacion" id="LugarReparacion{{IdOrdenServicio}}" class="form-select text-dark m-1 " disabled>
-                                            <option value="{{LugarReparacion}}">{{LugarReparacion}}</option>
-                                            <option value="Casa del cliente">Casa del cliente</option>
-                                            <option   value="Taller">Taller</option>
-                                        </select>
-                                    </div> 
+                                    
                                    <div class="col-md-3">
                                         <label>Dias para Vencimiento</label>
                                         <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}" value="{{DiasVencimiento}}" class="form-control text-dark m-1"
@@ -645,8 +647,8 @@
                                     <div class="row">
                                     
                                      <div class="col-md-3">
-                                        <label>Articulo o Servicio en Garantia</label>
-                                          <a target="_blank" href="/servistar/garantia{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar Servicio o refaccion</a>
+                                        <label>Articulo en Garantia</label>
+                                          <a target="_blank" href="/servistar/garantia{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar refaccion en garantia</a>
                                     </div>
                                      <div class="col-md-4">
                                         <label>Agregar gastos fijos</label><br>

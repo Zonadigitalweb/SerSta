@@ -70,20 +70,20 @@
                                     <table class="table table-bordered table-hover" id="tblmas">
                                         <thead id="tblh" style="display:none">
                                             <tr role="row">
-                                                <th>Descripcion</th>
-                                                <th>Equipo</th>
-                                                <th>Horas</th>
-                                                <th>Costo de servicio</th>
+                                                <th style="width: 500px;">Descripcion</th>
+                                                <th style="width: 500px;">Equipo</th>
+                                                <th style="width: 500px;">Horas</th>
+                                                <th style="width: 500px;">Costo de servicio</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
                                             {{#each Servicios}}
-                                            <tr id="{{IdServicio }}" style="display:none">
-                                                <td><a href="/servistar/ver_servicio{{IdServicio }}/"
+                                            <tr id="{{IdServicio }}" style="display:none;">
+                                                <td style="width: 500px;"><a href="/servistar/ver_servicio{{IdServicio }}/"
                                                         class="link-primary">{{Descripcion}}</a> </td>
-                                                <td>{{Equipo}}</td>
-                                                <td>{{Horas}}</td>
-                                                <td>{{CostoServicio}}</td>
+                                                <td style="width: 500px;">{{Equipo}}</td>
+                                                <td style="width: 500px;">{{Horas}}</td>
+                                                <td style="width: 500px;">{{CostoServicio}}</td>
 
                                             </tr>
                                             {{/each}}

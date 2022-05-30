@@ -78,20 +78,20 @@
                                     <table class="table table-bordered table-hover" id="tblmas">
                                         <thead id="tblh" style="display:none">
                                             <tr role="row">
-                                                <th>Nombre</th>
-                                                <th>Colonia</th>
-                                                <th>Calle</th>
-                                                <th>Numero</th>
+                                                <th style="width: 500px;">Nombre</th>
+                                                <th style="width: 500px;">Colonia</th>
+                                                <th style="width: 500px;">Calle</th>
+                                                <th style="width: 500px;">Numero</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
                                             {{#each clientes}}
                                             <tr id="{{IdCliente}}" style="display:none">
-                                                <td><a href="/servistar/ver_cliente{{IdCliente}}/"
+                                                <td style="width: 500px;"><a href="/servistar/ver_cliente{{IdCliente}}/"
                                                         class="link-primary">{{Nombre}}</a> </td>
-                                                <td>{{DirColonia}}</td>
-                                                <td>{{DirCalle}}</td>
-                                                <td>{{DirNum}}</td>
+                                                <td style="width: 500px;">{{DirColonia}}</td>
+                                                <td style="width: 500px;">{{DirCalle}}</td>
+                                                <td style="width: 500px;">{{DirNum}}</td>
                                             </tr>
                                             {{/each}}
                                         </tbody>

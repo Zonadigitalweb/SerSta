@@ -201,7 +201,7 @@ router.get("/servistar/calendario_tec", isLoggedIn, async (req, res)=>{
             }else{
                 let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora6])
 
-                dias[index].Colonia7=aa[0].DirColonia
+                dias[index].Colonia6=aa[0].DirColonia
             }
             if (dias[index].Hora7==0) {
                 dias[index].Hora7="Libre"
@@ -508,7 +508,7 @@ router.post("/flitrado_fecha", isLoggedIn, async (req, res)=>{
             }else{
                 let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora6])
 
-                dias[index].Colonia7=aa[0].DirColonia
+                dias[index].Colonia6=aa[0].DirColonia
             }
             if (dias[index].Hora7==0) {
                 dias[index].Hora7="Libre"
@@ -762,7 +762,7 @@ router.get("/servistar/calendario_ayu", isLoggedIn, async (req, res)=>{
             }else{
                 let aa= await pool.query("SELECT tblclientes.DirColonia FROM tblordenservicio,tblclientes WHERE tblordenservicio.IdOrdenServicio=? AND tblclientes.IdCliente=tblordenservicio.IdCliente",[dias[index].Hora1])
 
-                dias[index].Colonia7=aa[0].DirColonia
+                dias[index].Colonia6=aa[0].DirColonia
             }
             if (dias[index].Hora8==0) {
                 dias[index].Hora8="Libre"
@@ -1216,8 +1216,7 @@ router.get("/servistar/gastos_fijos:id/", isLoggedIn, async (req, res) => {
         orden[0].PrecioServicios=parseInt(orden[0].PrecioServicios,10)
         orden[0].Dolares=parseInt(orden[0].Dolares,10)
         
-        com=orden[0].PrecioServicios-orden[0].Dolares
-        com=2075
+        com=orden[0].CostoServicio-orden[0].Dolares
         if (com <= 1200) {
             com=0
         } else if(com <= 1700){
@@ -1232,7 +1231,7 @@ router.get("/servistar/gastos_fijos:id/", isLoggedIn, async (req, res) => {
 
         orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
         total=orden[0].Presupuesto-orden[0].PrecioServicios
-        utili=orden[0].PrecioServicios-com
+        utili=orden[0].CostoServicio-orden[0].Presupuesto-com
     
 
         res.render("layouts/agregar_gastos_s",{gastos,gastos_fijos,id,togastos,com,total,utili,orden})
@@ -1262,7 +1261,7 @@ router.get("/servistar/gastos_fijos:id/", isLoggedIn, async (req, res) => {
 
 router.get("/servistar/garantia:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
-    let ref = await pool.query("SELECT * FROM `tblrefacciones`")
+    let ref = await pool.query("SELECT * FROM `tblrefacciones` WHERE Existencias > 0")
     let ser = await pool.query("SELECT * FROM `tblservicios`")
     let refac= await pool.query("SELECT * from tblrefacciones, tblgarantiaservicio WHERE tblgarantiaservicio.IdRefaccion <> 'null' AND  tblgarantiaservicio.IdOrdenServicio = ? AND tblrefacciones.IdRefaccion=tblgarantiaservicio.IdRefaccion;",[id])
     let serv= await pool.query("SELECT * from tblservicios, tblgarantiaservicio WHERE tblgarantiaservicio.IdServicio <> 'null' AND tblgarantiaservicio.IdOrdenServicio = ? AND tblservicios.IdServicio=tblgarantiaservicio.IdServicio;",[id])
@@ -1274,6 +1273,7 @@ router.get("/eliminar_garantia:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
     
     let serv= await pool.query("SELECT * FROM tblgarantiaservicio WHERE IdReferencia = ?",[id])
+    await pool.query("UPDATE tblrefacciones SET Existencias=Existencias+1 WHERE IdRefaccion = ?",[serv[0].IdRefaccion])
     await pool.query("DELETE FROM tblgarantiaservicio WHERE IdReferencia = ?",[id])
     
     res.redirect("/servistar/garantia"+serv[0].IdOrdenServicio)
@@ -1326,9 +1326,11 @@ router.get("/servistar/agregar:ido/ref:idr/", isLoggedIn, async (req, res) => {
     await pool.query("INSERT INTO tblrefaccionservicio SET IdOrdenServicio = "+ido+", IdRefaccion ="+idr)
     res.redirect("/servistar/agregar_refaccion"+ido+"/")
 })
+
 router.get("/servistar/addgarantia:ido/ref:idr/", isLoggedIn, async (req, res) => {
     let { ido,idr } = req.params
     await pool.query("INSERT INTO tblgarantiaservicio SET IdOrdenServicio = "+ido+", IdRefaccion ="+idr)
+    await pool.query("UPDATE tblrefacciones SET Existencias=Existencias-1 WHERE IdRefaccion = ?",[idr])
     res.redirect("/servistar/garantia"+ido+"/")
 })
 router.get("/servistar/agregar:ido/gas:idr/", isLoggedIn, async (req, res) => {
@@ -1345,11 +1347,11 @@ router.get("/servistar/agregar:ido/gas:idr/", isLoggedIn, async (req, res) => {
     
     res.redirect("/servistar/gastos_fijos"+ido)
 })
-router.get("/servistar/addgarantia:ido/ser:idr/", isLoggedIn, async (req, res) => {
+/*router.get("/servistar/addgarantia:ido/ser:idr/", isLoggedIn, async (req, res) => {
     let { ido,idr } = req.params
     await pool.query("INSERT INTO tblgarantiaservicio SET IdOrdenServicio = "+ido+", IdServicio ="+idr)
     res.redirect("/servistar/garantia"+ido+"/")
-})
+})*/
 
 
 router.get("/servistar/agregar:ido/ser:idr/", isLoggedIn, async (req, res) => {
@@ -2057,8 +2059,9 @@ router.get("/servistar/refacciones", isLoggedIn, async (req, res) => {
 
 })
 router.get("/servistar/servicios", isLoggedIn, async (req, res) => {
-    let Servicios = await pool.query("SELECT * FROM tblservicios")
-    res.render("layouts/servicios",{Servicios})
+    /*let Servicios = await pool.query("SELECT * FROM tblservicios")
+    res.render("layouts/servicios",{Servicios})*/
+    res.redirect("/servistar/servicios_pendientes")
 
 })
 
