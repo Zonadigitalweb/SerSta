@@ -637,15 +637,25 @@
                                     </div>
                                     
                                     <div class="row">
-                                    
                                    <div class="col-md-3">
                                         <label>Dias para Vencimiento</label>
                                         <input type="number" name="DiasVencimiento" id="DiasVencimiento{{IdOrdenServicio}}" value="{{DiasVencimiento}}" class="form-control text-dark m-1"
                                             disabled >
                                     </div>
+                                    <div class="col-md-3">
+                                    <label>Dolares</label>
+                                    <input type="number" class="form-control text-dark m-1" id="Dolares{{IdOrdenServicio}}" name="Dolares" value="{{Dolares}}" disabled>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Refacciones</label>
+                                    <input type="number" class="form-control text-dark m-1" id="RefaccionesGastoFijo{{IdOrdenServicio}}" name="RefaccionesGastoFijo" value="{{RefaccionesGastoFijo}}" disabled >
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Refacciones PEP</label>
+                                    <input type="number" class="form-control text-dark m-1" id="RefaccionesPEP{{IdOrdenServicio}}" name="RefaccionesPEP"  value="{{RefaccionesPEP}}" disabled >
+                                </div>
                                     </div>
                                     <div class="row">
-                                    
                                      <div class="col-md-3">
                                         <label>Articulo en Garantia</label>
                                           <a target="_blank" href="/servistar/garantia{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar refaccion en garantia</a>
@@ -655,6 +665,20 @@
                                         <a target="_blank" href="/servistar/gastos_fijos{{IdOrdenServicio}}" class="btn btn-info" style="color:white">Agregar gastos fijos</a>
                                     </div>
                                     </div>
+                                     <div class="row">
+                                <div class="col-md-4">
+                                    <label>Comision a Tecnico</label>
+                                    <input type="text" class="form-control text-dark m-1" value="{{Comisi}}" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Total de Gastos</label>
+                                    <input type="text" class="form-control text-dark m-1"  value="{{Tot}}" readonly >
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Utilidad</label>
+                                    <input type="text" class="form-control text-dark m-1"  value="{{Utili}}" readonly >
+                                </div>
+                                </div>
                                     <br>
                                     <div class="form-group" >
                                         <button class="btn btn-info btn-block mx-1 " id="{{IdOrdenServicio}}BTN" style="display: none;" title="Enviar">
@@ -831,6 +855,9 @@
                 document.getElementById("FechaTerminado"+id).disabled=false
                 document.getElementById("FechaEntrega"+id).disabled=false
                 document.getElementById("VigenciaGarantia"+id).disabled=false
+                document.getElementById("Dolares"+id).disabled=false
+                document.getElementById("RefaccionesGastoFijo"+id).disabled=false
+                document.getElementById("RefaccionesPEP"+id).disabled=false
                // document.getElementById("FechaVencimiento"+id).disabled=false
                 //document.getElementById("DiasVencimiento"+id).disabled=false
                 document.getElementById(id+"BTN").style.display="block"

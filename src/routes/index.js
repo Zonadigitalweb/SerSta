@@ -1892,6 +1892,7 @@ router.post("/agregar_registro", isLoggedIn, async (req, res) => {
     if (IdTecnico=="") {
         IdTecnico=null
     }
+    Presupuesto=0
 
 
     const newarticulo = {IdSucursal,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita, Descripcion, FechaVisita, IdAyudante, IdTecnicoSegui, IdAyudanteSegui,VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,IdTecnico,Diagnostico,Presupuesto,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento }
@@ -2087,9 +2088,8 @@ router.post("/editar_cliente", isLoggedIn, async (req, res) => {
 })
 
 router.post("/editar_registro", isLoggedIn, async (req, res) => {
-    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita, FechaVisita, VisitaRealizada, Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento} = req.body
-    let aaa={ IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,Descripcion,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
-    log(aaa)
+    let { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita, FechaVisita, VisitaRealizada, Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento,Dolares,RefaccionesGastoFijo,RefaccionesPEP} = req.body
+    let aaa={ IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,IdCliente,IdEquipo,Falla,HoraVisita,VisitaRealizada,HoraVisitaReal,Descripcion,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento,Dolares,RefaccionesGastoFijo,RefaccionesPEP}
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdOrdenServicio`,`Fecha`) VALUES (?, '7', ?, current_timestamp())",[id,IdOrdenServicio])
     
@@ -2118,17 +2118,26 @@ router.post("/editar_registro", isLoggedIn, async (req, res) => {
     if (DiasVencimiento=="") {
         DiasVencimiento=null
     }
+    if (Dolares=="") {
+        Dolares=0
+    }
+    if (RefaccionesGastoFijo=="") {
+        RefaccionesGastoFijo=0
+    }
+    if (RefaccionesPEP=="") {
+        RefaccionesPEP=0
+    }
    
     const cerrado = await pool.query("SELECT * FROM `tblnotas` WHERE IdOrdenServicio = ?",[IdOrdenServicio])
     if (cerrado.length==0) {
-        const neworden = { IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita, FechaVisita, Descripcion, VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+        const neworden = { Dolares,RefaccionesGastoFijo,RefaccionesPEP,IdOrdenServicio,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita, FechaVisita, Descripcion, VisitaRealizada,HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
     }else {
         if (cerrado[0].NotaCerrada==1){
-        const neworden =  {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita,Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+        const neworden =  {Dolares,RefaccionesGastoFijo,RefaccionesPEP,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita,Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
         }else if (cerrado[0].NotaCerrada==0) {
-            const neworden = {FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita,Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
+            const neworden = {Dolares,RefaccionesGastoFijo,RefaccionesPEP,FechaSolicitud,HoraLLamda,MedioDeInformacion,Falla,HoraVisita,VisitaRealizada, FechaVisita,Descripcion, HoraVisitaReal,TipoTrabajo,Reparaciones,Refacciones,Diagnostico,CostoServicio,Garantia,AceptarPresupuesto,FechaTerminadoEstimado,LugarReparacion,EstadoServicio,FechaTerminado,FechaEntrega,VigenciaGarantia,ArticuloGarantia,FechaVencimiento,DiasVencimiento}
         await pool.query("UPDATE tblordenservicio SET ? WHERE IdOrdenServicio = ?", [neworden,IdOrdenServicio])
         }
     } 
@@ -2255,6 +2264,40 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
         gara.push(d)
         let e= await pool.query("SELECT * FROM tblgarantiaservicio,tblservicios WHERE tblgarantiaservicio.IdOrdenServicio = ? AND tblservicios.IdServicio=tblgarantiaservicio.IdServicio;",[orden[index].IdOrdenServicio])
         garaa.push(e)
+
+
+        let com,total,utili
+
+        if (orden[index].Dolares==null) {
+            orden[index].Dolares=0
+        }
+        if (orden[index].CostoServicio==null) {
+            orden[index].CostoServicio=0
+        }
+        if (orden[index].Presupuesto==null) {
+            orden[index].Presupuesto=0
+        }
+
+        
+        com=orden[index].CostoServicio-orden[index].Dolares
+        if (com <= 1200) {
+            com=0
+        } else if(com <= 1700){
+            com=150
+        } else if(com <= 2200){
+            com=200
+        } else if(com <= 2500){
+            com=250
+        } else {
+            com=300
+        }
+
+        total=orden[index].Presupuesto
+        utili=orden[index].CostoServicio-orden[index].Presupuesto-com
+        orden[index].Comisi=com
+        orden[index].Utili=utili
+        orden[index].Tot=total
+    
         
         
     }
