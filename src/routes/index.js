@@ -1432,39 +1432,8 @@ router.get("/eliminar_servicio:id/", isLoggedIn, async (req, res) => {
 router.get("/servistar/notas:id/", isLoggedIn, async (req, res) =>{
 
     const { id } = req.params
-    let notass = await pool.query("SELECT * FROM tblnotas WHERE IdOrdenServicio = ?",[id])
-    const orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[id])
-    if (notass[0] == undefined) {
-
-        res.render("layouts/agregar_nota",{id, orden})
-        return
-        
-    } else{
-
-        if (notass[0].NotaCerrada == 1) {
-            
-                let notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ? order by `Descripcion` asc",[notass[0].IdNotas])
-                let aa =5050
-                res.render("layouts/solo_notas",{notas, id, aa,orden})
-                return
-            
-        } else{
-            let IdCliente=notass[0].IdCliente
-            let notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ? order by `Descripcion` asc",[notass[0].IdNotas])
-            if (notas[0] == undefined) {
-                let IdN= notass[0].IdNotas
-                res.render("layouts/ver_notas",{notas, id, orden, IdN, IdCliente})
-            } else{
-                let IdN= notas[0].IdNotas
-                res.render("layouts/ver_notas",{notas, id, orden, IdN, IdCliente})
-
-            }
-            return
-        }
-    }
-
-
-
+    await pool.query("UPDATE tblidnotas SET IdOrden = ?",[id])
+    res.redirect("/pdf")
 }) 
 
 

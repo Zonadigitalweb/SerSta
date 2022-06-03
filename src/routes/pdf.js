@@ -257,7 +257,7 @@ module.exports={
 
     
     async desimg(req,res){
-        await crearimagen("http://localhost:4000/ver")
+        await crearimagen("http://localhost:3500/ver")
         let idOrden = await pool.query("SELECT * FROM `tblidnotas`")
         idOrden=idOrden[0].IdOrden
         let datos = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[idOrden])
@@ -272,7 +272,17 @@ module.exports={
  
 
     async pdf(req,res){
-        let idOrden = await pool.query("SELECT * FROM `tblidnotas`")
+        let orden = await pool.query("SELECT * FROM tblidnotas")
+        orden= await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[orden[0].IdOrden])
+        let cliente = await pool.query("SELECT * FROM tblclientes WHERE IdCliente = ?",[orden[0].IdCliente])
+        let tec = await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[orden[0].IdTecnico])
+        const cantidad = numeroALetras(orden[0].CostoServicio, {
+            plural: "PESOS",
+            singular: "PESO",
+            centPlural: "CENTAVOS",
+            centSingular: "CENTAVO"
+          });
+      /*  let idOrden = await pool.query("SELECT * FROM `tblidnotas`")
         idOrden=idOrden[0].IdOrden
         const datos = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[idOrden])
         const cliente = await pool.query("SELECT * FROM tblclientes WHERE IdCliente = ?",[datos[0].IdCliente])
@@ -298,12 +308,7 @@ module.exports={
         }else{
             datos[0].CostoServicio=total
         }
-        const cantidad = numeroALetras(datos[0].CostoServicio, {
-            plural: "PESOS",
-            singular: "PESO",
-            centPlural: "CENTAVOS",
-            centSingular: "CENTAVO"
-          });
+        
           datos[0].CostoServicio = Intl.NumberFormat('en-EU', {style: 'currency',currency: 'MXN', minimumFractionDigits: 2}).format(datos[0].CostoServicio);
           for (let index = 0; index < 12; index++) {
                 let num=notas.length
@@ -316,11 +321,13 @@ module.exports={
                 }
               
           }
-        res.render("nota.hbs",{ layout:"mainpdf",datos,cliente,tecnico,equipo,cantidad,notas,garantia})
+        res.render("nota.hbs",{ layout:"mainpdf",datos,cliente,tecnico,equipo,cantidad,notas,garantia})*/
+
+        res.render("nota.hbs",{ layout:"mainpdf",orden,cliente,cantidad,tec})
     },
     
     async despdf(req,res){
-        const pdf = await crearpdf("http://localhost:4000/verpdf")
+        const pdf = await crearpdf("http://localhost:3500/verpdf")
         res.contentType("application/pdf")
         res.send(pdf)
 
