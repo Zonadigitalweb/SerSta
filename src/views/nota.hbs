@@ -35,17 +35,19 @@
     <table class="table table-borderless" style="border-color: blue; border: blue 1px solid; width: 156px; height: 73px; -webkit-print-color-adjust: exact; margin:0%; padding:0%;">
       <thead>
         <tr style="height: 20px;">
-          <th colspan="3" style="height: 20px; background-color: blue; color:white; padding:0%;"><center style="height: 35px; font-size: 14px;">POLIZA DE GARANTÍA</center></th>
+          <th colspan="3" style="height: 20px; background-color: blue; color:white; padding:0%;"><center style="height: 35px; font-size: 14px;">PÓLIZA DE GARANTÍA</center></th>
         </tr>
       </thead>
       <tbody>
         <tr style="border-bottom: blue 1px solid; border-right: blue 1px solid; font-size: 11px;">
           {{#each orden}}
-         <td style="padding: 0%; border-right: blue 1px solid;"><center>Dia</center></td><td style="padding: 0%; border-right: blue 1px solid;"><center>Mes</center></td><td style="padding: 0%; border-right: blue 1px solid;"><center>Año</center></td>
+         <td style="padding: 0%; border-right: blue 1px solid;"><center>Día</center></td><td style="padding: 0%; border-right: blue 1px solid;"><center>Mes</center></td><td style="padding: 0%; border-right: blue 1px solid;"><center>Año</center></td>
           {{/each}}
         </tr>
         <tr style="font-size: 11px;">
+          {{#each orden}}
            <td style="padding: 0%; border-right: blue 1px solid; font-size: 11px;"><center>{{momentDay FechaEntrega}}</center></td><td style="font-size: 11px; padding: 0%; border-right: blue 1px solid;"><center>{{momentMot FechaEntrega}}</center></td><td style="padding: 0%; border-right: blue 1px solid;"><center>{{momentYea FechaEntrega}}</center></td>
+          {{/each}}
         </tr>
        
       </tbody>
@@ -57,7 +59,7 @@
   <table class="table table-borderless" style="border-color: blue; border: blue 1px solid; width: 780px; margin:0%; padding:0%;">
       <thead style="text-align: center;">
         <tr style="background-color: blue; height: 15px; margin:0%; padding:0%;">
-          <th colspan="2" style="-webkit-print-color-adjust: exact; color: rgb(255, 255, 255); height: 15px; margin:0%; padding:0%; font-size: 14px; height: 14px;">Descripcion del servicio</th>
+          <th colspan="2" style="-webkit-print-color-adjust: exact; color: rgb(255, 255, 255); height: 15px; margin:0%; padding:0%; font-size: 14px; height: 14px;">Descripción del servicio</th>
         </tr>
       </thead>
       <tbody>
@@ -82,7 +84,7 @@
     <table class="table table-borderless" style="width: 510px; margin:0%; height: 25px;">
       <tbody>
         <tr style="height: 25px;">
-          <td style="padding: 0%;"><strong style="color: blue; font-size:14px">*En partes electricas no hay garantia </strong></td>
+          <td style="padding: 0%;"><strong style="color: blue; font-size:14px">*En partes eléctricas y electrónicas  no hay garantía </strong></td>
         </tr>
       </tbody>
     </table>
@@ -91,7 +93,7 @@
     <table class="table table-borderless" style="border-color: blue; border: blue 1px solid; width: 270px; -webkit-print-color-adjust: exact; margin:0%; padding:0%;">
       <thead>
         <tr>
-          <th colspan="3" style="background-color: blue; color:white; padding:0%;"><center style="font-size:14px">Nombre del Tecnico</center></th>
+          <th colspan="3" style="background-color: blue; color:white; padding:0%;"><center style="font-size:14px">Nombre del Técnico</center></th>
         </tr>
       </thead>
       <tbody>

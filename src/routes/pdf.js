@@ -282,52 +282,32 @@ module.exports={
             centPlural: "CENTAVOS",
             centSingular: "CENTAVO"
           });
-      /*  let idOrden = await pool.query("SELECT * FROM `tblidnotas`")
-        idOrden=idOrden[0].IdOrden
-        const datos = await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[idOrden])
-        const cliente = await pool.query("SELECT * FROM tblclientes WHERE IdCliente = ?",[datos[0].IdCliente])
-        let tecnico = await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[datos[0].IdTecnico])
-        console.log(tecnico)
-        tecnico=tecnico[0].Nombre
-        
-        console.log(tecnico)
-        const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ? AND IdEquipo = ?", [datos[0].IdCliente, datos[0].IdEquipo])
-        let notas = await pool.query("SELECT * FROM tblnotas WHERE IdOrdenServicio = ?",[idOrden])
-        let garantia=notas[0].Garantia
-        notas = await pool.query("SELECT * FROM tbldetallenota WHERE IdNotas = ?",[notas[0].IdNotas])
-        let total=0
-        for (let index = 0; index < notas.length; index++) {
-            total+=notas[index].Importe
-            
-            if (notas[index].Importe==0 || notas[index].Importe ==datos[0].CostoServicio ) {
-                notas[index].Importe=""
-            }
-        }
-        if (total==0) {
-            
-        }else{
-            datos[0].CostoServicio=total
-        }
-        
-          datos[0].CostoServicio = Intl.NumberFormat('en-EU', {style: 'currency',currency: 'MXN', minimumFractionDigits: 2}).format(datos[0].CostoServicio);
-          for (let index = 0; index < 12; index++) {
-                let num=notas.length
-                if (num<11) {
-                    notas.push({
-                        Cantidad:"",
-                        Descripcion:"",
-                        Importe:""
-                    })
-                }
-              
-          }
-        res.render("nota.hbs",{ layout:"mainpdf",datos,cliente,tecnico,equipo,cantidad,notas,garantia})*/
-
         res.render("nota.hbs",{ layout:"mainpdf",orden,cliente,cantidad,tec})
     },
     
     async despdf(req,res){
         const pdf = await crearpdf("http://localhost:3500/verpdf")
+        res.contentType("application/pdf")
+        res.send(pdf)
+
+    },
+
+    async pdff(req,res){
+        let orden = await pool.query("SELECT * FROM tblidnotas")
+        orden= await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[orden[0].IdOrden])
+        let cliente = await pool.query("SELECT * FROM tblclientes WHERE IdCliente = ?",[orden[0].IdCliente])
+        let tec = await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[orden[0].IdTecnico])
+        const cantidad = numeroALetras(orden[0].CostoServicio, {
+            plural: "PESOS",
+            singular: "PESO",
+            centPlural: "CENTAVOS",
+            centSingular: "CENTAVO"
+          });
+        res.render("notaa.hbs",{ layout:"mainpdf",orden,cliente,cantidad,tec})
+    },
+    
+    async despdff(req,res){
+        const pdf = await crearpdf("http://localhost:3500/verpdff")
         res.contentType("application/pdf")
         res.send(pdf)
 

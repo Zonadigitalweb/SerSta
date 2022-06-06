@@ -21,7 +21,6 @@ helpers.moment= (timestamp)=>{
     return fecha
 }
 helpers.momentDay= (timestamp)=>{ 
-  
     let fecha= moment(timestamp).format("DD");
      return fecha
  }

@@ -2533,6 +2533,10 @@ router.get("/pdf",  pdfc.despdf)
 
 router.get("/verpdf",  pdfc.pdf)
 
+router.get("/pdff",  pdfc.despdff)
+
+router.get("/verpdff",  pdfc.pdff)
+
 
 
 
