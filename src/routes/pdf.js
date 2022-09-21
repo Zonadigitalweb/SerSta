@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer")
 const pool = require("../database")
+var moment = require('moment');
 
 
 async function crearimagen(url){
@@ -24,7 +25,7 @@ async function crearpdf(url){
 
     await pagina.goto(url)
 
-    let pdf=await pagina.pdf()
+    let pdf=await pagina.pdf({margin:{top:50,bottom:50}})
 
     navegador.close()
 
@@ -282,6 +283,18 @@ module.exports={
             centPlural: "CENTAVOS",
             centSingular: "CENTAVO"
           });
+          if (orden.length!=0) {
+            if ((orden[0].FechaEntrega != null || orden[0].FechaEntrega != undefined) && (orden[0].VigenciaGarantia != null ||orden[0].VigenciaGarantia != undefined)) {
+                orden[0].FechaVencimiento=moment(orden[0].FechaEntrega).add(orden[0].VigenciaGarantia,'d')
+            
+            
+                var fecha1 = moment();
+            var fecha2 = moment(orden[0].FechaVencimiento);
+            
+            orden[0].DiasVencimiento = fecha2.diff(fecha1, 'days') 
+            }
+            
+        }
         res.render("nota.hbs",{ layout:"mainpdf",orden,cliente,cantidad,tec})
     },
     
@@ -293,17 +306,42 @@ module.exports={
     },
 
     async pdff(req,res){
-        let orden = await pool.query("SELECT * FROM tblidnotas")
-        orden= await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[orden[0].IdOrden])
-        let cliente = await pool.query("SELECT * FROM tblclientes WHERE IdCliente = ?",[orden[0].IdCliente])
-        let tec = await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[orden[0].IdTecnico])
-        const cantidad = numeroALetras(orden[0].CostoServicio, {
-            plural: "PESOS",
-            singular: "PESO",
-            centPlural: "CENTAVOS",
-            centSingular: "CENTAVO"
-          });
-        res.render("notaa.hbs",{ layout:"mainpdf",orden,cliente,cantidad,tec})
+        let fechas = await pool.query("SELECT * FROM tblidnotas WHERE IdNota = 1")
+        let orden= await pool.query("SELECT tblordenservicio.*, tblclientes.Nombre AS NombreCli, tblequipos.*, tbltecnicos.* FROM tblordenservicio,tblclientes,tblequipos,tbltecnicos WHERE tblordenservicio.FechaSolicitud >= ? AND tblordenservicio.FechaSolicitud <= ? AND tblclientes.IdCliente = tblordenservicio.IdCliente AND tblequipos.IdEquipo = tblordenservicio.IdEquipo AND tblequipos.IdCliente = tblordenservicio.IdCliente AND tbltecnicos.IdTecnico = tblordenservicio.IdTecnico",[fechas[0].FechaDesde,fechas[0].FechaHasta])
+        for (let index = 0; index < orden.length; index++) {
+            
+            let com=orden[index].CostoServicio-orden[index].Dolares
+            if (com <= 1200) {
+                com=0
+            } else if(com <= 1700){
+                com=150
+            } else if(com <= 2200){
+                com=200
+            } else if(com <= 2500){
+                com=250
+            } else {
+                com=300
+            }
+            orden[index].TipoTrabajo=com
+            let utili=orden[index].CostoServicio-orden[index].Presupuesto-com
+            orden[index].VisitaRealizada=utili
+            
+
+            let tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'KIT DE LIMPIEZA'")
+            orden[index].kit=tem[0].CostoVenta
+            tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'DLLS'")
+            orden[index].Dlls=tem[0].CostoVenta
+            tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'IVA'")
+            orden[index].Iva=tem[0].CostoVenta
+            tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'LUZ Y AGUA'")
+            orden[index].LyA=tem[0].CostoVenta
+            tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'GARANTIA'")
+            orden[index].Gara=tem[0].CostoVenta
+            tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'GASOLINA'")
+            orden[index].Gas=tem[0].CostoVenta
+
+        }
+        res.render("notaa.hbs",{ layout:"mainpdf", orden})
     },
     
     async despdff(req,res){
