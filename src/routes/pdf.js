@@ -337,7 +337,7 @@ module.exports={
             orden[index].LyA=tem[0].CostoVenta
             tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'GARANTIA'")
             orden[index].Gara=tem[0].CostoVenta
-            tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'GASOLINA'")
+            tem = await pool.query("SELECT * FROM tblgastosfijos WHERE Descripcion = 'GASOLINA VILLA'")
             orden[index].Gas=tem[0].CostoVenta
 
         }

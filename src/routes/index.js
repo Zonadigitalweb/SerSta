@@ -1273,8 +1273,12 @@ router.get("/eliminar_garantia:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
     
     let serv= await pool.query("SELECT * FROM tblgarantiaservicio WHERE IdReferencia = ?",[id])
+    log(serv)
     await pool.query("UPDATE tblrefacciones SET Existencias=Existencias+1 WHERE IdRefaccion = ?",[serv[0].IdRefaccion])
     await pool.query("DELETE FROM tblgarantiaservicio WHERE IdReferencia = ?",[id])
+    let ref = await pool.query("SELECT * FROM tblrefacciones WHERE IdRefaccion = ?",[serv[0].IdRefaccion])
+    ref[0].CostoVenta=parseInt(ref[0].CostoVenta,10)
+    await pool.query("UPDATE tblordenservicio SET Presupuesto = Presupuesto-? WHERE IdOrdenServicio = ?",[ref[0].CostoVenta,serv[0].IdOrdenServicio])
     
     res.redirect("/servistar/garantia"+serv[0].IdOrdenServicio)
 })
@@ -1289,10 +1293,10 @@ router.get("/eliminar_gasto:id/", isLoggedIn, async (req, res) => {
     orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
     orden[0].CostoServicio=parseInt(orden[0].CostoServicio,10)
 
-    let Cantidad=orden[0].CostoServicio-se[0].CostoVenta
+    let Cantidad=orden[0].Presupuesto-se[0].CostoVenta
     
 
-    await pool.query("UPDATE tblordenservicio SET CostoServicio = ? WHERE IdOrdenServicio = ?",[Cantidad,serv[0].IdOrdenServicio])
+    await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio = ?",[Cantidad,serv[0].IdOrdenServicio])
     Cantidad=se[0].Existencias+1
     await pool.query("UPDATE tblgastosfijos SET Existencias = ? WHERE IdGastoFijo = ?",[Cantidad,serv[0].IdGastoFijo])
     await pool.query("DELETE FROM tblgastoservicio WHERE IdReferencia = ?",[id])
@@ -1334,6 +1338,10 @@ router.get("/servistar/addgarantia:ido/ref:idr/", isLoggedIn, async (req, res) =
     let { ido,idr } = req.params
     await pool.query("INSERT INTO tblgarantiaservicio SET IdOrdenServicio = "+ido+", IdRefaccion ="+idr)
     await pool.query("UPDATE tblrefacciones SET Existencias=Existencias-1 WHERE IdRefaccion = ?",[idr])
+    let ref = await pool.query("SELECT * FROM tblrefacciones WHERE IdRefaccion = ?",[idr])
+    ref[0].CostoVenta=parseInt(ref[0].CostoVenta,10)
+    await pool.query("UPDATE tblordenservicio SET Presupuesto = Presupuesto+? WHERE IdOrdenServicio = ?",[ref[0].CostoVenta,ido])
+
     res.redirect("/servistar/garantia"+ido+"/")
 })
 router.get("/servistar/agregar:ido/gas:idr/", isLoggedIn, async (req, res) => {
@@ -1343,10 +1351,10 @@ router.get("/servistar/agregar:ido/gas:idr/", isLoggedIn, async (req, res) => {
     let orden= await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio ="+ido)
 
     se[0].CostoVenta=parseInt(se[0].CostoVenta,10)
-    orden[0].CostoServicio=parseInt(orden[0].CostoServicio,10)
+    orden[0].Presupuesto=parseInt(orden[0].Presupuesto,10)
 
-    let Cantidad=orden[0].CostoServicio+se[0].CostoVenta
-    await pool.query("UPDATE tblordenservicio SET CostoServicio = ? WHERE IdOrdenServicio = ?",[Cantidad,ido])
+    let Cantidad=orden[0].Presupuesto+se[0].CostoVenta
+    await pool.query("UPDATE tblordenservicio SET Presupuesto = ? WHERE IdOrdenServicio = ?",[Cantidad,ido])
     Cantidad=se[0].Existencias-1
     await pool.query("UPDATE tblgastosfijos SET Existencias = ? WHERE IdGastoFijo = ?",[Cantidad,idr])
     await pool.query("INSERT INTO tblgastoservicio SET IdOrdenServicio = "+ido+", IdGastoFijo ="+idr)
@@ -2216,7 +2224,7 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
     const { id } = req.params
     let sucu = req.user.Sucursal
     const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ?", [id])
-    let cliente= await pool.query("SELECT * from tblclientes WHERE IdCliente = ?",[id])
+    let cliente= await pool.query("SELECT * FROM tblclientes WHERE IdCliente = ?",[id])
     const orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdSucursal = ? AND IdCliente = ? ORDER BY IdOrdenServicio DESC",[sucu,id])
     
     let ser=[],
@@ -2259,8 +2267,9 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
             orden[index].Presupuesto=0
         }
 
+        total=orden[index].Presupuesto
         
-        com=orden[index].CostoServicio-orden[index].Dolares
+        com=orden[index].CostoServicio-total
         if (com <= 1100) {
             com=0
         } else if(com <= 1700){
@@ -2273,8 +2282,7 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
             com=300
         }
 
-        total=orden[index].Presupuesto
-        utili=orden[index].CostoServicio-orden[index].Presupuesto-com
+        utili=orden[index].CostoServicio-total-com
         orden[index].Comisi=com
         orden[index].Utili=utili
         orden[index].Tot=total

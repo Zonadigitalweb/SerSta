@@ -34,7 +34,7 @@
 <script>
 let id = {{user.IdUsuario}}
 if(id == 15 || id == 18){
-  if(document.getElementById("h1").style.color =="" && document.getElementById("h2").style.color == "" && document.getElementById("h3").style.color == ""){
+  if(document.getElementById("adminS").style.color =="rgb(181, 181, 181)" && document.getElementById("adminI").style.color == "rgb(181, 181, 181)"){
       document.getElementById("adminS").style.color="#b5b5b5"
       document.getElementById("adminI").style.color="#b5b5b5"
   } else {
@@ -43,6 +43,7 @@ if(id == 15 || id == 18){
 
   }
   
+
 }else{
   document.getElementById("admin").style.display="none"
 }
