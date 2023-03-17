@@ -293,8 +293,15 @@ module.exports={
             
             orden[0].DiasVencimiento = fecha2.diff(fecha1, 'days') 
             }
+            if(orden[0].DiasVencimiento < 1){
+                orden[0].DiasVencimiento=0
+            } else {
+                orden[0].DiasVencimiento++
+            }
             
         }
+        orden[0].CostoServicio=orden[0].CostoServicio.toLocaleString();
+
         res.render("nota.hbs",{ layout:"mainpdf",orden,cliente,cantidad,tec})
     },
     
@@ -303,6 +310,46 @@ module.exports={
         res.contentType("application/pdf")
         res.send(pdf)
 
+    },
+
+    async despdf_blan(req,res){
+        const pdf = await crearpdf("http://localhost:3500/verpdf_blan")
+        res.contentType("application/pdf")
+        res.send(pdf)
+
+    },
+
+    async pdf_blan(req,res){
+        let orden = await pool.query("SELECT * FROM tblidnotas")
+        orden= await pool.query("SELECT * FROM tblordenservicio WHERE IdOrdenServicio = ?",[orden[0].IdOrden])
+        let cliente = await pool.query("SELECT * FROM tblclientes WHERE IdCliente = ?",[orden[0].IdCliente])
+        let tec = await pool.query("SELECT * FROM tbltecnicos WHERE IdTecnico = ?",[orden[0].IdTecnico])
+        const cantidad = numeroALetras(orden[0].CostoServicio, {
+            plural: "PESOS",
+            singular: "PESO",
+            centPlural: "CENTAVOS",
+            centSingular: "CENTAVO"
+          });
+          if (orden.length!=0) {
+            if ((orden[0].FechaEntrega != null || orden[0].FechaEntrega != undefined) && (orden[0].VigenciaGarantia != null ||orden[0].VigenciaGarantia != undefined)) {
+                orden[0].FechaVencimiento=moment(orden[0].FechaEntrega).add(orden[0].VigenciaGarantia,'d')
+            
+            
+                var fecha1 = moment();
+            var fecha2 = moment(orden[0].FechaVencimiento);
+            
+            orden[0].DiasVencimiento = fecha2.diff(fecha1, 'days') 
+            }
+            if(orden[0].DiasVencimiento < 1){
+                orden[0].DiasVencimiento=0
+            } else {
+                orden[0].DiasVencimiento++
+            }
+            
+        }
+        orden[0].CostoServicio=orden[0].CostoServicio.toLocaleString();
+
+        res.render("nota_blan.hbs",{ layout:"mainpdf",orden,cliente,cantidad,tec})
     },
 
     async pdff(req,res){

@@ -1,0 +1,124 @@
+<div style="margin-left: 13px;">
+<div class="container-fluid p-1">
+  <div class="row mx-auto">
+    <div class="col-md-12">
+      <div class="row">
+
+        <div class="col-md-4" >
+          <img alt="" src="aei.jpeg" width="770px" >
+        </div>
+      </div>
+    </div>
+
+ <div class="row mx-auto " style="margin-bottom: 10px; margin:0%; padding:0%;">
+    <table class="table table-borderless " style="font-size: 11px; border-color: rgb(255, 255, 255); border: rgb(255, 255, 255) 1px solid; width: 624px; margin:0%; height: 25px;">
+      <tbody>
+        {{#each cliente}}
+        <tr style="height: 10px;">
+          <td colspan="2" style="border-bottom: rgb(255, 255, 255) 1px solid; padding: 0%;"><strong style="color: rgb(255, 255, 255);">Cliente: </strong>{{Nombre}}</td>
+        </tr>
+        <tr style="height: 10px;">
+          <td colspan="2" style="border-bottom: rgb(255, 255, 255) 1px solid; padding: 0%;"><strong style="color: rgb(255, 255, 255);">Domicilio: </strong>{{DirCalle}} #{{DirNum}}</td>
+        </tr>
+        <tr style="height: 10px;">
+          <td colspan="2" style="border-bottom: rgb(255, 255, 255) 1px solid; padding: 0%;"><strong style="color: rgb(255, 255, 255);">Colonia: </strong>{{DirColonia}}</td>
+        </tr>
+        <tr style="height: 10px;">
+          <td style="border-bottom: rgb(255, 255, 255) 1px solid; padding: 0%;"><strong style="color: rgb(255, 255, 255);">Tel: </strong>{{Telefono}}</td>
+          <td style="border-bottom: rgb(255, 255, 255) 1px solid; padding: 0%;"><strong style="color: rgb(255, 255, 255);">Ciudad: </strong>{{Municipio}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    
+    <table class="table table-borderless" style="border-color: rgb(255, 255, 255); border: rgb(255, 255, 255) 1px solid; width: 156px; height: 73px; -webkit-print-color-adjust: exact; margin:0%; padding:0%;">
+      <thead>
+        <tr style="height: 20px;">
+          <th colspan="3" style="height: 20px; background-color: rgb(255, 255, 255); color:white; padding:0%;"><center style="height: 35px; font-size: 14px;">PÓLIZA DE GARANTÍA</center></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: white 1px solid; border-right: white 1px solid; font-size: 11px;">
+          {{#each orden}}
+         <td style="padding: 0%; border-right: white 1px solid;"><center>Día</center></td><td style="padding: 0%; border-right: white 1px solid;"><center>Mes</center></td><td style="padding: 0%; border-right: white 1px solid;"><center>Año</center></td>
+          {{/each}}
+        </tr>
+        <tr style="font-size: 11px;">
+          {{#each orden}}
+           <td style="padding: 0%; border-right: white 1px solid; font-size: 11px;"><center>{{momentDay FechaEntrega}}</center></td><td style="font-size: 11px; padding: 0%; border-right: white 1px solid;"><center>{{momentMot FechaEntrega}}</center></td><td style="padding: 0%; border-right: white 1px solid;"><center>{{momentYea FechaEntrega}}</center></td>
+          {{/each}}
+        </tr>
+       
+      </tbody>
+    </table>
+     
+ 
+ </div>
+ <div class="row mx-auto " style="margin:0%; padding:0%;">
+  <table class="table table-borderless" style="border-color: white; border: white 1px solid; width: 780px; margin:0%; padding:0%;">
+      <thead style="text-align: center;">
+        <tr style="background-color: white; height: 15px; margin:0%; padding:0%;">
+          <th colspan="2" style="-webkit-print-color-adjust: exact; color: rgb(255, 255, 255); height: 15px; margin:0%; padding:0%; font-size: 14px; height: 14px;">Descripción del servicio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {{#each orden}}
+          <td colspan="2" style="border-bottom: white 1px solid; padding: 0%; height: 150px; font-size: 11px;">{{Descripcion}}</td>
+          {{/each}}
+        </tr>
+        <tr style="border-bottom: white 1px solid; margin:0%; padding:0%; font-size: 13px; height: 15px;">
+          <td style="-webkit-print-color-adjust: exact; background-color: white; color:white; margin:0%; padding:0%; height: 15px;">Cantidad con letra</td><td style="-webkit-print-color-adjust: exact; margin:0%; height: 15px; padding:0%; background-color: white; color:white;"><center>Total</center></td>
+        </tr>
+        <tr style="font-size:11px">
+          <td style="border-right: white 1px solid; margin:0%; padding:0%; height: 15px;">{{cantidad}}</td>
+          {{#each orden}}
+          <td style="margin:0%; padding:0%; height: 15px;"><center>${{CostoServicio}}</center></td>
+          {{/each}}
+        </tr>
+      </tbody>
+    </table>
+ </div>
+ <div class="row mx-auto " style="margin-bottom: 10px; margin:0%; padding:0%;">
+    <table class="table table-borderless" style="width: 510px; margin:0%; height: 25px;">
+      <tbody style="">
+        <tr style="height: 25px;">
+          <td style="padding: 0%;"><strong style="color: white; font-size:14px">*En partes eléctricas y electrónicas<br>no hay garantía </strong></td>
+          {{#each orden}}
+          <td style="padding: 0%; text-align:center;"><strong style="color: white; font-size:14px">{{DiasVencimiento}} DIAS DE GARANTÍA </strong></td>
+          {{/each}}
+        </tr>
+      </tbody>
+    </table>
+
+
+    <table class="table table-borderless" style="border-color: white; border: white 1px solid; width: 270px; -webkit-print-color-adjust: exact; margin:0%; padding:0%;">
+      <thead>
+        <tr>
+          <th colspan="3" style="background-color: white; color:white; padding:0%;"><center style="font-size:14px">Nombre del Técnico</center></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: white 1px solid; border-right: white 1px solid;">
+          {{#each tec}}
+         <td style="padding: 0%; border-right: white 1px solid;"><center style="font-size:11px">{{Nombre}}</center></td>
+          {{/each}}
+        </tr>
+      </tbody>
+    </table>
+     
+ 
+ </div>
+ 
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<br>
+
+
+
+

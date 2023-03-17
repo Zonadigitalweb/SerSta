@@ -1447,7 +1447,16 @@ router.get("/servistar/notas:id/", isLoggedIn, async (req, res) =>{
 
     const { id } = req.params
     await pool.query("UPDATE tblidnotas SET IdOrden = ?",[id])
+    log(id+" nooo")
     res.redirect("/pdf")
+}) 
+
+router.get("/servistar/notablan:id/", isLoggedIn, async (req, res) =>{
+
+    const { id } = req.params
+    await pool.query("UPDATE tblidnotas SET IdOrden = ?",[id])
+    log(id+" sii")
+    res.redirect("/pdf_blan")
 }) 
 
 
@@ -2293,19 +2302,27 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
     
 
 
-
+for (let index = 0; index < orden.length; index++) {
     if (orden.length!=0) {
-        if ((orden[0].FechaEntrega != null || orden[0].FechaEntrega != undefined) && (orden[0].VigenciaGarantia != null ||orden[0].VigenciaGarantia != undefined)) {
-            orden[0].FechaVencimiento=moment(orden[0].FechaEntrega).add(orden[0].VigenciaGarantia,'d')
+        if ((orden[index].FechaEntrega != null || orden[index].FechaEntrega != undefined) && (orden[index].VigenciaGarantia != null ||orden[index].VigenciaGarantia != undefined)) {
+            orden[index].FechaVencimiento=moment(orden[index].FechaEntrega).add(orden[index].VigenciaGarantia,'d')
         
         
             var fecha1 = moment();
-        var fecha2 = moment(orden[0].FechaVencimiento);
+        var fecha2 = moment(orden[index].FechaVencimiento);
         
-        orden[0].DiasVencimiento = fecha2.diff(fecha1, 'days') 
+        orden[index].DiasVencimiento = fecha2.diff(fecha1, 'days')
+        if(orden[index].DiasVencimiento < 1){
+            orden[index].DiasVencimiento=0
+        } else {
+            orden[index].DiasVencimiento++
+        }
+
+        
         }
         
     }
+}
 
     res.render("layouts/cliente_completo", { equipo, cliente, orden, id, gas, ser, ref, gara, garaa})
 })
@@ -2516,6 +2533,10 @@ router.get("/ver",  pdfc.img)
 router.get("/pdf",  pdfc.despdf)
 
 router.get("/verpdf",  pdfc.pdf)
+
+router.get("/pdf_blan",  pdfc.despdf_blan)
+
+router.get("/verpdf_blan",  pdfc.pdf_blan)
 
 router.get("/pdff",  pdfc.despdff)
 
