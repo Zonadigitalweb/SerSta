@@ -4,6 +4,7 @@ const passport = require("passport")
 const pool = require("../database")
 const {isLoggedIn} = require("../lib/auth")
 
+/*
 router.get("/servistar/registro",  (req,res) =>{
     res.render("auth/registro",{layout:"mainpdf"})
 })
@@ -13,7 +14,7 @@ router.post("/registro",  passport.authenticate("local.signup",{
         failureRedirect: "/servistar/registro"
     
 }))
-
+*/
 
 
 router.get("/servistar/iniciar_sesion", (req,res) =>{

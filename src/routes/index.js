@@ -2215,17 +2215,30 @@ router.get("/servistar/servicios_pendientes", isLoggedIn, async (req, res) => {
     if (ip.substr(0, 7) == "::ffff:") {
         ip = ip.substr(7)
     }
-    log(req.ip)
+    log(ip)
     let id = req.user.Sucursal
-    const en_eje = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='En Ejecucion' AND tblordenservicio.EstadoServicio='En Ejecucion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
-    const pa_ent = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Para Entregar' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
-    const espe = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Esperando' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
-    const espe_refa = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Esperando Refacciones' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
-    const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Sin Reparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
-    const pen_visi = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Pendiente de Visita' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
-    const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.FechaGarantia='2021-12-31' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
+    if (id==1 || id==2) {
+        const en_eje = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ?  AND tblordenservicio.EstadoServicio='En Ejecucion' AND tblordenservicio.EstadoServicio='En Ejecucion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
+        const pa_ent = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Para Entregar' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
+        const espe = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Esperando' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
+        const espe_refa = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Esperando Refacciones' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
+        const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Sin Reparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
+        const pen_visi = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Pendiente de Visita' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
+        const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.FechaGarantia='2021-12-31' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id]) 
+        
+        res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara,pen_visi})
+    } else{
+        const en_eje = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='En Ejecucion' AND tblordenservicio.EstadoServicio='En Ejecucion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+        const pa_ent = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Para Entregar' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+        const espe = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Esperando' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+        const espe_refa = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Esperando Refacciones' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+        const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Sin Reparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+        const pen_visi = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Pendiente de Visita' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
+        const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.FechaGarantia='2021-12-31' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;") 
+        
+        res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara,pen_visi})
+    }
 
-    res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara,pen_visi})
 })
 
 
@@ -2234,7 +2247,7 @@ router.get("/servistar/ver_cliente:id/", isLoggedIn, async (req, res) => {
     let sucu = req.user.Sucursal
     const equipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ?", [id])
     let cliente= await pool.query("SELECT * FROM tblclientes WHERE IdCliente = ?",[id])
-    const orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdSucursal = ? AND IdCliente = ? ORDER BY IdOrdenServicio DESC",[sucu,id])
+    const orden = await pool.query("SELECT * FROM tblordenservicio WHERE IdCliente = ? ORDER BY IdOrdenServicio DESC",[id])
     
     let ser=[],
     gara=[],
