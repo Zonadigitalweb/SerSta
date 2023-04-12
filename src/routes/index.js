@@ -2178,6 +2178,16 @@ router.post("/agregar_cliente", isLoggedIn, async (req, res) => {
     res.redirect("/servistar/agregar_registro")
 
 })
+router.post("/agregar_cliente_ser", isLoggedIn, async (req, res) => {
+    let { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP} = req.body
+    let id = req.user.IdUsuario
+    await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `IdCliente`,`Fecha`) VALUES (?, '2', ?, current_timestamp())",[id,IdCliente])
+    const newcliente = { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP}
+    await pool.query("INSERT INTO tblclientes SET ?", [newcliente])
+    
+    res.redirect("/servistar/agregar_registro"+IdCliente+"/")
+
+})
 
 router.post("/cliente_agregar", isLoggedIn, async (req, res) => {
     let { IdCliente, Nombre, DirColonia, DirCalle, DirNum, DirEntre, Telefono, RFC, Municipio, CP} = req.body

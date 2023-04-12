@@ -25,7 +25,7 @@ async function crearpdf(url){
 
     await pagina.goto(url)
 
-    let pdf=await pagina.pdf({margin:{top:50,bottom:50}})
+    let pdf=await pagina.pdf({margin:{top:40,bottom:50}})
 
     navegador.close()
 
@@ -301,6 +301,8 @@ module.exports={
             
         }
         orden[0].CostoServicio=orden[0].CostoServicio.toLocaleString();
+
+        console.log(orden[0].Descripcion)
 
         res.render("nota.hbs",{ layout:"mainpdf",orden,cliente,cantidad,tec})
     },
