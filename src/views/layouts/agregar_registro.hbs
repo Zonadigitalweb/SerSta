@@ -75,22 +75,22 @@
                                 </div>
                                 <div class="form-group px-2">
                                     <table class="table table-bordered table-hover" id="tblmas">
-                                        <thead id="tblh">
-                                            <tr role="row" style="display:none">
-                                                <th>Nombre</th>
-                                                <th>Colonia</th>
-                                                <th>Calle</th>
-                                                <th>Numero</th>
+                                        <thead id="tblh" style="display:none">
+                                            <tr role="row" >
+                                                <th style="width: 500px;">Nombre</th>
+                                                <th style="width: 500px;">Colonia</th>
+                                                <th style="width: 500px;">Calle</th>
+                                                <th style="width: 500px;">Numero</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
                                             {{#each cliente}}
                                             <tr id="{{IdCliente}}" style="display:none">
-                                                <td><a href="/servistar/agregar_registro{{IdCliente}}/"
+                                                <td style="width: 500px;"><a href="/servistar/agregar_registro{{IdCliente}}/"
                                                         class="link-success">{{Nombre}}</a></td>
-                                                <td>{{DirColonia}}</td>
-                                                <td>{{DirCalle}}</td>
-                                                <td>{{DirNum}}</td>
+                                                <td style="width: 500px;">{{DirColonia}}</td>
+                                                <td style="width: 500px;">{{DirCalle}}</td>
+                                                <td style="width: 500px;">{{DirNum}}</td>
                                             </tr>
                                             {{/each}}
                                         </tbody>

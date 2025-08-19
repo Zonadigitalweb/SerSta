@@ -7,7 +7,7 @@ const passport = require("passport")
 const favicon = require('serve-favicon')
 const flash = require("connect-flash")
 const session = require("express-session")
-const MySQLStore = require("express-mysql-session")
+const MySQLStore = require('express-mysql-session')(session);
 
 
 const app = express()
@@ -18,13 +18,15 @@ const database = {
     host:"127.0.0.1",
     port:"3306",
     user: "root",
-    password: "",
+    password: "Meekoneko2214$",
     database: "servistar"
   
   }
 
 app.set ("port", process.env.PORT || 3500)
+
 app.set("views",path.join(__dirname,"views"))
+
 app.engine(".hbs",exphbs({
     defaultLayout:"main",
     layoutsDir: path.join(app.get("views"), "layouts"),

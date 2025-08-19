@@ -2221,11 +2221,7 @@ router.get("/servistar/clientes", isLoggedIn, async (req, res) => {
 
 
 router.get("/servistar/servicios_pendientes", isLoggedIn, async (req, res) => {   
-    var ip = req.ip
-    if (ip.substr(0, 7) == "::ffff:") {
-        ip = ip.substr(7)
-    }
-    log(ip)
+    
     let id = req.user.Sucursal
     if (id==1 || id==2) {
         const en_eje = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ?  AND tblordenservicio.EstadoServicio='En Ejecucion' AND tblordenservicio.EstadoServicio='En Ejecucion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])

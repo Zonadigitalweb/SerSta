@@ -32,8 +32,10 @@ router.post("/iniciar_sesion", passport.authenticate("local.signin",{
 router.get("/servistar/salir", isLoggedIn, async (req,res) =>{
     let id = req.user.IdUsuario
     await pool.query("INSERT INTO `tblmovimientos` (`IdUsuario`, `TipoMovimiento`, `Fecha`) VALUES (?, '1',current_timestamp())",[id])
-    req.logOut()
-    res.redirect("/servistar/iniciar_sesion")
+    req.logOut(function(err) {
+        if (err) { return res.status(500).send('Error al cerrar sesión'); }
+        res.redirect("/servistar/iniciar_sesion");
+    });
 })
 
 module.exports= router
