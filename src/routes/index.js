@@ -2063,10 +2063,16 @@ router.get("/servistar/servicios", isLoggedIn, async (req, res) => {
 router.post("/ver_cliente/agregare", isLoggedIn, async (req, res) => {
     let { IdCliente, IdEquipo, Categoria, Tipo, Marca, Serie, Color, Modelo } = req.body
     let id = req.user.IdUsuario
-    await pool.query("INSERT INTO `tblmovimientos` ( `IdUsuario`, `TipoMovimiento`, `IdCliente`, `IdEquipo`, `Fecha`) VALUES (?, '4', ?, ?, current_timestamp())",[id,IdCliente,IdEquipo])
     const newequipo = { IdCliente, IdEquipo, Categoria, Tipo, Marca, Serie, Color, Modelo }
-    await pool.query("INSERT INTO tblequipos SET ?", [newequipo])
-    res.redirect("/servistar/ver_cliente"+IdCliente+"/")
+    const oldequipo = await pool.query("SELECT * FROM tblequipos WHERE IdCliente = ? AND IdEquipo = ?",[IdCliente,IdEquipo])
+    console.log(oldequipo)
+    if (oldequipo.length > 0) {
+        return res.redirect("/servistar/ver_cliente"+IdCliente+"/")
+    }else{
+        await pool.query("INSERT INTO `tblmovimientos` ( `IdUsuario`, `TipoMovimiento`, `IdCliente`, `IdEquipo`, `Fecha`) VALUES (?, '4', ?, ?, current_timestamp())",[id,IdCliente,IdEquipo])
+        await pool.query("INSERT INTO tblequipos SET ?", [newequipo])
+        res.redirect("/servistar/ver_cliente"+IdCliente+"/")
+    }
 
 })
 router.post("/editar_cliente", isLoggedIn, async (req, res) => {
@@ -2230,7 +2236,7 @@ router.get("/servistar/servicios_pendientes", isLoggedIn, async (req, res) => {
         const espe_refa = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Esperando Refacciones' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
         const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Sin Reparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
         const pen_visi = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.EstadoServicio='Pendiente de Visita' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id])
-        const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND tblordenservicio.FechaGarantia='2021-12-30' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id]) 
+        const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.IdSucursal= ? AND (tblordenservicio.FechaGarantia='2021-12-29' OR tblordenservicio.FechaGarantia='2021-12-30' OR tblordenservicio.FechaGarantia='2021-12-31') AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;",[id]) 
         
         res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara,pen_visi})
     } else{
@@ -2240,7 +2246,7 @@ router.get("/servistar/servicios_pendientes", isLoggedIn, async (req, res) => {
         const espe_refa = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Esperando Refacciones' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
         const sin_nada = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Sin Reparacion' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
         const pen_visi = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.EstadoServicio='Pendiente de Visita' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;")
-        const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE tblordenservicio.FechaGarantia='2021-12-30' AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;") 
+        const gara = await pool.query("SELECT * FROM tblordenservicio, tblclientes WHERE (tblordenservicio.FechaGarantia='2021-12-29' OR tblordenservicio.FechaGarantia='2021-12-30' OR tblordenservicio.FechaGarantia='2021-12-31') AND tblclientes.IdCliente=tblordenservicio.IdCliente ORDER BY `FechaVisita` DESC;") 
         
         res.render("layouts/servicios_pendientes", {en_eje, pa_ent, espe, espe_refa, sin_nada, gara,pen_visi})
     }

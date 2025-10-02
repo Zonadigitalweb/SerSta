@@ -75,18 +75,18 @@
                                     <table class="table table-bordered table-hover" id="tblmas">
                                         <thead id="tblh" style="display:none">
                                             <tr role="row">
-                                                <th>Refaccion</th>
-                                                <th>Existencias</th>
-                                                <th>Costo de venta</th>
+                                                <th style="width: 500px;">Refaccion</th>
+                                                <th style="width: 500px;">Existencias</th>
+                                                <th style="width: 500px;">Costo de venta</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
                                             {{#each ref}}
                                             <tr id="{{IdRefaccion}}" style="display:none">
-                                                <td><a id="a{{IdRefaccion}}" href="/servistar/agregar_ref{{IdRefaccion}}/"
+                                                <td style="width: 500px;"><a id="a{{IdRefaccion}}" href="/servistar/agregar_ref{{IdRefaccion}}/"
                                                         class="link-primary">{{Descripcion}}</a> </td>
-                                                <td>{{Existencias}}</td>
-                                                <td>{{CostoVenta}}</td>
+                                                <td style="width: 500px;">{{Existencias}}</td>
+                                                <td style="width: 500px;">{{CostoVenta}}</td>
                                             </tr>
                                             {{/each}}
                                         </tbody>

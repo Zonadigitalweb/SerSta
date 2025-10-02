@@ -16,7 +16,6 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/servistar/calendario_tec">Tecnicos</a>
           <a class="dropdown-item" href="/servistar/calendario_ayu">Ayudantes</a>
-
         </div>
       </li>
         
@@ -49,7 +48,6 @@
   </div>
 </nav>
 
-
 <div class="container p-4">
     <div class="row">
         <div class=" mx-auto">
@@ -71,18 +69,18 @@
                                     <table class="table table-bordered table-hover" id="tblmas">
                                         <thead id="tblh" style="display:none">
                                             <tr role="row">
-                                                <th>Descripcion</th>
-                                                <th>Existencias</th>
-                                                <th>Costo de Venta</th>
+                                                <th style="width: 500px;">Descripcion</th>
+                                                <th style="width: 500px;">Existencias</th>
+                                                <th style="width: 500px;">Costo de Venta</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tblbody">
                                             {{#each Refacciones}}
                                             <tr id="{{IdRefaccion}}" style="display:none">
-                                                <td><a href="/servistar/ver_refaccion{{IdRefaccion}}/"
+                                                <td style="width: 500px;"><a href="/servistar/ver_refaccion{{IdRefaccion}}/"
                                                         class="link-primary">{{Descripcion}}</a> </td>
-                                                <td>{{Existencias}}</td>
-                                                <td>{{CostoVenta}}</td>
+                                                <td style="width: 500px;">{{Existencias}}</td>
+                                                <td style="width: 500px;">{{CostoVenta}}</td>
                                             </tr>
                                             {{/each}}
                                         </tbody>
